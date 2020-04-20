@@ -6,11 +6,11 @@ load_scale = function(enc)
 {
   if (enc == 'z5')
   {
-    encoder = read.csv(file = './data/z_scales.csv', sep = ";", dec = ",", header=TRUE, row.names=1)
+    encoder = read.csv(file = './_raw/z_scales.csv', sep = ";", dec = ",", header=TRUE, row.names=1)
   }
   if (enc == 'bl62')
   {
-    encoder = read.table(file = './data/BLOSUM62.txt')
+    encoder = read.table(file = './_raw/BLOSUM62.txt')
   }
   return (encoder)
 }
