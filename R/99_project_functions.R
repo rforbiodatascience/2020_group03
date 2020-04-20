@@ -32,3 +32,13 @@ encode_peptide = function(x, m)
   rownames(X_enc) = x
   return(X_enc)
 }
+
+# Simple function to convert a mutation into a protein sequence based on a unprot id
+make_sequence = function(Mutated_residue, Mutation_position, Mutation, uniprot_ID)
+{
+  WT_sequence <- as_tibble(GetSequences(uniprot_ID)) %>%
+    pull(Sequence)
+  sequence <- WT_sequence
+  str_sub(sequence, Mutation_position, Mutation_position) <- Mutation
+  return(sequence)
+}
