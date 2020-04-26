@@ -1,0 +1,87 @@
+---
+title: "22100 - R for Bio Data Science"
+subtitle: "Spring 2020 - Group project"
+author: "Group 3: Laura Sans, Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra"
+date: "27-APR-2020"
+output: ioslides_presentation
+widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<style>
+.forceBreak { -webkit-column-break-after: always; break-after: column; }
+</style>
+
+## Project aims
+
+* Produce R script toolbox for machine learning of protein and peptide bio activities.
+* Features:
+  - Support for both sequence or variant input.
+  - Support for several sequence encoders.
+  - Support for sequence based calculations.
+  - Support for several models:
+    - Gaussian Process Regression.
+    - Artificial Neutral Network.
+    - ElasticNet Regression.
+  - Visualization options.
+
+## R script overview 1
+
+<div class="columns-2">
+  ![](project_organisation.png){width=500px}
+  <p class="forceBreak"></p>
+  * 00_do_it.R
+    - Main program and loading of packages
+  * 01_load.R
+    - Load: Encoding matrices, peptide and protein variant information and associated bio data
+    - Save: All loaded data in .tsv format
+</div>
+
+## R script overview 2
+
+<div class="columns-2">
+  ![](project_organisation.png){width=500px}
+  <p class="forceBreak"></p>
+  * 02_clean.R
+    - Load: Load data from 01_load.R
+    - Wrangle data: Remove NaN, fixes
+    - Save cleansed data in .tsv format
+  * 03_augment.R
+    - Load data from 02_clean.R
+    - Augment data: Calculate sequences, descriptors, properties
+    - Save augmente data in .tsv format
+</div>
+    
+## R script overview 3
+
+<div class="columns-2">
+  ![](project_organisation.png){width=500px}
+  <p class="forceBreak"></p>
+  * 04_model_i.R
+    - Load augmented data
+    - Perform model fitting
+    - Predict unknowns
+    - Plotting and reporting
+</div>
+
+## R script overview 4
+
+<div class="columns-2">
+  ![](project_organisation.png){width=500px}
+  <p class="forceBreak"></p>
+  * 99_proj_func.R
+    - Sequence encoder
+    - Sequence generator
+    - ...
+</div>
+
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
