@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587380769348.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "DED5D0BB",
+    "lastKnownWriteTime" : 1587381627,
+    "last_content_update" : 1587381627020,
+    "path" : "~/github/2020_group03/R/04_analysis_i.R",
+    "project_path" : "R/04_analysis_i.R",
+    "properties" : {
+        "cursorPosition" : "7,0",
+        "scrollLine" : "10",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

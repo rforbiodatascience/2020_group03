@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587368654779.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3050283965",
+    "id" : "104F0BC",
+    "lastKnownWriteTime" : 1587916332,
+    "last_content_update" : 1587916332817,
+    "path" : "~/github/2020_group03/R/99_functions.R",
+    "project_path" : "R/99_functions.R",
+    "properties" : {
+        "cursorPosition" : "4,33",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
