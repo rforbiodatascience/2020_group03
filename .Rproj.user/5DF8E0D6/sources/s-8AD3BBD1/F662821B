@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587968469215.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F662821B",
+    "lastKnownWriteTime" : 1587968983,
+    "last_content_update" : 1587968983,
+    "path" : "~/github/2020_group03/R/01_load.R",
+    "project_path" : "R/01_load.R",
+    "properties" : {
+        "cursorPosition" : "37,0",
+        "scrollLine" : "20",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
