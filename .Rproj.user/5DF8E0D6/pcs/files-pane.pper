@@ -1,0 +1,9 @@
+{
+    "path" : "~/github/2020_group03/data/_raw",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
