@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587968487314.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "4354FE59",
+    "lastKnownWriteTime" : 1587968983,
+    "last_content_update" : 1587968983,
+    "path" : "~/github/2020_group03/R/02_clean.R",
+    "project_path" : "R/02_clean.R",
+    "properties" : {
+        "cursorPosition" : "36,0",
+        "scrollLine" : "26",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
