@@ -33,7 +33,7 @@ div.footnotes {
   - Support for both sequence or variant input.
   - Support for several sequence encoders.
   - Support for sequence based calculations.
-  - Support for several models:
+  - Support for several models.
   - Visualization options.
 
 ## R script overview 1
@@ -86,7 +86,6 @@ div.footnotes {
     - ...
 </div>
 
-
 ## Data peptide and protein data sources
 
 * Ideas for sequence / variant effects:
@@ -107,4 +106,12 @@ div.footnotes {
   - Artificial Neutral Network.
   - ElasticNet Regression.
 
+## Distribution of tasks, week 18
 
+* Laura: Descriptors and function for translating
+* Jacob: Sequence generation
+* Felix, Begoña: Machine learning tool boox
+
+* Project state EOW - functional preprocessing, first steps with machine learning toolbox
+
+## Distribution of tasks, week 19
