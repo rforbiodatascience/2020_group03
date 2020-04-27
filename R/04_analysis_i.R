@@ -12,7 +12,6 @@ source(file = "R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
-<<<<<<< HEAD
 # my_data_clean_aug <- read_tsv(file = "data/clean_test.txt")
 
 # Wrangle data
@@ -31,7 +30,6 @@ source(file = "R/99_project_functions.R")
 # ------------------------------------------------------------------------------
 #write_tsv(...)
 #ggsave(...)
-=======
 my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Wrangle data
@@ -53,4 +51,4 @@ ht <- ggplot(data=clean, aes(x = SCH_Average)) +
 # ------------------------------------------------------------------------------
 write_tsv(...)
 ggsave(...)
->>>>>>> origin/master
+

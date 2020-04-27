@@ -5,7 +5,6 @@ rm(list = ls())
 # Load libraries
 # ------------------------------------------------------------------------------
 library("tidyverse")
-<<<<<<< HEAD
 
 # Define functions
 # ------------------------------------------------------------------------------
@@ -35,7 +34,6 @@ pepts <- my_data_clean_aug %>%
 # ------------------------------------------------------------------------------
 #write_tsv(x = my_data_clean_aug,
 #         path = "data/03_my_data_clean_aug.tsv")
-=======
 library("UniprotR")
 
 # Define functions
@@ -72,4 +70,4 @@ aug_data_set_1 <- clean_data_set_1 %>%
 # ------------------------------------------------------------------------------
 write_tsv(x = aug_data_set_1,
           path = "./data/03_aug_data_set_1.tsv")
->>>>>>> origin/master
+

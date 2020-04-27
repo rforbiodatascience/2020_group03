@@ -5,7 +5,6 @@ rm(list = ls())
 # Load libraries
 # ------------------------------------------------------------------------------
 library("tidyverse")
-<<<<<<< HEAD
 
 # Define functions
 # ------------------------------------------------------------------------------
@@ -23,7 +22,7 @@ library("tidyverse")
 # ------------------------------------------------------------------------------
 #write_tsv(x = my_data,
 #          path = "data/01_my_data.tsv")
-=======
+
 library("ggseqlogo")
 library("readxl")
 library("ggplot2")
@@ -53,5 +52,3 @@ write_tsv(x = data_set_2,
           path = "./data/01_load_data_set_2.tsv")
 
 
-
->>>>>>> origin/master
