@@ -1,0 +1,15 @@
+# peptide sequences
+# X <- peptides %>%
+#   pull(Sequence) %>%
+#   encode_peptide(m = aa_scale_bl62)
+# 
+# y <- peptides %>%
+#   pull(Result)
+# 
+# Sequences <- peptides %>%
+#   pull(Sequence)
+# 
+# p1 = ggseqlogo(Sequences)
+# print(p1)
+
+# Write data
