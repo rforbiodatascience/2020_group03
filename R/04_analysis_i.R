@@ -5,6 +5,7 @@ rm(list = ls())
 # Load libraries
 # ------------------------------------------------------------------------------
 library("tidyverse")
+library("ggseqlogo")
 
 # Define functions
 # ------------------------------------------------------------------------------
@@ -16,7 +17,8 @@ aug_clean_data_set_1 <- read_tsv(file = "./data/03_aug_data_set_1.tsv")
 
 # Wrangle data
 # ------------------------------------------------------------------------------
-#my_data_clean_aug %>% ...
+df <- aug_clean_data_set_1 %>%
+  filter(score > 1)
 
 # Model data
 # ------------------------------------------------------------------------------
@@ -24,9 +26,12 @@ aug_clean_data_set_1 <- read_tsv(file = "./data/03_aug_data_set_1.tsv")
 
 # Visualise data
 # ---------------------------
-ht <- aug_clean_data_set_1 %>%
-    ggplot(aes(x = E3_score)) +
+ht <- df %>%
+    ggplot(aes(x = score)) +
     geom_histogram()
+
+seq <- df %>%
+  select(sequence)
 
 # Write data
 # ------------------------------------------------------------------------------

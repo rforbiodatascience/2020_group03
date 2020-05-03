@@ -42,3 +42,22 @@ make_sequence = function(Mutated_residue, Mutation_position, Mutation, uniprot_I
   str_sub(sequence, Mutation_position, Mutation_position) <- Mutation
   return(sequence)
 }
+
+# Simple function to convert a mutation description into an mutated residue
+get_mutated_residue <- function(variant) {
+  mutated_residue = str_extract(variant, "[A-Z]")
+  return(mutated_residue)
+}
+
+# Simple function to convert a mutation description into an mutattion position
+get_mutation_position <- function(variant) {
+  mutation_position = str_extract(variant, "[0-9]+")
+  return(mutation_position)
+}
+
+# Simple function to convert a mutation description into an mutation
+get_mutation <- function(variant) {
+  mutation = str_extract(variant, "[A-Z,*]$")
+  return(mutation)
+}
+
