@@ -15,10 +15,9 @@ load_scale = function(enc)
   return (encoder)
 }
 
-#' Simple encoding function for converting a given peptide 'x' to a numerical
-#' representation using the 'm' matrix
-encode_peptide = function(x, m)
-{
+# Simple encoding function for converting a given peptide 'x' to a numerical
+# representation using the 'm' matrix
+encode_peptide = function(x, m){
   X_enc = x %>%
     str_split('') %>%
     lapply(function(x_i){
