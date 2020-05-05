@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Clear workspace
 # ------------------------------------------------------------------------------
 rm(list = ls())
@@ -71,3 +72,97 @@ aug_data_set_1 <- clean_data_set_1 %>%
 write_tsv(x = aug_data_set_1,
           path = "./_raw/data/03_aug_data_set_1.tsv")
 
+=======
+# Clear workspace
+# ------------------------------------------------------------------------------
+rm(list = ls())
+
+# Load libraries
+# ------------------------------------------------------------------------------
+library("tidyverse")
+
+# Define functions
+# ------------------------------------------------------------------------------
+source(file = "R/99_functions.R")
+
+# Load data
+# ------------------------------------------------------------------------------
+data <- read_table2(file = "data/clean_test.txt", col_names = FALSE)
+
+# Wrangle data
+# ------------------------------------------------------------------------------
+
+# Remove non-important columns
+data <- data %>% 
+  rename(
+    peptide = X1,
+    activity = X2,
+  ) %>%  select(c(1,2))
+
+data$len = str_length(data$peptide)
+data <- data %>% group_by(len) %>% filter(len == 15) 
+
+<<<<<<< HEAD
+# Add new columns (encoding)
+encoded_seq = data %>%
+  pull(peptide) %>% 
+  encode_peptide(m = "blosum62")
+=======
+#pepts <- my_data_clean_aug %>% 
+#  pull(peptide) %>% 
+#  encode_peptide("blosum62")
+>>>>>>> master
+
+# Write data
+# ------------------------------------------------------------------------------
+#write_tsv(x = my_data_clean_aug,
+<<<<<<< HEAD
+#         path = "data/03_my_data_clean_aug.tsv")
+=======
+#         path = "data/03_my_data_clean_aug.tsv")
+library("UniprotR")
+
+# Define functions
+# ------------------------------------------------------------------------------
+source(file = "R/99_project_functions.R")
+
+
+# Load data
+# ------------------------------------------------------------------------------
+clean_data_set_1 <- read_tsv(file = "./data/02_clean_data_set_1.tsv")
+clean_data_set_2 <- read_tsv(file = "./data/02_clean_data_set_2.tsv")
+
+
+# Wrangle data
+# ------------------------------------------------------------------------------
+
+# need a function
+
+aug_data_set_1 <- clean_data_set_1 %>% 
+  mutate(
+    Mutated_residue = str_extract(Variant_ID, "[A-Z]"),
+    Mutation_position = str_extract(Variant_ID, "[0-9]+"),
+    Mutation = str_extract(Variant_ID, "[A-Z,*]$"),
+    Mutation = str_replace(Mutation, "[*]", Mutated_residue), #non-sense mutation remove
+    Sequence = make_sequence(Mutated_residue, Mutation_position, Mutation, "P38398"))
+
+ aug_data_set_2 <- clean_data_set_2 %>% 
+   mutate(
+     Mutated_residue = str_extract(ERK2_Mutant, "[A-Z]"),
+     Mutation_position = str_extract(ERK2_Mutant, "[0-9]+"),
+     Mutation = str_extract(ERK2_Mutant, "[A-Z,*]$"),
+     Mutation = str_replace(Mutation, "[*]", Mutated_residue), #non-sense mutation remove?
+     Sequence = make_sequence(Mutated_residue, Mutation_position, Mutation, "P28482"))
+
+# aug_data_set_3 <- clean_data_set_3 %>% 
+#   mutate()
+ 
+
+
+# Write data
+# ------------------------------------------------------------------------------
+write_tsv(x = aug_data_set_1,
+          path = "./data/03_aug_data_set_1.tsv")
+
+>>>>>>> master
+>>>>>>> master
