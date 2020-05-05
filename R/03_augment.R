@@ -43,8 +43,8 @@ source(file = "R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
-clean_data_set_1 <- read_tsv(file = "./data/02_clean_data_set_1.tsv")
-clean_data_set_2 <- read_tsv(file = "./data/02_clean_data_set_2.tsv")
+clean_data_set_1 <- read_tsv(file = "./_raw/data/02_clean_data_set_1.tsv")
+clean_data_set_2 <- read_tsv(file = "./_raw/data/02_clean_data_set_2.tsv")
 
 
 # Wrangle data
@@ -69,5 +69,5 @@ aug_data_set_1 <- clean_data_set_1 %>%
 # Write data
 # ------------------------------------------------------------------------------
 write_tsv(x = aug_data_set_1,
-          path = "./data/03_aug_data_set_1.tsv")
+          path = "./_raw/data/03_aug_data_set_1.tsv")
 
