@@ -89,6 +89,7 @@ predict(model, df_newpep_enc)
 predict(model_rel, df_newpep_enc)
 predict(model_rel_2, df_newpep_enc)
 
+# https://github.com/leonjessen/RPharma2019/blob/master/R/04_diamonds_regression.R
 # ANN + other regression model
 # https://www.rdocumentation.org/packages/neuralnet/versions/1.44.2/topics/neuralnet
 
@@ -122,6 +123,7 @@ nn <- neuralnet(f,data=train_,hidden=c(5,3),linear.output=T)
 # The problem here is that we have too many variables that a Neural Net is computationally demanding
 # therefore -> reduce the dimensionality with the variables that matter (see in lm) and do ANN
 
+# Keras
 
 # Visualise data
 # ---------------------------
