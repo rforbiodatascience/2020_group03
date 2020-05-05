@@ -1,4 +1,15 @@
+<<<<<<< HEAD
+/Users/laurasansc/Desktop/BioinformaticsSystemsBiology/RforBioDataScience/2020_week_07_ANNs/R/05_deep_learning_for_cancer_immunotherapy.R="87BDD4EA"
+/Users/laurasansc/github/2020_group03/R/00_doit.R="FFCEC7D4"
+/Users/laurasansc/github/2020_group03/R/01_load.R="9DD8CD26"
+/Users/laurasansc/github/2020_group03/R/02_clean.R="DDD47197"
+/Users/laurasansc/github/2020_group03/R/03_augment.R="AF9D8DAD"
+/Users/laurasansc/github/2020_group03/R/04_analysis_i.R="B473F1DC"
+/Users/laurasansc/github/2020_group03/R/99_functions.R="CFB9420C"
+/Users/laurasansc/github/2020_group03/R/99_project_functions.R="9E45CB6A"
+=======
 /cloud/project/R/01_load.R="BF0244C2"
 /cloud/project/README.md="75FD3595"
 /cloud/project/data/test.txt="4A9E7C83"
 /cloud/project/stuff.txt="5249C7B5"
+>>>>>>> master
