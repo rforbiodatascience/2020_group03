@@ -1,5 +1,6 @@
 # Define project functions
 # ------------------------------------------------------------------------------ 
+
 encode_peptide = function(x, matrix){
   matrix <- paste("/Users/laurasansc/github/2020_group03/data/_raw/",matrix, ".txt", sep="")
   m <- read.table(file = matrix, row.names = 1, header =TRUE)
