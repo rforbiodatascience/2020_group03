@@ -1,7 +1,9 @@
 # Define project functions
 # ------------------------------------------------------------------------------
-
-# Simple function to load a given amino acid scale
+#' Functions for Peptide Activity prediction
+#' 
+#' @description Simple function to load a given amino acid scale
+#' 
 load_scale = function(enc)
 {
   if (enc == 'z5')
@@ -15,8 +17,21 @@ load_scale = function(enc)
   return (encoder)
 }
 
-# Simple encoding function for converting a given peptide 'x' to a numerical
-# representation using the 'm' matrix
+
+#' @description
+#' `encode_peptide` returns a dataframe encoding the sequence in the method `m' specified.
+#' All the peptides have to be the same length.
+#'
+#
+#' @param x peptide, string
+#' @param m method, string, options: blosum45, blosum63, blosum80, blosum90, pam30, pam70 and pam250
+#' 
+#' @return if all the parameters are logical will return a dataframe with the row.names = peptide and each column the encoding. The number of columns is len(peptide) x 20 amino acids. 
+#'
+#' 
+#' @example
+#' encode_peptide('ATRALPLTW', "blosum62")
+#' 
 encode_peptide = function(x, m){
   X_enc = x %>%
     str_split('') %>%
