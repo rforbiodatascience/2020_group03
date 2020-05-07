@@ -1,3 +1,7 @@
+# 02_clean.R
+# ------------------------------------------------------------------------------
+
+
 # Clear workspace
 # ------------------------------------------------------------------------------
 rm(list = ls())
@@ -30,7 +34,7 @@ data_set_1_clean <- data_set_1  %>%
          score = E3_score) %>%
   filter(!str_detect(variant, "\\*"))
 
-  
+
 
 # Data_set 2  
 # select ERK2_Mutant and activity to predict, and rename columns
@@ -62,8 +66,9 @@ data_set_3_clean <- data_set_3  %>%
 # pivot to longer table, rename columns
 data_set_4_clean <- data_set_4 %>%
   pivot_longer(-X1, names_to = "substitution", values_to = "score") %>%
-  unite("variant", X1:substitution, sep="")
-  
+  unite("variant", X1:substitution, sep="") %>%
+  filter(!str_detect(variant, "\\*"))
+
 
 # Write data
 # ------------------------------------------------------------------------------
