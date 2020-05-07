@@ -64,5 +64,14 @@ distribution_data_set_3 <- ggplot(data_set_3, aes(score)) +
 distribution_data_set_4 <- ggplot(data_set_4, aes(score)) +
   geom_density(alpha=0.4, fill="lightblue")
   
+distribution_data_set_1_c <- ggplot(data_set_1, aes(score, color=mutated_residue)) +
+  geom_density(alpha=0.4)
+
 distribution_data_set_2_c <- ggplot(data_set_2, aes(score, color=mutated_residue)) +
+  geom_density(alpha=0.4)
+
+distribution_data_set_3_c <- ggplot(data_set_3, aes(score, color=mutated_residue)) +
+  geom_density(alpha=0.4)
+
+distribution_data_set_4_c <- ggplot(data_set_4, aes(score, color=mutated_residue)) +
   geom_density(alpha=0.4)
