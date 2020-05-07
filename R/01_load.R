@@ -8,7 +8,6 @@ rm(list = ls())
 # Load libraries
 # ------------------------------------------------------------------------------
 library("tidyverse")
-library("ggseqlogo")
 library("readxl")
 library("ggplot2")
 library('UniprotR') 

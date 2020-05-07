@@ -55,20 +55,3 @@ write_tsv(x = aug_data_set_3,
 
 write_tsv(x = aug_data_set_4,
           path = "./data/03_aug_data_set_4.tsv")
-
-
-data <- aug_data_set_4
-
-sequence_window <- data %>%
-  mutate(mutation_position = as.integer(mutation_position)) %>%
-  pull(mutation_position)
-
-data <- data %>%
-  mutate(sequence_to_model = str_sub(sequence, min(sequence_window), max(sequence_window)))
-
-#Add new columns (encoding)
-encoded_sequences = data %>%
-  pull(sequence_to_model) %>%
-  encode_peptide(m = "z_scales")
-
-write.csv(encoded_sequences,"data/encoded_seq_4.csv", row.names = TRUE)
