@@ -11,10 +11,6 @@ library("GauPro")
 library("UniprotR")
 library("ANN2")
 
-# Define functions
-# ------------------------------------------------------------------------------
-source(file = "./R/99_functions.R")
-
 
 # Define functions
 # ------------------------------------------------------------------------------
@@ -66,11 +62,11 @@ test <- data[-partition, ]
 #Add new columns (encoding)
 X_train <- training %>%
   pull(sequence_to_model) %>%
-  encode_peptide(m = "z_scales")
+  encode_peptide(m = "blosum62")
 
 X_test <- test %>%
   pull(sequence_to_model) %>%
-  encode_peptide(m = "z_scales")
+  encode_peptide(m = "blosum62")
 
 
 
@@ -87,30 +83,12 @@ Y_train <- unname(as.matrix(Y_train))
 X_train <- unname(as.matrix(X_train))
 X_test <- unname(as.matrix(X_test))
 
-NN <- neuralnetwork(X = X_train, y = Y_train, hidden.layers = c(500, 300,100),
+print('NN running...')
+
+NN <- neuralnetwork(X = X_train, y = Y_train, hidden.layers = c(500, 300, 100),
                     optim.type = 'adam', learn.rates = 0.01, val.prop = 0)
 
-prediction() <- predict(NN, newdata = X_test)
-Y_pred <- as.numeric(y_pred$predictions)
-res <- tibble(y_p, Y_test)
+pred <- predict(NN, newdata = X_test)
+Y_Pred <- as.numeric(pred$predictions)
+res <- tibble(Y_pred, Y_test)
 gg <- ggplot(res, aes(x=y_Pred, y=Y_test)) + geom_point()
-
-
-
-
-
-
-# Y_pred_Lasso <- predict(fit.lasso.cv, newx = X_test, s = "lambda.min")
-# Y_pred_Ridge <- predict(fit.ridge.cv, newx = X_test, s = "lambda.min")
-# Y_pred_ElasticNet <- predict(fit.elnet.cv, newx = X_test, s = "lambda.min")
-# 
-# results = tibble(Y_test, Y_pred_Lasso, Y_pred_Ridge)
-# 
-# results <- results %>%
-#   mutate(score = Y_test) %>%
-#   full_join(test, by = "score") %>%
-#   select(variant, score, Y_test, Y_pred_Ridge, Y_pred_Lasso) %>%
-#   pivot_longer(c(-variant, -score), names_to = "model", values_to = "prediction")
-#   
-# 
-# gg <- ggplot(results, aes(x=score, y=prediction, color=model)) + geom_point()

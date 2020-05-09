@@ -7,11 +7,6 @@ rm(list = ls())
 library("tidyverse")
 library("UniprotR")
 
-# Define functions
-# ------------------------------------------------------------------------------
-source(file = "./R/99_functions.R")
-
-
 
 # Define functions
 # ------------------------------------------------------------------------------
@@ -36,8 +31,6 @@ aug_data_set_2 <- convert_variant_to_sequence(clean_data_set_2, "P28482")
 aug_data_set_3 <- convert_variant_to_sequence(clean_data_set_3, "Q5SW96")
 aug_data_set_4 <- convert_variant_to_sequence(clean_data_set_4, "P04147")
 
-aug_data_set_4 <- aug_data_set_4 %>%
-  drop_na(score)
 
 # Write data
 # ------------------------------------------------------------------------------

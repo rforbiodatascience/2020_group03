@@ -1,8 +1,6 @@
 # Define project functions
 # ------------------------------------------------------------------------------
-<<<<<<< HEAD
 
-=======
 #' Functions for Peptide Activity prediction
 #' 
 #' @description Simple function to load a given amino acid scale
@@ -36,10 +34,12 @@ load_scale = function(enc)
 #' encode_peptide('ATRALPLTW', "blosum62")
 #' 
 encode_peptide = function(x, m){
+  mat <- paste("./data/_raw/",m, ".txt", sep="")
+  encoder <- read.table(file = mat, row.names = 1, header =TRUE)
   X_enc = x %>%
     str_split('') %>%
     lapply(function(x_i){
-      m[x_i,] %>%
+      encoder[x_i,] %>%
         as.matrix %>%
         t %>%
         matrix(nrow = 1, byrow = TRUE) %>%
@@ -49,7 +49,9 @@ encode_peptide = function(x, m){
   rownames(X_enc) = x
   return(X_enc)
 }
->>>>>>> e738ec71a4922377c68ab1d068687f64e9537c1c
+
+
+
 
 # Simple function to convert a mutation into a protein sequence based on a unprot id
 #
