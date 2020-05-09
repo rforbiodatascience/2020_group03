@@ -1,10 +1,12 @@
 ---
-title: "22100 - R for Bio Data Science"
-subtitle: "Spring 2020 - Group project"
-author: "Group 3: Laura Sans, Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra"
-date: "27-APR-2020"
-output: ioslides_presentation
-widescreen: true
+title: "Peptide activity prediction"
+subtitle: "22100 - R for Bio Data Science"
+author: 'Group 3: Laura Sans, Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra'
+date: "Spring 2020"
+output:
+  ioslides_presentation: default
+  beamer_presentation: default
+widescreen: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -108,10 +110,28 @@ div.footnotes {
 
 ## Distribution of tasks, week 18
 
-* Laura: Descriptors and function for translating
+* Laura: Descriptors and function for translating, data visualization / exploration
 * Jacob: Sequence generation
 * Felix, Begoña: Machine learning tool boox
 
 * Project state EOW - functional preprocessing, first steps with machine learning toolbox
 
 ## Distribution of tasks, week 19
+
+
+## Content
+* Introduction
+* Methods
+* Results
+* Discussion
+* Conclusion
+
+## Introduction
+
+## Methods
+
+## Results
+
+## Discussion
+
+## Conclusion

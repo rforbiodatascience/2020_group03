@@ -54,6 +54,7 @@ encode_peptide = function(x, m){
 #
 # Returns:
 # modified sequence
+
 make_sequence = function(Mutated_residue, Mutation_position, Mutation, uniprot_ID)
 {
   WT_sequence <- as_tibble(GetSequences(uniprot_ID)) %>%
