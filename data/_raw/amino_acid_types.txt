@@ -1,0 +1,21 @@
+Amino_acid	Type
+G			Aliphatic
+A			Aliphatic
+V			Aliphatic
+L			Aliphatic
+I			Aliphatic
+P			Imino acid
+D			Acidic
+E			Acidic
+K			Basic
+R			Basic
+H			Basic
+S			Polar
+T			Polar
+Q			Polar
+N			Polar
+F			Aromatic
+W			Aromatic
+H			Aromatic
+C			Sulphur containing
+M			Sulphur containing

@@ -11,11 +11,6 @@ library("tidyverse")
 library("ggplot2")
 library("UniprotR")
 
-# Define functions
-# ------------------------------------------------------------------------------
-source(file = "./R/99_functions.R")
-
-
 
 # Define functions
 # ------------------------------------------------------------------------------
