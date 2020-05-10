@@ -11,11 +11,6 @@ library("tidyverse")
 library("ggplot2")
 library("UniprotR")
 
-# Define functions
-# ------------------------------------------------------------------------------
-source(file = "./R/99_functions.R")
-
-
 
 # Define functions
 # ------------------------------------------------------------------------------
@@ -76,3 +71,16 @@ distribution_data_set_3_c <- ggplot(data_set_3, aes(score, color=mutated_residue
 
 distribution_data_set_4_c <- ggplot(data_set_4, aes(score, color=mutated_residue)) +
   geom_density(alpha=0.4)
+
+amino_acids <- read_csv("data/_raw/amino_acid_types.csv", col_names = TRUE)
+
+heatmap_type_1 <- data_set_1 %>%
+  full_join(amino_acids, by =c("mutation" = "Amino_acid"))
+
+heatmap_type_data_set_1 <- ggplot(heatmap_type_1, aes(mutation_position, Type, fill = score)) +
+  scale_x_continuous(expand=c(0,0)) +
+  scale_fill_continuous(type ="viridis", oob= scales::squish) +
+  theme(panel.background = element_blank()) +
+  geom_tile()
+
+
