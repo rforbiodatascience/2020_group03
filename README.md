@@ -1,6 +1,8 @@
-# 2020_group03
+# Toolbox for analysis and prediction of protein and peptide variant effects
+## 22100 - R for Bio Data Science - Spring 2020
+### 2020_group03
 
-## Data sources:
+### Data sources:
 
 ### Data set 1
 * data_set_1 ref: https://doi.org/10.1534/genetics.115.175802
