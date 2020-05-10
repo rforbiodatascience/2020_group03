@@ -5,9 +5,7 @@ rm(list = ls())
 # Load libraries
 # ------------------------------------------------------------------------------
 library("tidyverse")
-library("neuralnet")
 library("caret")
-library("GauPro")
 library("UniprotR")
 library("ANN2")
 
@@ -38,6 +36,7 @@ aug_data_set_3 <- convert_variant_to_sequence(clean_data_set_3, "Q5SW96")
 data <- aug_data_set_3 %>%
   drop_na(score)
 
+
 #
 # wrap in function
 #
@@ -62,11 +61,11 @@ test <- data[-partition, ]
 #Add new columns (encoding)
 X_train <- training %>%
   pull(sequence_to_model) %>%
-  encode_peptide(m = "blosum62")
+  encode_peptide(m = "z_scales")
 
 X_test <- test %>%
   pull(sequence_to_model) %>%
-  encode_peptide(m = "blosum62")
+  encode_peptide(m = "z_scales")
 
 
 
@@ -89,6 +88,6 @@ NN <- neuralnetwork(X = X_train, y = Y_train, hidden.layers = c(500, 300, 100),
                     optim.type = 'adam', learn.rates = 0.01, val.prop = 0)
 
 pred <- predict(NN, newdata = X_test)
-Y_Pred <- as.numeric(pred$predictions)
+Y_pred <- as.numeric(pred$predictions)
 res <- tibble(Y_pred, Y_test)
-gg <- ggplot(res, aes(x=y_Pred, y=Y_test)) + geom_point()
+gg <- ggplot(res, aes(x=Y_pred, y=Y_test)) + geom_point()
