@@ -1,5 +1,6 @@
 # 04_density_plots.R
 # ------------------------------------------------------------------------------
+print('04_density_plots.R -> density plotting data')
 
 # Clear workspace
 # ------------------------------------------------------------------------------
@@ -35,3 +36,17 @@ density_residue_data_set_1 <- density_plot_residue(data_set_1)
 density_residue_data_set_2 <- density_plot_residue(data_set_2)
 density_residue_data_set_3 <- density_plot_residue(data_set_3)
 density_residue_data_set_4 <- density_plot_residue(data_set_4)
+
+# Save density plots
+# ------------------------------------------------------------------------------
+ggsave(plot = density_data_set_1, "./doc/density_plots/density_data_set_1.png")
+ggsave(plot = density_data_set_2, "./doc/density_plots/density_data_set_2.png")
+ggsave(plot = density_data_set_3, "./doc/density_plots/density_data_set_3.png")
+ggsave(plot = density_data_set_4, "./doc/density_plots/density_data_set_4.png")
+
+# Save density plots per mutation
+# ------------------------------------------------------------------------------
+ggsave(plot = density_residue_data_set_1, "./doc/density_plots/density_residue_data_set_1.png")
+ggsave(plot = density_residue_data_set_2, "./doc/density_plots/density_residue_data_set_2.png")
+ggsave(plot = density_residue_data_set_3, "./doc/density_plots/density_residue_data_set_3.png")
+ggsave(plot = density_residue_data_set_4, "./doc/density_plots/density_residue_data_set_4.png")

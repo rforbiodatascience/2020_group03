@@ -1,5 +1,6 @@
 # 04_quicksar.R
 # ------------------------------------------------------------------------------
+print('04_quicksar.R -> quickSARing data')
 
 # Clear workspace
 # ------------------------------------------------------------------------------
@@ -25,11 +26,19 @@ data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 data_set_4 <- data_set_4 %>%
   drop_na(score)
 
+data_set_3 <- data_set_3 %>%
+  drop_na(score)
+
 # Plot effective amino acids at each position with a cutoff
 # ------------------------------------------------------------------------------
 quick_sar_data_set_1 <- quick_sar(data_set_1, cutoff = 0.5)
 quick_sar_data_set_2 <- quick_sar(data_set_2, cutoff = 3)
-quick_sar_data_set_3 <- quick_sar(data_set_3, cutoff = 0.3)
+quick_sar_data_set_3 <- quick_sar(data_set_3, cutoff = 0.6)
 quick_sar_data_set_4 <- quick_sar(data_set_4, cutoff = 0)
-                        
 
+# Save quickSAR plots
+# ------------------------------------------------------------------------------
+ggsave(plot = quick_sar_data_set_1, "./doc/quick_SAR/quick_sar_data_set_1.png")
+ggsave(plot = quick_sar_data_set_2, "./doc/quick_SAR/quick_sar_data_set_2.png")
+ggsave(plot = quick_sar_data_set_3, "./doc/quick_SAR/quick_sar_data_set_3.png")
+ggsave(plot = quick_sar_data_set_4, "./doc/quick_SAR/quick_sar_data_set_4.png")
