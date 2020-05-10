@@ -1,35 +1,14 @@
 # Define project functions
 # ------------------------------------------------------------------------------
 
-#' Functions for Peptide Activity prediction
-#' 
-#' @description Simple function to load a given amino acid scale
-#' 
-load_scale = function(enc)
-{
-  if (enc == 'z5')
-  {
-    encoder = read.csv(file = './_raw/z_scales.csv', sep = ";", dec = ",", header=TRUE, row.names=1)
-  }
-  if (enc == 'bl62')
-  {
-    encoder = read.table(file = './_raw/BLOSUM62.txt')
-  }
-  return (encoder)
-}
-
-
 #' @description
 #' `encode_peptide` returns a dataframe encoding the sequence in the method `m' specified.
 #' All the peptides have to be the same length.
 #'
-#
 #' @param x peptide, string
 #' @param m method, string, options: blosum45, blosum63, blosum80, blosum90, pam30, pam70 and pam250
 #' 
 #' @return if all the parameters are logical will return a dataframe with the row.names = peptide and each column the encoding. The number of columns is len(peptide) x 20 amino acids. 
-#'
-#' 
 #' @example
 #' encode_peptide('ATRALPLTW', "blosum62")
 #' 
@@ -51,16 +30,20 @@ encode_peptide = function(x, m){
 }
 
 
-
-
-# Simple function to convert a mutation into a protein sequence based on a unprot id
-#
-# Usage:
-# make_sequence(Mutated_residue, Mutation_position, Mutation, uniprot_ID)
-#
-# Returns:
-# modified sequence
-
+#' make_sequence
+#' @description
+#' `make_sequence` convert variant information and WT sequence to variant sequence
+#' Supports only single mutations
+#'
+#' @param Mutated_residue, string residue to mutate
+#' @param Mutation_position, numeric, residue number to mutate
+#' @param Mutation, string mutation to which amino acid
+#' @param uniprot_ID, string uniprot_ID
+#' 
+#' @return sequence, string protein sequence
+#' 
+#' @examples
+#' make_sequence("D", 2, "K", "37636")
 make_sequence = function(Mutated_residue, Mutation_position, Mutation, uniprot_ID)
 {
   WT_sequence <- as_tibble(GetSequences(uniprot_ID)) %>%
@@ -70,48 +53,64 @@ make_sequence = function(Mutated_residue, Mutation_position, Mutation, uniprot_I
   return(sequence)
 }
 
-# Function to convert a mutation description into an mutated residue
-#
-# Usage:
-# get_mutated_residue(variant)
-#
-# Returns:
-# mutated residue
+
+#' @description
+#' `get_mutated_residue` extracts inforationm about WT residue
+#' Supports only single mutations
+#'
+#' @param variant, string format example "D23E"
+#'
+#' @return mutated_residue, string
+#'
+#' @examples
+#' get_mutated_residue("D2K")
 get_mutated_residue <- function(variant) {
   mutated_residue = str_extract(variant, "[A-Z]")
   return(mutated_residue)
 }
 
-# Function to convert a mutation description into an mutattion position
-#
-# Usage:
-# get_mutation_position(variant)
-#
-# Returns:
-# mutation position
+
+#' @description
+#' `get_mutation_position` extracts information about mutation position
+#'
+#' @param variant, string
+#'
+#' @return mutation_position, numeric
+#'
+#' @examples
+#' get_mutation_position("D2K")
 get_mutation_position <- function(variant) {
   mutation_position = str_extract(variant, "[0-9]+")
   return(mutation_position)
 }
 
-# Function to convert a mutation description into an mutation
-#
-# Usage:
-# get_mutation(variant)
-#
-# Returns:
-# mutation
+
+#' @description
+#' `get_mutation` extracts information about mutation to which amino_acid
+#'
+#' @param variant, string
+#'
+#' @return mutation, string
+#' @export
+#'
+#' @examples
+#' get_mutation("D2K")
 get_mutation <- function(variant) {
   mutation = str_extract(variant, "[A-Z,*]$")
   return(mutation)
 }
 
-# Function to convert variant to sequence
-#
-# Usage:
-# convert_variant_to_sequence(tibble, uniprot_id)
-# Returns:
-# tibble augmented with sequence
+
+#' @description
+#' `convert_variant_to_sequence` converts a tibble of variant_IDs to a tibble with corrensponding
+#' sequences based on a uniprot ID
+#' 
+#' @param df, tibble of variant_IDs column name = variant
+#' @param protein, string uniprot ID
+#'
+#' @return tibble with sequences
+#'
+#' @examples convert_variant_to_sequence(df, "74742")
 convert_variant_to_sequence <- function(df, protein)  {
   clean_df <- df %>%
   mutate(
@@ -122,16 +121,17 @@ convert_variant_to_sequence <- function(df, protein)  {
   return(clean_df)
 }
 
-#' heatmap_score
+#' @description 
+#' `heatmap_score` makes a ggplot2 tile plot based on a tibble
+#' 
 #'
-#' @param df 
-#' @param score_min 
-#' @param score_max 
+#' @param df, tibble with columns score, mutation_position, mutation info
+#' @param score_min, numeric lower cutoff
+#' @param score_max, numeric higher cutoff
 #'
-#' @return
-#' @export
+#' @return heatmap object
 #'
-#' @examples
+#' @examples heatmap_score(df, 0.2, 4.3)
 heatmap_score <- function(df, score_min, score_max) {
   heatmap <- ggplot(df, aes(mutation_position, mutation, fill = score)) +
     scale_x_continuous(expand=c(0,0)) +
@@ -142,43 +142,44 @@ heatmap_score <- function(df, score_min, score_max) {
 }
 
 
-#' density_plot
+#' @description 
+#' `density_plot` makes a ggplot2 density plot based on a tibble
+#' 
+#' 
+#' @param df, tibble with score column 
 #'
-#' @param df 
+#' @return density plot object
 #'
-#' @return
-#' @export
-#'
-#' @examples
+#' @examples density_plot(df)
 density_plot <- function(df) {
   density <- ggplot(df, aes(score)) +
     geom_density(alpha=0.4, fill="lightblue")
   return(density)
 }
 
-#' density_plot_residue
+#' @description 
+#' `density_plot_residue` makes a ggplot2 density plot based on a tibble
+#' 
+#' 
+#' @param df, tibble with score column and mutated_residue columns
 #'
-#' @param df 
+#' @return density plot object
 #'
-#' @return
-#' @export
-#'
-#' @examples
+#' @examples density_plot_residue(df)
 density_plot_residue <- function(df){
   density_residue <- ggplot(df, aes(score, color=mutated_residue, fill=mutated_residue)) +
     geom_density(alpha=0.1)
   return(density_residue)
 }
 
-#' Title
+#' @description 
+#' `quick_sar` makes a ggplot2 line plot based on a tibble
+#' 
+#' @param df, tibble with score column and mutation_position columns
 #'
-#' @param df 
-#' @param cutoff 
+#' @return density plot object
 #'
-#' @return
-#' @export
-#'
-#' @examples
+#' @examples quick_sar(df)
 quick_sar <- function(df, cutoff) {
   df_eff <- df %>%
     mutate(effective = case_when(score <= cutoff ~ 0,
