@@ -1,4 +1,5 @@
 # Toolbox for analysis and prediction of protein and peptide variant effects
+![Image description](link-to-image)
 ## 22100 - R for Bio Data Science - Spring 2020
 ### 2020_group03
 
