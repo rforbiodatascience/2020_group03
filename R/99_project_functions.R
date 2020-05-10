@@ -121,3 +121,73 @@ convert_variant_to_sequence <- function(df, protein)  {
     sequence = make_sequence(mutated_residue, mutation_position, mutation, protein))
   return(clean_df)
 }
+
+#' heatmap_score
+#'
+#' @param df 
+#' @param score_min 
+#' @param score_max 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+heatmap_score <- function(df, score_min, score_max) {
+  heatmap <- ggplot(df, aes(mutation_position, mutation, fill = score)) +
+    scale_x_continuous(expand=c(0,0)) +
+    scale_fill_continuous(limits=c(score_min, score_max),type ="viridis", oob= scales::squish) +
+    theme(panel.background = element_blank()) +
+    geom_tile()
+  return(heatmap)
+}
+
+
+#' density_plot
+#'
+#' @param df 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+density_plot <- function(df) {
+  density <- ggplot(df, aes(score)) +
+    geom_density(alpha=0.4, fill="lightblue")
+  return(density)
+}
+
+#' density_plot_residue
+#'
+#' @param df 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+density_plot_residue <- function(df){
+  density_residue <- ggplot(df, aes(score, color=mutated_residue, fill=mutated_residue)) +
+    geom_density(alpha=0.1)
+  return(density_residue)
+}
+
+#' Title
+#'
+#' @param df 
+#' @param cutoff 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+quick_sar <- function(df, cutoff) {
+  df_eff <- df %>%
+    mutate(effective = case_when(score <= cutoff ~ 0,
+                                 score > cutoff ~ 1)) %>%
+    group_by(mutation_position) %>%
+    summarise(N_eff = sum(effective))
+  
+  neff_plot <- df_eff %>%
+    ggplot(aes(x=mutation_position, y = N_eff)) +
+    geom_line()
+  return(neff_plot)
+}

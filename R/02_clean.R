@@ -34,8 +34,6 @@ data_set_1_clean <- data_set_1  %>%
          score = E3_score) %>%
   filter(!str_detect(variant, "\\*"))
 
-
-
 # Data_set 2  
 # select ERK2_Mutant and activity to predict, and rename columns
 data_set_2_clean <- data_set_2  %>% 
@@ -72,14 +70,7 @@ data_set_4_clean <- data_set_4 %>%
 
 # Write data
 # ------------------------------------------------------------------------------
-write_tsv(x = data_set_1_clean,
-          path = "./data/02_clean_data_set_1.tsv")
-
-write_tsv(x = data_set_2_clean,
-          path = "./data/02_clean_data_set_2.tsv")
-
-write_tsv(x = data_set_3_clean,
-          path = "./data/02_clean_data_set_3.tsv")
-
-write_tsv(x = data_set_4_clean,
-          path = "./data/02_clean_data_set_4.tsv")
+write_tsv(x = data_set_1_clean, path = "./data/02_clean_data_set_1.tsv")
+write_tsv(x = data_set_2_clean, path = "./data/02_clean_data_set_2.tsv")
+write_tsv(x = data_set_3_clean, path = "./data/02_clean_data_set_3.tsv")
+write_tsv(x = data_set_4_clean, path = "./data/02_clean_data_set_4.tsv")
