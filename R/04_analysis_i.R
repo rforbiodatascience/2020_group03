@@ -82,6 +82,7 @@ seq_properties %>%
   group_by(mutation) %>%
   ggplot() +
   geom_point(aes(x = mutation, y = pI, color = aminoacid_class)) +
+  ####
   theme_classic() +
   labs(x = "Residue mutated", y = "pI", color = "Residue character") +
   theme(
