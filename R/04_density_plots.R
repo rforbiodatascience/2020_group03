@@ -25,14 +25,14 @@ data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 
 # Generate density plots
 # ------------------------------------------------------------------------------
-density_data_set_1 <- density_plot(data_set_1)
-density_data_set_2 <- density_plot(data_set_2)
-density_data_set_3 <- density_plot(data_set_3)
-density_data_set_4 <- density_plot(data_set_4)
+density_data_set_1 <- density_plot(data_set_1, title="Score density plot for Data Set 1")
+density_data_set_2 <- density_plot(data_set_2, title="Score density plot for Data Set 2")
+density_data_set_3 <- density_plot(data_set_3, title="Score density plot for Data Set 3")
+density_data_set_4 <- density_plot(data_set_4, title="Score density plot for Data Set 4")
 
 # Generate density plot per mutation
 # ------------------------------------------------------------------------------
-density_residue_data_set_1 <- density_plot_residue(data_set_1)
+density_residue_data_set_1 <- density_plot_residue(data_set_1 )
 density_residue_data_set_2 <- density_plot_residue(data_set_2)
 density_residue_data_set_3 <- density_plot_residue(data_set_3)
 density_residue_data_set_4 <- density_plot_residue(data_set_4)

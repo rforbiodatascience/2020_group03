@@ -104,6 +104,13 @@ CV_results <- tidy(fit.elasticnet.cv) %>%
 
 CV_plot <- ggplot(CV_results, aes(x=log_lambda, y=estimate)) +
   geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
-  geom_point()
+  geom_point() +
+  theme_classic() +
+  theme(
+    panel.border = element_rect(colour = "black", fill = NA, size = 1),
+    axis.line = element_line(colour = "black", size = 0),
+    axis.text.x = element_text(face = "bold", color = "#000000"),
+    axis.text.y = element_text(face = "bold", color = "#000000")
+  )
 
 ggsave(plot=CV_plot, filename)

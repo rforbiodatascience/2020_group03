@@ -137,7 +137,14 @@ heatmap_score <- function(df, score_min, score_max) {
     scale_x_continuous(expand=c(0,0)) +
     scale_fill_continuous(limits=c(score_min, score_max),type ="viridis", oob= scales::squish) +
     theme(panel.background = element_blank()) +
-    geom_tile()
+    geom_tile() +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    )
   return(heatmap)
 }
 
@@ -151,9 +158,17 @@ heatmap_score <- function(df, score_min, score_max) {
 #' @return density plot object
 #'
 #' @examples density_plot(df)
-density_plot <- function(df) {
+density_plot <- function(df, title) {
   density <- ggplot(df, aes(score)) +
-    geom_density(alpha=0.4, fill="lightblue")
+    geom_density(alpha=0.4, fill="lightblue") +
+    ggtitle(title) +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    )
   return(density)
 }
 
@@ -168,7 +183,14 @@ density_plot <- function(df) {
 #' @examples density_plot_residue(df)
 density_plot_residue <- function(df){
   density_residue <- ggplot(df, aes(score, color=mutated_residue, fill=mutated_residue)) +
-    geom_density(alpha=0.1)
+    geom_density(alpha=0.1) +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    )
   return(density_residue)
 }
 
@@ -189,6 +211,13 @@ quick_sar <- function(df, cutoff) {
   
   neff_plot <- df_eff %>%
     ggplot(aes(x=mutation_position, y = N_eff)) +
-    geom_line()
+    geom_line() +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    )
   return(neff_plot)
 }
