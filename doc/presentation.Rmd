@@ -1,5 +1,5 @@
 ---
-title: "Peptide activity prediction"
+title: "Toolbox for analysis and prediction of protein and peptide variant effects"
 subtitle: "22100 - R for Bio Data Science"
 author: 'Group 3: Laura Sans, Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra'
 date: "Spring 2020"
@@ -38,18 +38,25 @@ div.footnotes {
   - Support for several models.
   - Visualization options.
 
-## R script overview 1
-
+## Example dataset 2 - data overview
 <div class="columns-2">
-  ![](project_organisation.png){width=500px}
+  ![Density plot of score](density_plots/density_data_set_1.png){width=100%}
   <p class="forceBreak"></p>
-  * 00_do_it.R
-    - Main program and loading of packages
-  * 01_load.R
-    - Load: Encoding matrices, peptide and protein variant information and associated bio data
-    - Save: All loaded data in .tsv format
+  ![Density plot of score per residue](density_plots/density_residue_data_set_1.png){width=100%}
 </div>
 
+
+
+
+
+
+
+## Example dataset 1 - heatmap
+![d](quick_SAR/quick_sar_data_set_1.png){width=100%}
+
+</div>
+![Heatmap data set 1](heatmaps/heatmap_data_set_1.png){width=100%}
+  
 ## R script overview 2
 
 <div class="columns-2">
