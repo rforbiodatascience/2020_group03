@@ -28,49 +28,86 @@ amino_acids <- read_csv("data/_raw/amino_acids.csv", col_names = TRUE)
 
 # Data_set 1
 # select variant_ID and activity to predict, and rename columns
-data_set_1_clean <- data_set_1  %>% 
+data_set_1_clean <- data_set_1 %>%
   select(Variant_ID, E3_score) %>%
-  rename(variant = Variant_ID,
-         score = E3_score) %>%
+  rename(
+    variant = Variant_ID,
+    score = E3_score
+  ) %>%
   filter(!str_detect(variant, "\\*"))
 
+<<<<<<< HEAD
+
+
+# Data_set 2
+=======
 # Data_set 2  
+>>>>>>> 1d23e18731429af2f697b28b94cbdfecf178f800
 # select ERK2_Mutant and activity to predict, and rename columns
-data_set_2_clean <- data_set_2  %>% 
+data_set_2_clean <- data_set_2 %>%
   select(ERK2_Mutant, SCH_Average) %>%
-  rename(variant = ERK2_Mutant,
-         score = SCH_Average)
+  rename(
+    variant = ERK2_Mutant,
+    score = SCH_Average
+  )
 
 # Data_set 3
 # convert three letter amino acid representation to oneletter, select hgvs_pro and score to predict, and rename columns
-data_set_3_clean <- data_set_3  %>% 
+data_set_3_clean <- data_set_3 %>%
   select(hgvs_pro, score) %>%
   rename(variant = hgvs_pro) %>%
   mutate(
-    mutated_residue_3_letter = str_extract(variant, "[A-Z][a-z][a-z]"), 
+    mutated_residue_3_letter = str_extract(variant, "[A-Z][a-z][a-z]"),
     mutation_position = str_extract(variant, "[0-9]+"),
     mutation_3_letter = str_extract(variant, "[A-Z,a-z,=]+$"),
-    mutation_3_letter = str_replace(mutation_3_letter, "[=]", mutated_residue_3_letter)) %>%
+    mutation_3_letter = str_replace(mutation_3_letter, "[=]", mutated_residue_3_letter)
+  ) %>%
   full_join(
-    amino_acids, by = c("mutation_3_letter" = "threeletter")) %>%
+    amino_acids,
+    by = c("mutation_3_letter" = "threeletter")
+  ) %>%
   rename(mutation = oneletter) %>%
   full_join(
-    amino_acids, by = c("mutated_residue_3_letter" = "threeletter")) %>%
+    amino_acids,
+    by = c("mutated_residue_3_letter" = "threeletter")
+  ) %>%
   rename(mutated_residue = oneletter) %>%
-  unite(variant, mutated_residue, mutation_position, mutation, sep="") %>%
+  unite(variant, mutated_residue, mutation_position, mutation, sep = "") %>%
   select(variant, score)
 
 # Data_set 4
 # pivot to longer table, rename columns
 data_set_4_clean <- data_set_4 %>%
   pivot_longer(-X1, names_to = "substitution", values_to = "score") %>%
-  unite("variant", X1:substitution, sep="") %>%
+  unite("variant", X1:substitution, sep = "") %>%
   filter(!str_detect(variant, "\\*"))
 
 
 # Write data
 # ------------------------------------------------------------------------------
+<<<<<<< HEAD
+write_tsv(
+  x = data_set_1_clean,
+  path = "./data/02_clean_data_set_1.tsv"
+)
+
+write_tsv(
+  x = data_set_2_clean,
+  path = "./data/02_clean_data_set_2.tsv"
+)
+
+write_tsv(
+  x = data_set_3_clean,
+  path = "./data/02_clean_data_set_3.tsv"
+)
+
+write_tsv(
+  x = data_set_4_clean,
+  path = "./data/02_clean_data_set_4.tsv"
+)
+=======
 write_tsv(x = data_set_1_clean, path = "./data/02_clean_data_set_1.tsv")
 write_tsv(x = data_set_2_clean, path = "./data/02_clean_data_set_2.tsv")
 write_tsv(x = data_set_3_clean, path = "./data/02_clean_data_set_3.tsv")
 write_tsv(x = data_set_4_clean, path = "./data/02_clean_data_set_4.tsv")
+>>>>>>> 1d23e18731429af2f697b28b94cbdfecf178f800

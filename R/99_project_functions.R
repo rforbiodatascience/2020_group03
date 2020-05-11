@@ -20,7 +20,7 @@ encode_peptide = function(x, m){
     lapply(function(x_i){
       encoder[x_i,] %>%
         as.matrix %>%
-        t %>%
+        t() %>%
         matrix(nrow = 1, byrow = TRUE) %>%
         return
     })
@@ -30,6 +30,16 @@ encode_peptide = function(x, m){
 }
 
 
+<<<<<<< HEAD
+# Simple function to convert a mutation into a protein sequence based on a unprot id
+#
+# Usage:
+# make_sequence(Mutated_residue, Mutation_position, Mutation, uniprot_ID)
+#
+# Returns:
+# modified sequence
+
+=======
 #' make_sequence
 #' @description
 #' `make_sequence` convert variant information and WT sequence to variant sequence
@@ -44,6 +54,7 @@ encode_peptide = function(x, m){
 #' 
 #' @examples
 #' make_sequence("D", 2, "K", "37636")
+>>>>>>> 1d23e18731429af2f697b28b94cbdfecf178f800
 make_sequence = function(Mutated_residue, Mutation_position, Mutation, uniprot_ID)
 {
   WT_sequence <- as_tibble(GetSequences(uniprot_ID)) %>%
