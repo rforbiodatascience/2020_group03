@@ -5,15 +5,16 @@ rm(list = ls())
 # Load libraries
 # ------------------------------------------------------------------------------
 library("tidyverse")
-library("glmnet")
 library("caret")
 library("UniprotR")
+library("ANN2")
 library("yardstick")
 
 
 # Define functions
 # ------------------------------------------------------------------------------
 source(file = "./R/99_project_functions.R")
+
 
 # Load data
 # ------------------------------------------------------------------------------
@@ -22,9 +23,10 @@ data_set_2 <- read_tsv(file = "./data/03_aug_data_set_2.tsv")
 data_set_3 <- read_tsv(file = "./data/03_aug_data_set_3.tsv")
 data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 
+
 # Wrangle data
 # ------------------------------------------------------------------------------
-data_set_1 <- data_set_1 %>%
+data_set_1 <- data_set_4 %>%
   mutate(variant = case_when(variant=="NA-NA" ~ "D2D",
                              !variant=="NA-NA" ~ variant))
 
@@ -32,19 +34,19 @@ data_set_1 <- data_set_1 %>%
 
 # Select dataset and wrangle
 # ------------------------------------------------------------------------------
-test_set = data_set_3
-filename = "./doc/glmnet/corr_data_set_3.png"
-RMSE_path = "./data/glmnet_RMSE_data_set_3.tsv"
+test_set = data_set_4
+filename = "./doc/ann/ann_corr_data_set_4.png"
+RMSE_path = "./data/ANN_RMSE_data_set_4.tsv"
 
 
 data <- test_set %>%
   drop_na(score)
 
 
-# Elastic net hyperparameters
+# ANN2 hyperparameters
 # ------------------------------------------------------------------------------
-alpha_ = 0.2 # mix between ridge and lasso
-s_ = 0.01 # regularization strenght
+epochs = 10 # number of epochs
+hidden_layers = c(100, 100) # number and size of hidden layers
 scale = "z_scales" # amino acid descriptor scale
 train_size = 0.75 # train sample size
 seed_value = 42 # random seed
@@ -63,7 +65,7 @@ data <- data %>%
 # ------------------------------------------------------------------------------
 Y <- data  %>%
   select(score)
- 
+
 Y <- unname(as.matrix(Y))
 
 # Partion data
@@ -93,31 +95,24 @@ Y_test <- unname(as.matrix(Y_test))
 Y_train <- unname(as.matrix(Y_train))
 X_train <- unname(as.matrix(X_train))
 
+print('NN running...')
 
-# Fit elasticnet model
-# ------------------------------------------------------------------------------
-fit.elasticnet <- glmnet(X_train, Y_train, type.measure="mse", alpha = alpha_, s = s_,
-                         family="gaussian",
-                         standardize=TRUE)
+NN <- neuralnetwork(X = X_train, y = Y_train,
+                    hidden.layers = hidden_layers,
+                    loss.type="squared",
+                    optim.type = 'adam',
+                    regression = TRUE,
+                    activ.functions = "tanh",
+                    learn.rates = 0.01, val.prop = 0,
+                    n.epochs = epochs)
 
-# Preduct using elasticnet model
-# ------------------------------------------------------------------------------
-Y_pred_ElasticNet <- predict(fit.elasticnet, newx = X_test, s = s_, alpha=alpha_)
-results = tibble(Y_test, Y_pred_ElasticNet)
-RMSE_table = results
+pred <- predict(NN, newdata = X_test)
+Y_pred <- as.double(pred$predictions)
+res <- tibble(Y_pred, Y_test)
 
+RMSE_ <- rmse(res, Y_test[,1], Y_pred)
 
-# Pivot results and test response variables
-# ------------------------------------------------------------------------------
-results <- results %>%
-  mutate(score = Y_test) %>%
-  full_join(test, by = "score") %>%
-  select(variant, score, Y_test, Y_pred_ElasticNet) %>%
-  pivot_longer(c(-variant, -score), names_to = "model", values_to = "prediction")
-  
-# Plot correlation between score and prediction
-# ------------------------------------------------------------------------------
-corr_plot <- ggplot(results, aes(x=score, y=prediction, color=model)) +
+corr_plot <- ggplot(res, aes(x=Y_pred, y=Y_test)) +
   geom_point() +
   theme_classic() +
   theme(
@@ -129,9 +124,4 @@ corr_plot <- ggplot(results, aes(x=score, y=prediction, color=model)) +
 
 ggsave(plot=corr_plot, filename)
 
-
-RMSE_table <- RMSE_table %>%
-  select(Y_test, Y_pred_ElasticNet)
-
-RMSE_ = rmse(RMSE_table, Y_test[,1], Y_pred_ElasticNet[,"1"])
 write_tsv(x = RMSE_, path = RMSE_path)

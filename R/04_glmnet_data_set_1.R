@@ -8,6 +8,7 @@ library("tidyverse")
 library("glmnet")
 library("caret")
 library("UniprotR")
+library("yardstick")
 
 
 # Define functions
@@ -33,6 +34,7 @@ data_set_1 <- data_set_1 %>%
 # ------------------------------------------------------------------------------
 test_set = data_set_1
 filename = "./doc/glmnet/corr_data_set_1.png"
+RMSE_path = "./data/glmnet_RMSE_data_set_1.tsv"
 
 
 data <- test_set %>%
@@ -42,7 +44,7 @@ data <- test_set %>%
 # Elastic net hyperparameters
 # ------------------------------------------------------------------------------
 alpha_ = 0.2 # mix between ridge and lasso
-s_ = 0.005 # regularization strenght
+s_ = 0.01 # regularization strenght
 scale = "z_scales" # amino acid descriptor scale
 train_size = 0.75 # train sample size
 seed_value = 42 # random seed
@@ -102,6 +104,8 @@ fit.elasticnet <- glmnet(X_train, Y_train, type.measure="mse", alpha = alpha_, s
 # ------------------------------------------------------------------------------
 Y_pred_ElasticNet <- predict(fit.elasticnet, newx = X_test, s = s_, alpha=alpha_)
 results = tibble(Y_test, Y_pred_ElasticNet)
+RMSE_table = results
+
 
 # Pivot results and test response variables
 # ------------------------------------------------------------------------------
@@ -114,7 +118,7 @@ results <- results %>%
 # Plot correlation between score and prediction
 # ------------------------------------------------------------------------------
 corr_plot <- ggplot(results, aes(x=score, y=prediction, color=model)) +
-  geom_point()+
+  geom_point() +
   theme_classic() +
   theme(
     panel.border = element_rect(colour = "black", fill = NA, size = 1),
@@ -124,3 +128,10 @@ corr_plot <- ggplot(results, aes(x=score, y=prediction, color=model)) +
   )
 
 ggsave(plot=corr_plot, filename)
+
+
+RMSE_table <- RMSE_table %>%
+  select(Y_test, Y_pred_ElasticNet)
+
+RMSE_ = rmse(RMSE_table, Y_test[,1], Y_pred_ElasticNet[,"1"])
+write_tsv(x = RMSE_, path = RMSE_path)

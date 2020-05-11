@@ -36,13 +36,9 @@ data_set_1_clean <- data_set_1 %>%
   ) %>%
   filter(!str_detect(variant, "\\*"))
 
-<<<<<<< HEAD
 
 
 # Data_set 2
-=======
-# Data_set 2  
->>>>>>> 1d23e18731429af2f697b28b94cbdfecf178f800
 # select ERK2_Mutant and activity to predict, and rename columns
 data_set_2_clean <- data_set_2 %>%
   select(ERK2_Mutant, SCH_Average) %>%
@@ -73,7 +69,8 @@ data_set_3_clean <- data_set_3 %>%
   ) %>%
   rename(mutated_residue = oneletter) %>%
   unite(variant, mutated_residue, mutation_position, mutation, sep = "") %>%
-  select(variant, score)
+  select(variant, score) %>%
+  filter(!grepl('NA', variant))
 
 # Data_set 4
 # pivot to longer table, rename columns
@@ -85,29 +82,7 @@ data_set_4_clean <- data_set_4 %>%
 
 # Write data
 # ------------------------------------------------------------------------------
-<<<<<<< HEAD
-write_tsv(
-  x = data_set_1_clean,
-  path = "./data/02_clean_data_set_1.tsv"
-)
-
-write_tsv(
-  x = data_set_2_clean,
-  path = "./data/02_clean_data_set_2.tsv"
-)
-
-write_tsv(
-  x = data_set_3_clean,
-  path = "./data/02_clean_data_set_3.tsv"
-)
-
-write_tsv(
-  x = data_set_4_clean,
-  path = "./data/02_clean_data_set_4.tsv"
-)
-=======
 write_tsv(x = data_set_1_clean, path = "./data/02_clean_data_set_1.tsv")
 write_tsv(x = data_set_2_clean, path = "./data/02_clean_data_set_2.tsv")
 write_tsv(x = data_set_3_clean, path = "./data/02_clean_data_set_3.tsv")
 write_tsv(x = data_set_4_clean, path = "./data/02_clean_data_set_4.tsv")
->>>>>>> 1d23e18731429af2f697b28b94cbdfecf178f800
