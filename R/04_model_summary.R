@@ -79,3 +79,4 @@ RMSE_plot <- ggplot(RMSE_summary, aes(x = dataset, y = .estimate, fill=model)) +
     axis.text.y = element_text(face = "bold", color = "#000000")
   )
 
+ggsave(plot = RMSE_plot, "./doc/model_summaries/RMSE_blosum62.png")
