@@ -1,5 +1,6 @@
-# 04_heatmaps.R
+# 04_quicksar.R
 # ------------------------------------------------------------------------------
+print('04_quicksar.R -> quickSARing data')
 
 # Clear workspace
 # ------------------------------------------------------------------------------
@@ -22,29 +23,22 @@ data_set_2 <- read_tsv(file = "./data/03_aug_data_set_2.tsv")
 data_set_3 <- read_tsv(file = "./data/03_aug_data_set_3.tsv")
 data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 
-# calculate effective amino acids
+data_set_4 <- data_set_4 %>%
+  drop_na(score)
 
-data_set_1_eff <- data_set_1 %>%
-  mutate(effective = case_when(score<=0.3 ~ 0,
-                               score>0.3 ~1)) %>%
-  group_by(mutation_position) %>%
-  summarise(N_eff = sum(effective))
+data_set_3 <- data_set_3 %>%
+  drop_na(score)
 
+# Plot effective amino acids at each position with a cutoff
+# ------------------------------------------------------------------------------
+quick_sar_data_set_1 <- quick_sar(data_set_1, cutoff = 0.5)
+quick_sar_data_set_2 <- quick_sar(data_set_2, cutoff = 3)
+quick_sar_data_set_3 <- quick_sar(data_set_3, cutoff = 0.6)
+quick_sar_data_set_4 <- quick_sar(data_set_4, cutoff = 0)
 
-neff_1 <- data_set_1_eff %>%
-  ggplot(aes(x=mutation_position, y = N_eff)) +
-  geom_line()
-        
-
-data_set_2_eff <- data_set_2 %>%
-  mutate(effective = case_when(score<=4 ~ 0,
-                               score>4 ~1)) %>%
-  group_by(mutation_position) %>%
-  summarise(N_eff = sum(effective))
-
-
-neff_2 <- data_set_2_eff %>%
-  ggplot(aes(x=mutation_position, y = N_eff)) +
-  geom_line()
-                        
-
+# Save quickSAR plots
+# ------------------------------------------------------------------------------
+ggsave(plot = quick_sar_data_set_1, "./doc/quick_SAR/quick_sar_data_set_1.png")
+ggsave(plot = quick_sar_data_set_2, "./doc/quick_SAR/quick_sar_data_set_2.png")
+ggsave(plot = quick_sar_data_set_3, "./doc/quick_SAR/quick_sar_data_set_3.png")
+ggsave(plot = quick_sar_data_set_4, "./doc/quick_SAR/quick_sar_data_set_4.png")

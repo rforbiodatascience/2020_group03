@@ -16,27 +16,27 @@ source(file = "./R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
-clean_data_set_1 <- read_tsv(file = "./data/02_clean_data_set_1.tsv")
-#clean_data_set_2 <- read_tsv(file = "./data/02_clean_data_set_2.tsv")
-clean_data_set_3 <- read_tsv(file = "./data/02_clean_data_set_3.tsv")
+#clean_data_set_1 <- read_tsv(file = "./data/02_clean_data_set_1.tsv")
+clean_data_set_2 <- read_tsv(file = "./data/02_clean_data_set_2.tsv")
+#clean_data_set_3 <- read_tsv(file = "./data/02_clean_data_set_3.tsv")
 #clean_data_set_4 <- read_tsv(file = "./data/02_clean_data_set_4.tsv")
 
 # Wrangle data
 # ------------------------------------------------------------------------------
-aug_data_set_1 <- clean_data_set_1 %>%
-  mutate(variant = case_when(variant=="NA-NA" ~ "D2D",
-                             !variant=="NA-NA" ~ variant))
+#aug_data_set_1 <- clean_data_set_1 %>%
+#  mutate(variant = case_when(variant=="NA-NA" ~ "D2D",
+#                             !variant=="NA-NA" ~ variant))
 
 # augmenting with sequence
-aug_data_set_1 <- convert_variant_to_sequence(aug_data_set_1, "P38398")
-#aug_data_set_2 <- convert_variant_to_sequence(clean_data_set_2, "P28482")
+#aug_data_set_1 <- convert_variant_to_sequence(aug_data_set_1, "P38398")
+aug_data_set_2 <- convert_variant_to_sequence(clean_data_set_2, "P28482")
 #aug_data_set_3 <- convert_variant_to_sequence(clean_data_set_3, "Q5SW96")
 #aug_data_set_4 <- convert_variant_to_sequence(clean_data_set_4, "P04147")
 
-data <- aug_data_set_1 %>%
-  drop_na(score) %>%
-  mutate(score_norm = (score - mean(score))/sd(score)) %>%
-  mutate(score_stad = (score - min(score)) / (max(score)-min(score)))
+data <- aug_data_set_2 %>%
+  drop_na(score)# %>%
+  #mutate(score_norm = (score - mean(score))/sd(score)) %>%
+  #mutate(score_stad = (score - min(score)) / (max(score)-min(score)))
 
 
 
@@ -52,7 +52,7 @@ data <- data %>%
   mutate(sequence_to_model = str_sub(sequence, min(sequence_window), max(sequence_window)))
 
 Y <- data  %>%
-  select(score_stad)
+  select(score)
  
 Y <- unname(as.matrix(Y))
 
@@ -74,10 +74,10 @@ X_test <- test %>%
 
 
 Y_test <- test %>%
-  select(score_stad)
+  select(score)
 
 Y_train <- training %>%
-  select(score_stad)
+  select(score)
 
 Y_test <- unname(as.matrix(Y_test))
 Y_train <- unname(as.matrix(Y_train))
@@ -87,8 +87,13 @@ X_test <- unname(as.matrix(X_test))
 
 print('NN running...')
 
-NN <- neuralnetwork(X = X_train, y = Y_train, hidden.layers = c(100),
-                    optim.type = 'adam', learn.rates = 0.01, val.prop = 0)
+NN <- neuralnetwork(X = X_train, y = Y_train,
+                    hidden.layers = c(100,100),
+                    loss.type="squared",
+                    optim.type = 'adam',
+                    regression = TRUE,
+                    activ.functions = "tanh",
+                    learn.rates = 0.01, val.prop = 0)
 
 pred <- predict(NN, newdata = X_test)
 Y_pred <- as.numeric(pred$predictions)
