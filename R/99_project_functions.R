@@ -41,7 +41,7 @@ encode_peptide = function(x, m){
     lapply(function(x_i){
       encoder[x_i,] %>%
         as.matrix %>%
-        t %>%
+        t() %>%
         matrix(nrow = 1, byrow = TRUE) %>%
         return
     })
@@ -49,8 +49,6 @@ encode_peptide = function(x, m){
   rownames(X_enc) = x
   return(X_enc)
 }
-
-
 
 
 # Simple function to convert a mutation into a protein sequence based on a unprot id

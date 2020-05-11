@@ -1,5 +1,5 @@
 ---
-title: "Peptide activity prediction"
+title: "Toolbox for analysis and prediction of peptide variant effects"
 subtitle: "22100 - R for Bio Data Science"
 author: 'Group 3: Laura Sans, Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra'
 date: "Spring 2020"
@@ -118,6 +118,9 @@ div.footnotes {
 
 ## Distribution of tasks, week 19
 
+# final presentation 
+
+next slides are for the final presentation
 
 ## Content
 * Introduction
@@ -127,10 +130,39 @@ div.footnotes {
 * Conclusion
 
 ## Introduction
+Prediction of protein-protein interactions (PPI) are a challenging task. 
+
+ML models allow to exploit the content of these PPI data sets. 
+
+The aim of this project is to create a toolbox to predict the biological activity of these peptides with machine learning models. 
+
+## Methods - the data sets
+
+<div class="columns-2">
+  ![](file.png){width=300px}
+  <p class="forceBreak"></p>
+  * **Data set 1**: Massively Parallel Functional Analysis of BRCA1 RING domain variants
+  * **Data set 2**: Phenotypic Characterization of a Comprehensive Set of MAPK1/ERK2 Missense Mutants
+  * **Data set 3**: A deep mutational scan of LDLRAP1 based on a Y2H assay with the interactor OBFC1.
+  * **Data set 4**: Combining Natural Sequence Variation with High Throughput Mutational Data to Reveal Protein Interaction Sites
+</div>
+
+## Methods - the data sets
 
 ## Methods
 
+
+Dataset used
+libraries used
+data cleaning and data wrangling
+data visu (only mention it, more in results)
+modelling (how, train set, test set, models regression, ann...)
+
+
 ## Results
+data visu (some plots to show the distribution of the initial data, LAURA WILL DO IT)
+basic statistics for the data we have (LAURA WILL DO IT)
+models results
 
 ## Discussion
 
