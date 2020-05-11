@@ -1,9 +1,5 @@
 ---
-<<<<<<< HEAD
 title: "Toolbox for analysis and prediction of protein and peptide variant effects"
-=======
-title: "Toolbox for analysis and prediction of peptide variant effects"
->>>>>>> 01d20440b1f983239e551b2706ed6417cdb3164c
 subtitle: "22100 - R for Bio Data Science"
 author: 'Group 3: Laura Sans, Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra'
 date: "Spring 2020"
