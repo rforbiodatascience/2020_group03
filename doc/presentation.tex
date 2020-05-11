@@ -67,12 +67,18 @@
 }
 \usepackage{hyperref}
 \hypersetup{
-            pdftitle={22100 - R for Bio Data Science},
+            pdftitle={Toolbox for analysis and prediction of peptide variant effects},
             pdfauthor={Group 3: Laura Sans, Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \newif\ifbibliography
+\usepackage{longtable,booktabs}
+\usepackage{caption}
+% These lines are needed to make table captions work with longtable:
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -93,21 +99,18 @@
 \makeatother
 
 
-\title{22100 - R for Bio Data Science}
+\title{Toolbox for analysis and prediction of peptide variant effects}
 \providecommand{\subtitle}[1]{}
-\subtitle{Spring 2020 - Group project}
+\subtitle{22100 - R for Bio Data Science}
 \author{Group 3: Laura Sans, Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra}
-\date{27-APR-2020}
+\date{Spring 2020}
 
 \begin{document}
 \frame{\titlepage}
 
 \begin{frame}
 
-\end{frame}
-
-\begin{frame}{Project aims}
-\protect\hypertarget{project-aims}{}
+\begin{block}{Project aims}
 
 \begin{itemize}
 \tightlist
@@ -132,10 +135,9 @@
   \end{itemize}
 \end{itemize}
 
-\end{frame}
+\end{block}
 
-\begin{frame}{R script overview 1}
-\protect\hypertarget{r-script-overview-1}{}
+\begin{block}{R script overview 1}
 
 \includegraphics[width=5.20833in,height=\textheight]{project_organisation.png}
 
@@ -162,10 +164,9 @@
   \end{itemize}
 \end{itemize}
 
-\end{frame}
+\end{block}
 
-\begin{frame}{R script overview 2}
-\protect\hypertarget{r-script-overview-2}{}
+\begin{block}{R script overview 2}
 
 \includegraphics[width=5.20833in,height=\textheight]{project_organisation.png}
 
@@ -197,10 +198,9 @@
   \end{itemize}
 \end{itemize}
 
-\end{frame}
+\end{block}
 
-\begin{frame}{R script overview 3}
-\protect\hypertarget{r-script-overview-3}{}
+\begin{block}{R script overview 3}
 
 \includegraphics[width=5.20833in,height=\textheight]{project_organisation.png}
 
@@ -222,10 +222,9 @@
   \end{itemize}
 \end{itemize}
 
-\end{frame}
+\end{block}
 
-\begin{frame}{R script overview 4}
-\protect\hypertarget{r-script-overview-4}{}
+\begin{block}{R script overview 4}
 
 \includegraphics[width=5.20833in,height=\textheight]{project_organisation.png}
 
@@ -245,10 +244,9 @@
   \end{itemize}
 \end{itemize}
 
-\end{frame}
+\end{block}
 
-\begin{frame}{Data peptide and protein data sources}
-\protect\hypertarget{data-peptide-and-protein-data-sources}{}
+\begin{block}{Data peptide and protein data sources}
 
 \begin{itemize}
 \tightlist
@@ -281,10 +279,9 @@
   \end{itemize}
 \end{itemize}
 
-\end{frame}
+\end{block}
 
-\begin{frame}{Machine learning toolbox}
-\protect\hypertarget{machine-learning-toolbox}{}
+\begin{block}{Machine learning toolbox}
 
 \begin{itemize}
 \item
@@ -301,14 +298,14 @@
   \end{itemize}
 \end{itemize}
 
-\end{frame}
+\end{block}
 
-\begin{frame}{Distribution of tasks, week 18}
-\protect\hypertarget{distribution-of-tasks-week-18}{}
+\begin{block}{Distribution of tasks, week 18}
 
 \begin{itemize}
 \item
-  Laura: Descriptors and function for translating
+  Laura: Descriptors and function for translating, data visualization /
+  exploration
 \item
   Jacob: Sequence generation
 \item
@@ -318,10 +315,188 @@
   learning toolbox
 \end{itemize}
 
+\end{block}
+
+\begin{block}{Distribution of tasks, week 19}
+
+\end{block}
+
 \end{frame}
 
-\begin{frame}{Distribution of tasks, week 19}
-\protect\hypertarget{distribution-of-tasks-week-19}{}
+\begin{frame}{final presentation}
+\protect\hypertarget{final-presentation}{}
+
+next slides are for the final presentation
+
+\begin{block}{Content}
+
+\begin{itemize}
+\tightlist
+\item
+  Introduction
+\item
+  Methods
+\item
+  Results
+\item
+  Discussion
+\item
+  Conclusion
+\end{itemize}
+
+\end{block}
+
+\begin{block}{Introduction}
+
+Prediction of protein-protein interactions (PPI) are a challenging task.
+
+ML models allow to exploit the content of these PPI data sets.
+
+The aim of this project is to create a toolbox to predict the biological
+activity of these peptides with machine learning models.
+
+\end{block}
+
+\begin{block}{Methods - the data sets}
+
+\begin{longtable}[]{@{}lllllll@{}}
+\toprule
+\begin{minipage}[b]{0.05\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[b]{0.04\columnwidth}\raggedright
+Protein\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\raggedright
+Target\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
+Biological activity\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\raggedright
+Species\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\raggedright
+Num of variants\strut
+\end{minipage} & \begin{minipage}[b]{0.30\columnwidth}\raggedright
+Score\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.05\columnwidth}\raggedright
+Data set 1\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+BRCA1\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+BARD1 RING domain\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Ubiquitin E3 activity\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+\emph{H. sapiens}\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+5610\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+Y2H assays\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright
+Data set 2\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+ERK2\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+Small molecule (SCH772984)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Resistance to drugs\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+\emph{H. sapiens}\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+6810\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+Drug sensitivity assays. Calculation of cell availability\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright
+Data set 3\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+LDLRAP1\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+OBFC1\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Protein translation\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+\emph{H. sapiens}\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+6385\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+Y2H assays\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.05\columnwidth}\raggedright
+Data set 4\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Pab1\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+el4FG1\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Translation initiation\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+\emph{S. cereviseae}\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+1340\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
+Y2H assays\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{block}
+
+\begin{block}{Methods - the data sets}
+
+\end{block}
+
+\begin{block}{Methods}
+
+Dataset used libraries used data cleaning and data wrangling data visu
+(only mention it, more in results) modelling (how, train set, test set,
+models regression, ann\ldots{})
+
+\end{block}
+
+\begin{block}{Results}
+
+data visu (some plots to show the distribution of the initial data,
+LAURA WILL DO IT) basic statistics for the data we have (LAURA WILL DO
+IT) models results
+
+\end{block}
+
+\begin{block}{Discussion}
+
+\end{block}
+
+\begin{block}{Conclusion}
+
+\end{block}
+
+\begin{block}{References}
+
+\includegraphics[width=3.125in,height=\textheight]{file.png}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data set 1}: L. M. Starita, D. L. Young, et al.
+  \emph{Massively parallel functional analysis of brca1 ring
+  domainvariants}, Genetics, vol.~200, no. 2, pp.~413--422, 2015. 
+\item
+  \textbf{Data set 2}: L. Brenan, A. Andreev, et al. \emph{Phenotypic
+  characterization of a comprehensive set of missense mutants}. Cell
+  Reports, vol.~17, no. 4, pp.~1171--1183, 2016. 
+\item
+  \textbf{Data set 3}: A deep mutational scan of LDLRAP1 based on a Y2H
+  assay with the interactor OBFC1.
+  {[}\url{https://www.mavedb.org/scoreset/urn:mavedb:00000036-a-1/}{]} 
+\item
+  \textbf{Data set 4}: D. Melamed, D. L. Young, et al. \emph{Combining
+  natural sequence variation withhigh throughput mutational data to
+  reveal protein interaction sites}. PLOS Genetics, vol.~11, no.
+  2,pp.~1--21, 2015. 
+\end{itemize}
+
+\end{block}
 
 \end{frame}
 
