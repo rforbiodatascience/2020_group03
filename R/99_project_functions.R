@@ -6,7 +6,7 @@
 #' All the peptides have to be the same length.
 #'
 #' @param x peptide, string
-#' @param m method, string, options: blosum45, blosum63, blosum80, blosum90, pam30, pam70 and pam250
+#' @param m method, string, options: blosum45, blosum62, blosum80, blosum90, pam30, pam70 and pam250
 #' 
 #' @return if all the parameters are logical will return a dataframe with the row.names = peptide and each column the encoding. The number of columns is len(peptide) x 20 amino acids. 
 #' @example
@@ -121,6 +121,54 @@ convert_variant_to_sequence <- function(df, protein)  {
   return(clean_df)
 }
 
+#' @description
+#' `aminoacid_type` returns an aminoacid type
+#' 
+#' @param residue, a residue in 1 letter code
+#'
+#' @return tibble with sequences
+#'
+#' @examples aminoacid_type("A")
+#' 
+aminoacid_type <- function(residue) {
+  type <- case_when(
+    residue == "R" | residue == "H" | residue == "K" ~ "basic",
+    residue == "D" | residue == "E" ~ "acid",
+    residue == "S" | residue == "T" ~ "hydroxilic",
+    residue == "Q" | residue == "N" ~ "amidic",
+    residue == "A" | residue == "G" | residue == "I" | residue == "L" | residue == "P" | residue == "V" ~ "aliphatic",
+    residue == "F" | residue == "W" | residue == "Y" ~ "aromatic",
+    residue == "C" | residue == "M" ~ "sulfur-containing"
+  )
+return(type)
+}
+
+#' @description
+#' `zscale2col` returns 5 columns one for each of the z-scales values stored in a list
+#' 
+#' @param zscales, tibble of zscales in each row, a list of 5 zscales
+#' @param df, df where to cbind the zscales
+#'
+#' @return tibble with 5 rows
+#'
+zscale2col <- function(df, zscales) {
+  zscales <- data.frame(zscales)
+  zscales <- as_tibble(cbind(nms = names(zscales), t(zscales))) %>%
+    select(.data$Z1, .data$Z2, .data$Z3, .data$Z4, .data$Z5)
+  df <- bind_cols(df, zscales)
+  df <- df %>%
+    mutate(
+      Z1 = as.numeric(Z1),
+      Z2 = as.numeric(Z2),
+      Z3 = as.numeric(Z3),
+      Z4 = as.numeric(Z4),
+      Z5 = as.numeric(Z5)
+    )
+  return(df)
+}
+
+#' Visualization functions
+#' 
 #' @description 
 #' `heatmap_score` makes a ggplot2 tile plot based on a tibble
 #' 
@@ -133,19 +181,49 @@ convert_variant_to_sequence <- function(df, protein)  {
 #'
 #' @examples heatmap_score(df, 0.2, 4.3)
 heatmap_score <- function(df, score_min, score_max) {
-  heatmap <- ggplot(df, aes(mutation_position, mutation, fill = score)) +
+  heatmap <- ggplot(df, aes(mutation_position, mutation, fill = score), color = "black") +
     scale_x_continuous(expand=c(0,0)) +
     scale_fill_continuous(limits=c(score_min, score_max),type ="viridis", oob= scales::squish) +
-    theme(panel.background = element_blank()) +
     geom_tile() +
+    labs(x="Sequence position", y="Residue mutated",color="Score") +
     theme_classic() +
     theme(
+      panel.background = element_blank(),
       panel.border = element_rect(colour = "black", fill = NA, size = 1),
       axis.line = element_line(colour = "black", size = 0),
       axis.text.x = element_text(face = "bold", color = "#000000"),
       axis.text.y = element_text(face = "bold", color = "#000000")
     )
   return(heatmap)
+}
+
+
+#' @description 
+#' `heatmap_g_score` makes a ggplot2 tile plot based on a tibble
+#' 
+#'
+#' @param df, tibble with x and y columns
+#' @param score_min, numeric lower cutoff
+#' @param score_max, numeric higher cutoff
+#'
+#' @return heatmap object
+#'
+#' @examples heatmap_score(df, score_min=0.2, score_max=4.3)
+heatmap_g_score <- function(df, score_min, score_max) {
+  heatmap_plot<- ggplot(df, aes(x=mutation_position,y=aminoacid_class, fill=score), color = "black") +
+    scale_x_continuous(expand=c(0,0)) +
+    scale_fill_continuous(limits=c(score_min, score_max),type ="viridis", oob= scales::squish) +
+    geom_tile() +
+    labs(x="Sequence position", y="Amino acid classification",color="Score", title="Score heatmap") + 
+    theme_classic() +
+    theme(
+      panel.background = element_blank(),
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    )
+  return(heatmap_plot)
 }
 
 
@@ -158,17 +236,21 @@ heatmap_score <- function(df, score_min, score_max) {
 #' @return density plot object
 #'
 #' @examples density_plot(df)
+#' 
+#' 
 density_plot <- function(df, title) {
   density <- ggplot(df, aes(score)) +
     geom_density(alpha=0.4, fill="lightblue") +
     ggtitle(title) +
+    labs(x="Score", y="Density",color="Score") +
     theme_classic() +
     theme(
       panel.border = element_rect(colour = "black", fill = NA, size = 1),
       axis.line = element_line(colour = "black", size = 0),
       axis.text.x = element_text(face = "bold", color = "#000000"),
-      axis.text.y = element_text(face = "bold", color = "#000000")
-    )
+      axis.text.y = element_text(face = "bold", color = "#000000"),
+      legend.position = c(0.7, 0.223)) +
+    guides(fill = guide_legend(ncol = 5))
   return(density)
 }
 
@@ -176,20 +258,24 @@ density_plot <- function(df, title) {
 #' `density_plot_residue` makes a ggplot2 density plot based on a tibble
 #' 
 #' 
-#' @param df, tibble with score column and mutated_residue columns
+#' @param df, tibble with score column and mutation columns
 #'
 #' @return density plot object
 #'
 #' @examples density_plot_residue(df)
 density_plot_residue <- function(df){
-  density_residue <- ggplot(df, aes(score, color=mutated_residue, fill=mutated_residue)) +
+  density_residue <- ggplot(df, aes(score, color=mutation, fill=mutation)) +
     geom_density(alpha=0.1) +
     theme_classic() +
+    labs(x="Score", y="Density",title="Score density plof scores per residue mutated") +
     theme(
+      legend.position = "bottom",
       panel.border = element_rect(colour = "black", fill = NA, size = 1),
       axis.line = element_line(colour = "black", size = 0),
       axis.text.x = element_text(face = "bold", color = "#000000"),
-      axis.text.y = element_text(face = "bold", color = "#000000")
+      axis.text.y = element_text(face = "bold", color = "#000000"),
+      ) +
+    guides(fill = guide_legend(title = "Residue Mutated", nrow = 4), color=guide_legend(title = "Residue Mutated",nrow = 4)
     )
   return(density_residue)
 }
@@ -213,6 +299,7 @@ quick_sar <- function(df, cutoff) {
     ggplot(aes(x=mutation_position, y = N_eff)) +
     geom_line() +
     theme_classic() +
+    labs(x="Mutation position", y="Number of residues",title="Residues allowed per position in the sequence") +
     theme(
       panel.border = element_rect(colour = "black", fill = NA, size = 1),
       axis.line = element_line(colour = "black", size = 0),

@@ -38,7 +38,7 @@ quick_sar_data_set_4 <- quick_sar(data_set_4, cutoff = 0)
 
 # Save quickSAR plots
 # ------------------------------------------------------------------------------
-ggsave(plot = quick_sar_data_set_1, "./doc/quick_SAR/quick_sar_data_set_1.png")
-ggsave(plot = quick_sar_data_set_2, "./doc/quick_SAR/quick_sar_data_set_2.png")
-ggsave(plot = quick_sar_data_set_3, "./doc/quick_SAR/quick_sar_data_set_3.png")
-ggsave(plot = quick_sar_data_set_4, "./doc/quick_SAR/quick_sar_data_set_4.png")
+ggsave(plot = quick_sar_data_set_1, "./doc/quick_SAR/quick_sar_data_set_1.png",width = 10, height = 3, dpi=300)
+ggsave(plot = quick_sar_data_set_2, "./doc/quick_SAR/quick_sar_data_set_2.png",width = 10, height = 3, dpi=300)
+ggsave(plot = quick_sar_data_set_3, "./doc/quick_SAR/quick_sar_data_set_3.png",width = 10, height = 3, dpi=300)
+ggsave(plot = quick_sar_data_set_4, "./doc/quick_SAR/quick_sar_data_set_4.png",width = 10, height = 3, dpi=300)
