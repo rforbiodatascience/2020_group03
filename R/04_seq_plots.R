@@ -25,29 +25,16 @@ data_set_2 <- read_tsv(file = "./data/03_aug_data_set_2.tsv")
 data_set_3 <- read_tsv(file = "./data/03_aug_data_set_3.tsv")
 data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 
-data_set <- data_set_3 %>%
-  drop_na() %>%
-  mutate(score = (score - min(score)) / (max((score)-min(score))))
+# Make sequence logo plots
+# ------------------------------------------------------------------------------
+seq_logo_data_set_1 <- sequence_logo(data_set_1, start_position = 40, end_position = 80)
+seq_logo_data_set_2 <- sequence_logo(data_set_1, start_position = 40, end_position = 80)
+seq_logo_data_set_3 <- sequence_logo(data_set_1, start_position = 110, end_position = 150)
+seq_logo_data_set_4 <- sequence_logo(data_set_1, start_position = 135, end_position = 185)
 
-score_sum <- data_set %>%
-  group_by(mutation_position) %>%
-  summarise(score_sum=sum(score))
-
-gg_seq_1 <- data_set %>%
-  full_join(score_sum, by = "mutation_position") %>%
-  filter(mutation_position >200 & mutation_position < 260) %>%
-  mutate(score = score / score_sum) %>%
-  select(mutation_position, mutation, score) %>%
-  replace(is.na(.), 0) %>%
-  pivot_wider(names_from = mutation_position, values_from = score)
-
-custom_mat = as.matrix(gg_seq_1)
-aa=custom_mat[,1]
-colnames(custom_mat) <- NULL
-row.names(custom_mat) <- aa
-custom_mat<-custom_mat[,-1]
-
-# Generate sequence logo
-logo <- ggseqlogo(custom_mat, method='custom', seq_type='aa') + ylab('scaled scoring')
-  
-plot(logo + theme(axis.text.x = element_blank()))
+# Save sequence logos
+# ------------------------------------------------------------------------------
+ggsave(plot = seq_logo_data_set_1, "./results/04_sequence_logos/seq_logo_data_set_1.png",width = 10, height = 3, dpi=300)
+ggsave(plot = seq_logo_data_set_2, "./results/04_sequence_logos/seq_logo_data_set_2.png",width = 10, height = 3, dpi=300)
+ggsave(plot = seq_logo_data_set_3, "./results/04_sequence_logos/seq_logo_data_set_3.png",width = 10, height = 3, dpi=300)
+ggsave(plot = seq_logo_data_set_4, "./results/04_sequence_logos/seq_logo_data_set_4.png",width = 10, height = 3, dpi=300)
