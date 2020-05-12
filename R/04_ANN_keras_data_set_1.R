@@ -65,6 +65,7 @@ df_encoded_seq <- data.frame(matrix(unlist(encoded_seq), nrow=nrow, byrow=T),str
 # To add the activity
 df_encoded_seq$activity <- data$activity
 
+
 # Model data
 # ------------------------------------------------------------------------------
 
