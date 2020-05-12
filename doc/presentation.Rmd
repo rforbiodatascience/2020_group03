@@ -82,17 +82,17 @@ library("keras")
 ## Example data set 1 - data overview
 
 <div class="columns-2">
- ![](density_plots/density_data_set_1.png){width=100%}
+ ![](../results/04_density_plots/density_data_set_1.png){width=100%}
   <p class="forceBreak">
      </p>
-   ![](density_plots/density_residue_data_set_1.png){width=100%}
+   ![](../results/04_density_plots/density_residue_data_set_1.png){width=100%}
 </div>
 
 ## Example dataset 1 - heatmap
-![](heatmaps/heatmap_data_set_score_1.png){width=100%}
+![](../results/04_heatmaps/heatmap_data_set_score_1.png){width=100%}
 
 ## Example dataset 1 - conserved regions
-![](quick_SAR/quick_sar_data_set_1.png){width=100%}
+![](../results/04_quick_SAR/quick_sar_data_set_1.png){width=100%}
 
 ## Machine learning toolbox
 

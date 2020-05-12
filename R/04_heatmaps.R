@@ -32,10 +32,10 @@ heatmap_data_set_score_4 <- heatmap_score(data_set_4, score_min = -2, score_max 
 
 # Save heatmaps
 # ------------------------------------------------------------------------------
-ggsave(plot = heatmap_data_set_score_1, "./results/heatmaps/heatmap_data_set_score_1.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_2, "./results/heatmaps/heatmap_data_set_score_2.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_3, "./results/heatmaps/heatmap_data_set_score_3.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_4, "./results/heatmaps/heatmap_data_set_score_4.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_score_1, "./results/04_heatmaps/heatmap_data_set_score_1.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_score_2, "./results/04_heatmaps/heatmap_data_set_score_2.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_score_3, "./results/04_heatmaps/heatmap_data_set_score_3.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_score_4, "./results/04_heatmaps/heatmap_data_set_score_4.png",width = 10, height = 3, dpi=300)
 
 
 # Add aminoacid type / call function aminoacid_type
@@ -66,7 +66,7 @@ heatmap_data_set_score_g_4 <- data_set_4 %>%
 
 # Save heatmaps
 # ----------------------------------------------------------------------------
-ggsave(plot = heatmap_data_set_score_g_1, "./results/heatmaps/heatmap_data_set_score_g_1.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_g_2, "./results/heatmaps/heatmap_data_set_score_g_2.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_g_3, "./results/heatmaps/heatmap_data_set_score_g_3.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_g_4, "./results/heatmaps/heatmap_data_set_score_g_4.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_score_g_1, "./results/04_heatmaps/heatmap_data_set_score_g_1.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_score_g_2, "./results/04_heatmaps/heatmap_data_set_score_g_2.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_score_g_3, "./results/04_heatmaps/heatmap_data_set_score_g_3.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_score_g_4, "./results/04_heatmaps/heatmap_data_set_score_g_4.png",width = 10, height = 3, dpi=300)
