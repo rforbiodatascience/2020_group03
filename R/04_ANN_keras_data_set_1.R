@@ -85,12 +85,12 @@ metric_pcc = custom_metric("pcc", function(y_true, y_pred) {
 # Set nn data and test/training partitions
 test_f = 0.30
 nn_dat = df_encoded_seq %>%
+  filter_all(all_vars(. != 0)) %>% 
   mutate_if(is.ordered, as.numeric) %>% 
   mutate(partition = sample(x = c('test', 'train'),
                             size = nrow(.),
                             replace = TRUE,
                             prob = c(test_f, 1 - test_f)))
-
 # as we are going to predict activity (y) we need to exclude it from X_train and X_test
 # Set training data
 X_train = nn_dat %>%
@@ -137,7 +137,7 @@ plot_lm <- ggplot(train_df, aes(x = X1, y = activity, color = activity) ) +
   )
 
 # Save plot
-ggsave(plot_lm, "./results/06_ann/linear_regression_data_set_1.png")
+ggsave(plot = plot_lm, "./results/06_ann/linear_regression_data_set_1.png")
 
 # Set hyperparameters
 n_epochs      = 10
@@ -187,6 +187,7 @@ history = model_ann %>%
       batch_size = batch_size,
       validation_split = 0
   )
+save_model_hdf5(object = model_ann, filepath = "./data/model_ann.h5")
 
 # Evaluate model
 # ------------------------------------------------------------------------------
@@ -217,7 +218,7 @@ d_perf = bind_rows(tibble(y_pred = y_test_pred,
 # ------------------------------------------------------------------------------
 title = "Performance of ANN Regression model"
 sub_title = paste0("Test PCC = ", pcc_test, ", training PCC = ", pcc_train, ".")
-d_perf %>%
+ann_keras_data_set_1 <- d_perf %>%
   ggplot(aes(x = y_pred, y = y_true)) +
   geom_point() +
   geom_abline(intercept = 0, slope = 1, linetype = 'dashed') +

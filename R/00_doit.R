@@ -13,8 +13,8 @@
 # install_github("rstudio/keras")
 # 
 # Would you like to install miniconda? Y
-# library(keras)
-# install_keras(tensorflow = "1.13.1")
+library(keras)
+install_keras(tensorflow = "1.13.1")
 
 
 # Run all scripts

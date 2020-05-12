@@ -96,6 +96,8 @@ data_set_3 <- data_set_3 %>%
 data_set_4 <- data_set_4 %>% 
   zscale2col(zscales_4)
 
+
+model <- load_model_hdf5("./data/model_ann.h5")
 # Add aminoacid type / call function aminoacid_type
 data_set_1 <- data_set_1 %>%
   mutate(aminoacid_class = aminoacid_type(mutation))
