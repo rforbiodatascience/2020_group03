@@ -308,3 +308,67 @@ quick_sar <- function(df, cutoff) {
     )
   return(neff_plot)
 }
+
+
+#' sequence_logo
+#'
+#' @param df tibble 
+#' @param start_position start of sequence window
+#' @param end_position start of sequence window
+#'
+#' @return ggseq sequence plot
+#' @export
+#'
+#' @examples
+sequence_logo <- function(df, start_position, end_position) {
+  
+  # drop na and normalize score
+  data_set <- df %>%
+    drop_na() %>%
+    mutate(score = (score - min(score)) / (max((score)-min(score))))
+  
+  # sum up score per mutation_position
+  score_summary_per_position <- data_set %>%
+    group_by(mutation_position) %>%
+    summarise(score_sum=sum(score))
+  
+  # join score_summary_per_position with data_set and calculate score/score_sum for each position
+  # replace any occuring na with 0
+  # pivot to wider
+  aa_tibble <- data_set %>%
+    full_join(score_summary_per_position, by = "mutation_position") %>%
+    filter(mutation_position >= start_position & mutation_position <= end_position) %>%
+    mutate(score = score / score_sum) %>%
+    select(mutation_position, mutation, score) %>%
+    replace(is.na(.), 0) %>%
+    pivot_wider(names_from = mutation_position, values_from = score)
+  
+  # prepping for ggseglogo
+  aa_matrix = as.matrix(aa_tibble) #convert to matrix
+  aa_column = aa_matrix[,1] # extract aa names
+  labels = colnames(aa_matrix) # get mutation positions
+  colnames(aa_matrix) <- NULL # remove column names
+  row.names(aa_matrix) <- aa_column  # name rows with aa
+  aa_matrix <- aa_matrix[,-1]  # remove aa columns in matrix area
+  
+  labels <- labels[-1] # remove mutation word
+  
+  window_length = end_position - start_position + 1 # calculate break range for x_scale
+  
+  # Generate sequence logo
+  logo <- ggseqlogo(aa_matrix, method='custom', seq_type='aa')
+  ggseq <- logo + 
+   
+    scale_x_continuous(breaks = 1:window_length, labels = labels) +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.y = element_text(face = "bold", color = "#000000"),
+      axis.text.x.bottom = element_text(vjust = 0.5, angle = -90, face = "bold", color = "#000000")) +
+    xlab("Mutation position") + 
+    ylab('Fraction of scoring')
+  
+  return(ggseq)
+}
+  
