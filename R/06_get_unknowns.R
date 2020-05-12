@@ -28,31 +28,31 @@ amino_acids <- read_csv("data/_raw/amino_acids.csv", col_names = TRUE)
 
 # Data_set 1
 # select variant_ID and activity to predict, and rename columns
-data_set_1_clean <- data_set_1 %>%
+data_set_1_unknowns <- data_set_1 %>%
   select(Variant_ID, E3_score) %>%
   rename(
     variant = Variant_ID,
     score = E3_score
   ) %>%
   filter(!str_detect(variant, "\\*")) %>%
-  drop_na(score)
+  filter(is.na(score))
 
 
 
 # Data_set 2
 # select ERK2_Mutant and activity to predict, and rename columns
-data_set_2_clean <- data_set_2 %>%
+data_set_2_unknowns <- data_set_2 %>%
   select(ERK2_Mutant, SCH_Average) %>%
   rename(
     variant = ERK2_Mutant,
     score = SCH_Average
   ) %>%
-  drop_na(score)
+  filter(is.na(score))
 
 
 # Data_set 3
 # convert three letter amino acid representation to oneletter, select hgvs_pro and score to predict, and rename columns
-data_set_3_clean <- data_set_3 %>%
+data_set_3_unknowns <- data_set_3 %>%
   select(hgvs_pro, score) %>%
   rename(variant = hgvs_pro) %>%
   mutate(
@@ -74,20 +74,20 @@ data_set_3_clean <- data_set_3 %>%
   unite(variant, mutated_residue, mutation_position, mutation, sep = "") %>%
   select(variant, score) %>%
   filter(!grepl('NA', variant)) %>%
-  drop_na(score)
+  filter(is.na(score))
 
 # Data_set 4
 # pivot to longer table, rename columns
-data_set_4_clean <- data_set_4 %>%
+data_set_4_unknowns <- data_set_4 %>%
   pivot_longer(-X1, names_to = "substitution", values_to = "score") %>%
   unite("variant", X1:substitution, sep = "") %>%
   filter(!str_detect(variant, "\\*"))  %>%
-  drop_na(score)
+  filter(is.na(score))
 
 
 # Write data
 # ------------------------------------------------------------------------------
-write_tsv(x = data_set_1_clean, path = "./data/02_clean_data_set_1.tsv")
-write_tsv(x = data_set_2_clean, path = "./data/02_clean_data_set_2.tsv")
-write_tsv(x = data_set_3_clean, path = "./data/02_clean_data_set_3.tsv")
-write_tsv(x = data_set_4_clean, path = "./data/02_clean_data_set_4.tsv")
+write_tsv(x = data_set_1_unknowns, path = "./data/06_data_set_1_unknowns.tsv")
+write_tsv(x = data_set_2_unknowns, path = "./data/06_data_set_2_unknowns.tsv")
+write_tsv(x = data_set_3_unknowns, path = "./data/06_data_set_3_unknowns.tsv")
+write_tsv(x = data_set_4_unknowns, path = "./data/06_data_set_4_unknowns.tsv")

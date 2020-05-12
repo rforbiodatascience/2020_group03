@@ -17,109 +17,23 @@ source(file = "./R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
-RMSE_data_set_1_ANN_z <- read_tsv(file = "./data/ANN_zs_RMSE_data_set_1.tsv")
-RMSE_data_set_2_ANN_z <- read_tsv(file = "./data/ANN_zs_RMSE_data_set_2.tsv")
-RMSE_data_set_3_ANN_z <- read_tsv(file = "./data/ANN_zs_RMSE_data_set_3.tsv")
-RMSE_data_set_4_ANN_z <- read_tsv(file = "./data/ANN_zs_RMSE_data_set_4.tsv")
-RMSE_data_set_1_glmnet_z <- read_tsv(file = "./data/glmnet_zs_RMSE_data_set_1.tsv")
-RMSE_data_set_2_glmnet_z <- read_tsv(file = "./data/glmnet_zs_RMSE_data_set_2.tsv")
-RMSE_data_set_3_glmnet_z <- read_tsv(file = "./data/glmnet_zs_RMSE_data_set_3.tsv")
-RMSE_data_set_4_glmnet_z <- read_tsv(file = "./data/glmnet_zs_RMSE_data_set_4.tsv")
-
-RMSE_data_set_1_ANN_b <- read_tsv(file = "./data/ANN_blosum62_RMSE_data_set_1.tsv")
-RMSE_data_set_2_ANN_b <- read_tsv(file = "./data/ANN_blosum62_RMSE_data_set_2.tsv")
-RMSE_data_set_3_ANN_b <- read_tsv(file = "./data/ANN_blosum62_RMSE_data_set_3.tsv")
-RMSE_data_set_4_ANN_b <- read_tsv(file = "./data/ANN_blosum62_RMSE_data_set_4.tsv")
-RMSE_data_set_1_glmnet_b <- read_tsv(file = "./data/glmnet_blosum62_RMSE_data_set_1.tsv")
-RMSE_data_set_2_glmnet_b <- read_tsv(file = "./data/glmnet_blosum62_RMSE_data_set_2.tsv")
-RMSE_data_set_3_glmnet_b <- read_tsv(file = "./data/glmnet_blosum62_RMSE_data_set_3.tsv")
-RMSE_data_set_4_glmnet_b <- read_tsv(file = "./data/glmnet_blosum62_RMSE_data_set_4.tsv")
-
-
-
-RMSE_data_set_1_ANN_z <- RMSE_data_set_1_ANN_z %>%
-  add_column(dataset = "data_set_1",
-             model = "ANN",
-             scale = "z_scales")
-
-RMSE_data_set_2_ANN_z <- RMSE_data_set_2_ANN_z %>%
-  add_column(dataset = "data_set_2",
-             model = "ANN",
-             scale = "z_scales")
-
-RMSE_data_set_3_ANN_z <- RMSE_data_set_3_ANN_z %>%
-  add_column(dataset = "data_set_3",
-             model = "ANN",
-             scale = "z_scales")
-
-RMSE_data_set_4_ANN_z <- RMSE_data_set_4_ANN_z %>%
-  add_column(dataset = "data_set_4",
-             model = "ANN",
-             scale = "z_scales")
-
-RMSE_data_set_1_glmnet_z <- RMSE_data_set_1_glmnet_z %>%
-  add_column(dataset = "data_set_1",
-             model = "ElasticNet",
-             scale = "z_scales")
-
-RMSE_data_set_2_glmnet_z <- RMSE_data_set_2_glmnet_z %>%
-  add_column(dataset = "data_set_2",
-             model = "ElasticNet",
-             scale = "z_scales")
-
-RMSE_data_set_3_glmnet_z <- RMSE_data_set_3_glmnet_z %>%
-  add_column(dataset = "data_set_3",
-             model = "ElasticNet",
-             scale = "z_scales")
-
-RMSE_data_set_4_glmnet_z <- RMSE_data_set_4_glmnet_z %>%
-  add_column(dataset = "data_set_4",
-             model = "ElasticNet",
-             scale = "z_scales")
-
-
-
-
-RMSE_data_set_1_ANN_b <- RMSE_data_set_1_ANN_b %>%
-  add_column(dataset = "data_set_1",
-             model = "ANN",
-             scale = "blosum62")
-
-RMSE_data_set_2_ANN_b <- RMSE_data_set_2_ANN_b %>%
-  add_column(dataset = "data_set_2",
-             model = "ANN",
-             scale = "blosum62")
-
-RMSE_data_set_3_ANN_b <- RMSE_data_set_3_ANN_b %>%
-  add_column(dataset = "data_set_3",
-             model = "ANN",
-             scale = "blosum62")
-
-RMSE_data_set_4_ANN_b <- RMSE_data_set_4_ANN_b %>%
-  add_column(dataset = "data_set_4",
-             model = "ANN",
-             scale = "blosum62")
-
-RMSE_data_set_1_glmnet_b <- RMSE_data_set_1_glmnet_b %>%
-  add_column(dataset = "data_set_1",
-             model = "ElasticNet",
-             scale = "blosum62")
-
-RMSE_data_set_2_glmnet_b <- RMSE_data_set_2_glmnet_b %>%
-  add_column(dataset = "data_set_2",
-             model = "ElasticNet",
-             scale = "blosum62")
-
-RMSE_data_set_3_glmnet_b <- RMSE_data_set_3_glmnet_b %>%
-  add_column(dataset = "data_set_3",
-             model = "ElasticNet",
-             scale = "blosum62")
-
-RMSE_data_set_4_glmnet_b <- RMSE_data_set_4_glmnet_b %>%
-  add_column(dataset = "data_set_4",
-             model = "ElasticNet",
-             scale = "blosum62")
-
+RMSE_data_set_1_ANN_z <- read_tsv(file = "./results/06_ann/06_ann_RMSE_z_scales_data_set_1.tsv")
+RMSE_data_set_2_ANN_z <- read_tsv(file = "./results/06_ann/06_ann_RMSE_z_scales_data_set_2.tsv")
+RMSE_data_set_3_ANN_z <- read_tsv(file = "./results/06_ann/06_ann_RMSE_z_scales_data_set_3.tsv")
+RMSE_data_set_4_ANN_z <- read_tsv(file = "./results/06_ann/06_ann_RMSE_z_scales_data_set_4.tsv")
+RMSE_data_set_1_glmnet_z <- read_tsv(file = "./results/06_glmnet/06_glmnet_RMSE_z_scales_data_set_1.tsv")
+RMSE_data_set_2_glmnet_z <- read_tsv(file = "./results/06_glmnet/06_glmnet_RMSE_z_scales_data_set_2.tsv")
+RMSE_data_set_3_glmnet_z <- read_tsv(file = "./results/06_glmnet/06_glmnet_RMSE_z_scales_data_set_3.tsv")
+RMSE_data_set_4_glmnet_z <- read_tsv(file = "./results/06_glmnet/06_glmnet_RMSE_z_scales_data_set_4.tsv")
+ 
+RMSE_data_set_1_ANN_b <- read_tsv(file = "./results/06_ann/06_ann_RMSE_blosum62_data_set_1.tsv")
+RMSE_data_set_2_ANN_b <- read_tsv(file = "./results/06_ann/06_ann_RMSE_blosum62_data_set_2.tsv")
+RMSE_data_set_3_ANN_b <- read_tsv(file = "./results/06_ann/06_ann_RMSE_blosum62_data_set_3.tsv")
+RMSE_data_set_4_ANN_b <- read_tsv(file = "./results/06_ann/06_ann_RMSE_blosum62_data_set_4.tsv")
+RMSE_data_set_1_glmnet_b <- read_tsv(file = "./results/06_glmnet/06_glmnet_RMSE_blosum62_data_set_1.tsv")
+RMSE_data_set_2_glmnet_b <- read_tsv(file = "./results/06_glmnet/06_glmnet_RMSE_blosum62_data_set_2.tsv")
+RMSE_data_set_3_glmnet_b <- read_tsv(file = "./results/06_glmnet/06_glmnet_RMSE_blosum62_data_set_3.tsv")
+RMSE_data_set_4_glmnet_b <- read_tsv(file = "./results/06_glmnet/06_glmnet_RMSE_blosum62_data_set_4.tsv")
 
 
 RMSE_summary <- bind_rows(RMSE_data_set_1_ANN_z,

@@ -273,7 +273,7 @@ density_plot_residue <- function(df){
       panel.border = element_rect(colour = "black", fill = NA, size = 1),
       axis.line = element_line(colour = "black", size = 0),
       axis.text.x = element_text(face = "bold", color = "#000000"),
-      axis.text.y = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
       ) +
     guides(fill = guide_legend(title = "Residue Mutated", nrow = 4), color=guide_legend(title = "Residue Mutated",nrow = 4)
     )
@@ -371,4 +371,224 @@ sequence_logo <- function(df, start_position, end_position) {
   
   return(ggseq)
 }
+
+
+
+#' ANN2 - Artificial Neural Network
+#'
+#' @param df datset
+#' @param folder folder to store output
+#' @param name name of dataset
+#' @param epochs 
+#' @param hidden_layers 
+#' @param scale descriptor scale
+#' @param train_size 
+#' @param seed_value 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+ANN2 <- function(df, folder, name, epochs, hidden_layers,
+                 scale, train_size, seed_value) {
   
+  print(name)
+  print(scale)
+  
+  graph_filename = paste(folder,"_ann_corr_",scale,"_",name,".png", sep="")
+  obj_filename = paste(folder,"_ann_",scale,"_",name,".RData", sep="")
+  RMSE_filename = paste(folder,"_ann_RMSE_",scale,"_",name,".tsv", sep="")
+  
+  data <- df
+  
+  # Get sequence window and truncate
+  # ------------------------------------------------------------------------------
+  sequence_window <- data %>%
+    mutate(mutation_position = as.integer(mutation_position)) %>%
+    pull(mutation_position)
+  
+  data <- data %>%
+    mutate(sequence_to_model = str_sub(sequence, min(sequence_window), max(sequence_window)))
+  
+  # Make score response variable
+  # ------------------------------------------------------------------------------
+  Y <- data  %>%
+    select(score)
+  
+  Y <- unname(as.matrix(Y))
+  
+  # Partion data
+  # ------------------------------------------------------------------------------
+  set.seed(seed_value)
+  partition <- createDataPartition(y = Y, p = train_size , list = F)
+  training = data[partition, ]
+  test <- data[-partition, ]
+  
+  # Encode sequences and make test and train sets
+  # ------------------------------------------------------------------------------
+  X_train <- training %>%
+    pull(sequence_to_model) %>%
+    encode_peptide(m = scale)
+  
+  X_test <- test %>%
+    pull(sequence_to_model) %>%
+    encode_peptide(m = scale)
+  
+  Y_test <- test %>%
+    select(score)
+  
+  Y_train <- training %>%
+    select(score)
+  
+  Y_test <- unname(as.matrix(Y_test))
+  Y_train <- unname(as.matrix(Y_train))
+  X_train <- unname(as.matrix(X_train))
+  
+  print('NN running...')
+  
+  NN <- neuralnetwork(X = X_train, y = Y_train,
+                      hidden.layers = hidden_layers,
+                      loss.type="squared",
+                      optim.type = 'adam',
+                      regression = TRUE,
+                      activ.functions = "tanh",
+                      learn.rates = 0.01, val.prop = 0,
+                      n.epochs = epochs)
+  
+  pred <- predict(NN, newdata = X_test)
+  Y_pred <- as.double(pred$predictions)
+  res <- tibble(Y_pred, Y_test)
+  
+  RMSE_ <- rmse(res, Y_test[,1], Y_pred) %>%
+    add_column(dataset = name,
+             model = "ANN",
+             scale = scale)
+  
+  corr_plot <- ggplot(res, aes(x=Y_pred, y=Y_test)) +
+    geom_point() +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    )
+  
+  ggsave(plot=corr_plot, graph_filename)
+  
+  write_ANN(NN, obj_filename)
+  
+  write_tsv(x = RMSE_, path = RMSE_filename)
+  
+  return() # could return object
+}
+
+
+glmnet_reg <- function (df, folder, name, alpha_, s_,
+                        scale, train_size, seed_value) {
+  print(name)
+  print(scale)
+  
+  graph_filename = paste(folder,"_glmnet_corr_",scale,"_",name,".png", sep="")
+  obj_filename = paste(folder,"_glmnet_",scale,"_",name,".Rdata", sep="")
+  RMSE_filename = paste(folder,"_glmnet_RMSE_",scale,"_",name,".tsv", sep="")
+  
+  data <- df
+
+  
+  # Get sequence window and truncate
+  # ------------------------------------------------------------------------------
+  sequence_window <- data %>%
+    mutate(mutation_position = as.integer(mutation_position)) %>%
+    pull(mutation_position)
+  
+  data <- data %>%
+    mutate(sequence_to_model = str_sub(sequence, min(sequence_window), max(sequence_window)))
+  
+  # Make score response variable
+  # ------------------------------------------------------------------------------
+  Y <- data  %>%
+    select(score)
+  
+  Y <- unname(as.matrix(Y))
+  
+  # Partion data
+  # ------------------------------------------------------------------------------
+  set.seed(seed_value)
+  partition <- createDataPartition(y = Y, p = train_size , list = F)
+  training = data[partition, ]
+  test <- data[-partition, ]
+  
+  # Encode sequences and make test and train sets
+  # ------------------------------------------------------------------------------
+  X_train <- training %>%
+    pull(sequence_to_model) %>%
+    encode_peptide(m = scale)
+  
+  X_test <- test %>%
+    pull(sequence_to_model) %>%
+    encode_peptide(m = scale)
+  
+  Y_test <- test %>%
+    select(score)
+  
+  Y_train <- training %>%
+    select(score)
+  
+  Y_test <- unname(as.matrix(Y_test))
+  Y_train <- unname(as.matrix(Y_train))
+  X_train <- unname(as.matrix(X_train))
+  
+  
+  # Fit elasticnet model
+  # ------------------------------------------------------------------------------
+  fit.elasticnet <- glmnet(X_train, Y_train, type.measure="mse", alpha = alpha_, s = s_,
+                           family="gaussian",
+                           standardize=TRUE)
+  
+  # Preduct using elasticnet model
+  # ------------------------------------------------------------------------------
+  Y_pred_ElasticNet <- predict(fit.elasticnet, newx = X_test, s = s_, alpha=alpha_)
+  results = tibble(Y_test, Y_pred_ElasticNet)
+  RMSE_table = results
+  
+  
+  # Pivot results and test response variables
+  # ------------------------------------------------------------------------------
+  results <- results %>%
+    mutate(score = Y_test) %>%
+    full_join(test, by = "score") %>%
+    select(variant, score, Y_test, Y_pred_ElasticNet) %>%
+    pivot_longer(c(-variant, -score), names_to = "model", values_to = "prediction")
+  
+  # Plot correlation between score and prediction
+  # ------------------------------------------------------------------------------
+  corr_plot <- ggplot(results, aes(x=score, y=prediction, color=model)) +
+    geom_point() +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    )
+  
+  ggsave(plot=corr_plot, graph_filename)
+  
+  
+  RMSE_table <- RMSE_table %>%
+    select(Y_test, Y_pred_ElasticNet)
+    
+  
+  RMSE_ = rmse(RMSE_table, Y_test[,1], Y_pred_ElasticNet[,"1"]) %>%
+    add_column(dataset = name,
+               model = "glmnet",
+               scale = scale)
+  
+  write_tsv(x = RMSE_, path = RMSE_filename)
+  
+  save(fit.elasticnet, file=obj_filename)
+  
+  return() # could return something
+  
+}
