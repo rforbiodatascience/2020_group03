@@ -4,8 +4,8 @@ subtitle: "22100 - R for Bio Data Science"
 author: 'Group 3: Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra, Laura Sans Comerma'
 date: "Spring 2020"
 output:
-  ioslides_presentation: default
   beamer_presentation: default
+  ioslides_presentation: default
 widescreen: yes
 ---
 
@@ -55,7 +55,10 @@ The aim of this project is to create a toolbox to predict the biological activit
   - Support for several models.
   - Visualization options.
   
-## Project overview
+## Project overview {.centered}
+![](../doc/external_figures/00_project_organisation.png){width=75%}
+
+[Visit our Github repository](https://github.com/rforbiodatascience/2020_group03)
 
 
 ## Methods - packages used
@@ -110,7 +113,7 @@ library("keras")
 ## Referencex
 
 <div class="columns-2">
-  ![](/figures_presentation/file.png){width=300px}
+  ![](../doc/external_figures/file.png){width=300px}
   <p class="forceBreak"></p>
 
   * <font size="3">**Data set 1**: L. M. Starita,  D. L. Young, et al. *Massively parallel functional analysis of brca1 ring domainvariants*, Genetics, vol. 200, no. 2, pp. 413–422, 2015.  </font>
@@ -153,7 +156,7 @@ library("keras")
 ### R script overview 2
 
 <div class="columns-2">
-  ![](project_organisation.png){width=500px}
+  ![](../doc/external_figures/project_organisation.png){width=500px}
   <p class="forceBreak"></p>
   * 04_model_i.R
     - Load augmented data
@@ -166,7 +169,7 @@ library("keras")
 ### R script overview 3
 
 <div class="columns-2">
-  ![](project_organisation.png){width=500px}
+  ![](../doc/external_figures/project_organisation.png){width=500px}
   <p class="forceBreak"></p>
   * 99_proj_func.R
     - Sequence encoder
