@@ -4,8 +4,8 @@ subtitle: "22100 - R for Bio Data Science"
 author: 'Group 3: Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra, Laura Sans Comerma'
 date: "Spring 2020"
 output:
-  beamer_presentation: default
   ioslides_presentation: default
+  beamer_presentation: default
 widescreen: yes
 ---
 
@@ -37,10 +37,9 @@ div.columns-2{
 
 * Introduction
 * Methods
-  - Data
   - Project overview
+  - Data
 * Results
-* Discussion
 * Conclusion
 
 ## Introduction
@@ -56,14 +55,8 @@ The aim of this project is to create a toolbox to predict the biological activit
   - Support for several models.
   - Visualization options.
   
-## Methods - the data sets
+## Project overview
 
-|            | Protein | Target                     | Biological activity    | Species         | Num of variants | Score                                                     |
-| ---------- | ------- | -------------------------- | ---------------------- | --------------- | --------------- | --------------------------------------------------------- |
-| Data set 1 | BRCA1   | BARD1 RING domain          | Ubiquitin E3 activity  | *H. sapiens*    | 5610            | Y2H assays                                                |
-| Data set 2 | ERK2    | Small molecule (SCH772984) | Resistance to drugs    | *H. sapiens*    | 6810            | Drug sensitivity assays. Calculation of cell availability |
-| Data set 3 | LDLRAP1 | OBFC1                      | Protein translation    | *H. sapiens*    | 6385            | Y2H assays                                                |
-| Data set 4 | Pab1    | el4FG1                     | Translation initiation | *S. cereviseae* | 1340            | Y2H assays                                                |
 
 ## Methods - packages used
 ```
@@ -76,6 +69,15 @@ library("UniprotR")
 library("neuralnet")
 library("keras")
 ```
+
+## Methods - the data sets
+
+|            | Protein | Target                     | Biological activity    | Species         | Num of variants | Score                                                     |
+| ---------- | ------- | -------------------------- | ---------------------- | --------------- | --------------- | --------------------------------------------------------- |
+| Data set 1 | BRCA1   | BARD1 RING domain          | Ubiquitin E3 activity  | *H. sapiens*    | 5610            | Y2H assays                                                |
+| Data set 2 | ERK2    | Small molecule (SCH772984) | Resistance to drugs    | *H. sapiens*    | 6810            | Drug sensitivity assays. Calculation of cell availability |
+| Data set 3 | LDLRAP1 | OBFC1                      | Protein translation    | *H. sapiens*    | 6385            | Y2H assays                                                |
+| Data set 4 | Pab1    | el4FG1                     | Translation initiation | *S. cereviseae* | 1340            | Y2H assays                                                |
 
 ## Example data set 1 - data overview
 
@@ -91,7 +93,6 @@ library("keras")
 
 ## Example dataset 1 - conserved regions
 ![](quick_SAR/quick_sar_data_set_1.png){width=100%}
-  
 
 ## Machine learning toolbox
 

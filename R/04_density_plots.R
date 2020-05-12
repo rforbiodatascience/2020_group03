@@ -39,14 +39,14 @@ density_residue_data_set_4 <- density_plot_residue(data_set_4)
 
 # Save density plots
 # ------------------------------------------------------------------------------
-ggsave(plot = density_data_set_1, "./doc/density_plots/density_data_set_1.png", width = 7, height = 5, dpi=300)
-ggsave(plot = density_data_set_2, "./doc/density_plots/density_data_set_2.png", width = 7, height = 5, dpi=300)
-ggsave(plot = density_data_set_3, "./doc/density_plots/density_data_set_3.png", width = 7, height = 5, dpi=300)
-ggsave(plot = density_data_set_4, "./doc/density_plots/density_data_set_4.png", width = 7, height = 5, dpi=300)
+ggsave(plot = density_data_set_1, "./replace/density_plots/density_data_set_1.png", width = 7, height = 5, dpi=300)
+ggsave(plot = density_data_set_2, "./replace/density_plots/density_data_set_2.png", width = 7, height = 5, dpi=300)
+ggsave(plot = density_data_set_3, "./replace/density_plots/density_data_set_3.png", width = 7, height = 5, dpi=300)
+ggsave(plot = density_data_set_4, "./replace/density_plots/density_data_set_4.png", width = 7, height = 5, dpi=300)
 
 # Save density plots per mutation
 # ------------------------------------------------------------------------------
-ggsave(plot = density_residue_data_set_1, "./doc/density_plots/density_residue_data_set_1.png", width = 7, height = 6.25, dpi=300)
-ggsave(plot = density_residue_data_set_2, "./doc/density_plots/density_residue_data_set_2.png", width = 7, height = 6.25, dpi=300)
-ggsave(plot = density_residue_data_set_3, "./doc/density_plots/density_residue_data_set_3.png", width = 7, height = 6.25, dpi=300)
-ggsave(plot = density_residue_data_set_4, "./doc/density_plots/density_residue_data_set_4.png", width = 7, height = 6.25, dpi=300)
+ggsave(plot = density_residue_data_set_1, "./replace/density_plots/density_residue_data_set_1.png", width = 7, height = 6.25, dpi=300)
+ggsave(plot = density_residue_data_set_2, "./replace/density_plots/density_residue_data_set_2.png", width = 7, height = 6.25, dpi=300)
+ggsave(plot = density_residue_data_set_3, "./replace/density_plots/density_residue_data_set_3.png", width = 7, height = 6.25, dpi=300)
+ggsave(plot = density_residue_data_set_4, "./replace/density_plots/density_residue_data_set_4.png", width = 7, height = 6.25, dpi=300)
