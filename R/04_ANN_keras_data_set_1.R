@@ -62,19 +62,6 @@ df_encoded_rownames <- df_encoded_seq[,-1]
 # Model data
 # ------------------------------------------------------------------------------
 
-## Multiple linear model
-model <- lm(activity ~., data = df_encoded_seq)
-# check lm
-par(mfrow= c(2,2))
-plot(model)
-summary(model)
-
-# predict using encode function
-newpeptide <- 'LNVTSEDLGKTLEAK'
-newpep_enc <- encode_peptide(newpeptide, "blosum62")
-df_newpep_enc <- data.frame(matrix(unlist(newpep_enc), nrow=1, byrow=T),stringsAsFactors=FALSE)
-predict(model, df_newpep_enc)
-
 ## ANN
 # Example of custom metric, here pearson's correlation coefficient, i.e.
 # equivalent to cor(x, y, method = "pearson"), but note how we need to use the
@@ -116,11 +103,6 @@ y_test = nn_dat %>%
   filter(partition == "test") %>%
   pull(activity)
 
-# General lineal model given the partitions
-model_2 <- glm.fit(X_train, y_train, family = gaussian())
-summary.glm(model_2)
-predict.glm(model_2)
-
 # Linear model with partitions
 train_df = nn_dat %>%
   filter(partition == "train") %>%
@@ -129,11 +111,11 @@ X_test_df = nn_dat %>%
   filter(partition == "test") %>%
   select(-activity, -partition)
 
-model_3 <- lm(activity ~., data = train_df)
+model <- lm(activity ~., data = train_df)
 par(mfrow = c(2, 2))  # Split the plotting panel into a 2 x 2 grid
-plot(model_3)
-summary(model_3)
-y_pred <- predict(model_3, X_test_df)
+plot(model)
+summary(model)
+y_pred <- predict(model, X_test_df)
 
 # plot
 ggplot(train_df, aes(x = X1, y = activity, color = activity) ) +

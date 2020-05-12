@@ -39,7 +39,7 @@ max_value <- data_set_3 %>%
   as.integer()
 
 data <- data %>% 
-  mutate(peptide = strtrim(peptide, max_value/5))  %>%
+  mutate(peptide = strtrim(peptide, max_value))  %>%
   mutate(len = str_length(peptide))
 
 # Add new columns (encoding)
