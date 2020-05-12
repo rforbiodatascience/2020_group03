@@ -25,7 +25,7 @@ data_set_2 <- read_tsv(file = "./data/03_aug_data_set_2.tsv")
 data_set_3 <- read_tsv(file = "./data/03_aug_data_set_3.tsv")
 data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 
-data_set <- data_set_3 %>%
+data_set <- data_set_2 %>%
   drop_na() %>%
   mutate(score = (score - min(score)) / (max((score)-min(score))))
 
@@ -35,7 +35,7 @@ score_sum <- data_set %>%
 
 gg_seq_1 <- data_set %>%
   full_join(score_sum, by = "mutation_position") %>%
-  filter(mutation_position >200 & mutation_position < 260) %>%
+  filter(mutation_position >40 & mutation_position < 80) %>%
   mutate(score = score / score_sum) %>%
   select(mutation_position, mutation, score) %>%
   replace(is.na(.), 0) %>%
@@ -50,4 +50,6 @@ custom_mat<-custom_mat[,-1]
 # Generate sequence logo
 logo <- ggseqlogo(custom_mat, method='custom', seq_type='aa') + ylab('scaled scoring')
   
-plot(logo + theme(axis.text.x = element_blank()))
+ggseq <- logo + theme(axis.text.x = element_blank())
+
+ggsave(plot = ggseq, "./doc/sequence_logos/seq_logo_data_set_2.png")

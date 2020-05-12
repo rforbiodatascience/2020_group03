@@ -35,7 +35,7 @@ score_sum <- data_set %>%
 
 gg_seq_1 <- data_set %>%
   full_join(score_sum, by = "mutation_position") %>%
-  filter(mutation_position >200 & mutation_position < 260) %>%
+  filter(mutation_position >110 & mutation_position < 150) %>%
   mutate(score = score / score_sum) %>%
   select(mutation_position, mutation, score) %>%
   replace(is.na(.), 0) %>%
@@ -50,4 +50,6 @@ custom_mat<-custom_mat[,-1]
 # Generate sequence logo
 logo <- ggseqlogo(custom_mat, method='custom', seq_type='aa') + ylab('scaled scoring')
   
-plot(logo + theme(axis.text.x = element_blank()))
+ggseq <- logo + theme(axis.text.x = element_blank())
+
+ggsave(plot = ggseq, "./doc/sequence_logos/seq_logo_data_set_3.png")
