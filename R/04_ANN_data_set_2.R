@@ -24,20 +24,11 @@ data_set_3 <- read_tsv(file = "./data/03_aug_data_set_3.tsv")
 data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 
 
-# Wrangle data
-# ------------------------------------------------------------------------------
-data_set_1 <- data_set_4 %>%
-  mutate(variant = case_when(variant=="NA-NA" ~ "D2D",
-                             !variant=="NA-NA" ~ variant))
-
-
-
 # Select dataset and wrangle
 # ------------------------------------------------------------------------------
 test_set = data_set_2
-filename = "./doc/ann/ann_corr_data_set_2.png"
-RMSE_path = "./data/ANN_RMSE_data_set_2.tsv"
-
+filename = "./results/06_ann/ann_corr_data_set_2.png"
+RMSE_path = "./data/ANN_zs_RMSE_data_set_2.tsv"
 
 data <- test_set %>%
   drop_na(score)

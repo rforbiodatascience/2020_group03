@@ -144,11 +144,12 @@ RMSE_plot <- ggplot(RMSE_summary, aes(x = dataset, y = .estimate, fill = model))
   theme_classic() +
   ylab("RMSE") +
   facet_grid(cols = vars(scale)) +
+  theme_classic() +
   theme(
     panel.border = element_rect(colour = "black", fill = NA, size = 1),
     axis.line = element_line(colour = "black", size = 0),
     axis.text.x = element_text(face = "bold", color = "#000000", angle = 90),
-    axis.text.y = element_text(face = "bold", color = "#000000"))
+    axis.text.x.bottom = element_text(vjust = 0.5, angle = -90, face = "bold", color = "#000000"))
 
 
-ggsave(plot = RMSE_plot, "./doc/model_summaries/RMSE_blosum62_z_scale.png")
+ggsave(plot = RMSE_plot, "./results/06_model_summaries/RMSE_blosum62_z_scale.png")

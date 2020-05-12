@@ -21,18 +21,11 @@ data_set_2 <- read_tsv(file = "./data/03_aug_data_set_2.tsv")
 data_set_3 <- read_tsv(file = "./data/03_aug_data_set_3.tsv")
 data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 
-# Wrangle data
-# ------------------------------------------------------------------------------
-data_set_1 <- data_set_1 %>%
-  mutate(variant = case_when(variant=="NA-NA" ~ "D2D",
-                             !variant=="NA-NA" ~ variant))
-
-
 
 # Select dataset and wrangle
 # ------------------------------------------------------------------------------
 test_set = data_set_3
-filename = "./doc/glmnet/CV_data_set_3.png"
+filename = "./results/06_glmnet/CV_data_set_3.png"
 
 
 data <- test_set %>%

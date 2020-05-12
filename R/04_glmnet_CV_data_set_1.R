@@ -32,7 +32,7 @@ data_set_1 <- data_set_1 %>%
 # Select dataset and wrangle
 # ------------------------------------------------------------------------------
 test_set = data_set_1
-filename = "./doc/glmnet/CV_data_set_1.png"
+filename = "./results/06_glmnet/CV_data_set_1.png"
 
 
 data <- test_set %>%
