@@ -28,36 +28,25 @@ data_set_1 <- data_set_1 %>%
 
 data_set_1 %>% glimpse()
 
-# we will make the model with the mutations 
+data <- data_set_1 %>% 
+  rename(
+    peptide = sequence,
+    activity = score,
+  ) %>%  select(c(2,6))
 
 max_value <- data_set_1 %>% 
   summarise(max = max(mutation_position)) %>% 
   as.integer()
 
-if(max_value > 60){
-  data_rwos <- data_set_1 %>%
-    #filter(mutation_position < (max_value/3)*2 & mutation_position > (max_value/3)) %>%
-    mutate(peptide = substr(sequence, (max_value/4), (max_value/4)*2))  %>%
-    mutate(len = str_length(peptide))
-  
-  data <- data_rwos %>% 
-    rename(
-      activity = score,
-    ) %>%  select(c(2,7))
-} else {
-  data <- data_set_1 %>% 
-    rename(
-      peptide = sequence,
-      activity = score,
-    ) %>%  select(c(2,6))
-}
+data <- data %>% 
+  mutate(peptide = strtrim(peptide, max_value))  %>%
+  mutate(len = str_length(peptide))
 
 # Add new columns (encoding)
 # change
 encoded_seq <- data %>%
   pull(peptide) %>% 
   encode_peptide(m = "blosum62")
-
 nrow <- dim(encoded_seq)[1]
 # The ouput of encode_peptide function is a matrix, we need to convert it to a dataframe
 df_encoded_seq <- data.frame(matrix(unlist(encoded_seq), nrow=nrow, byrow=T),stringsAsFactors=FALSE)
@@ -65,6 +54,10 @@ df_encoded_seq <- data.frame(matrix(unlist(encoded_seq), nrow=nrow, byrow=T),str
 # To add the activity
 df_encoded_seq$activity <- data$activity
 
+# for having the rownames too
+sequences <- data.frame(row.names(encoded_seq))
+df_encoded_rownames <- cbind(sequences, encoded_seq)
+df_encoded_rownames <- df_encoded_seq[,-1]
 
 # Model data
 # ------------------------------------------------------------------------------
@@ -83,7 +76,7 @@ metric_pcc = custom_metric("pcc", function(y_true, y_pred) {
 })
 
 # Set nn data and test/training partitions
-test_f = 0.30
+test_f = 0.20
 nn_dat = df_encoded_seq %>%
   mutate_if(is.ordered, as.numeric) %>% 
   mutate(partition = sample(x = c('test', 'train'),
@@ -125,7 +118,7 @@ summary(model)
 y_pred <- predict(model, X_test_df)
 
 # plot
-plot_lm <- ggplot(train_df, aes(x = X1, y = activity, color = activity) ) +
+ggplot(train_df, aes(x = X1, y = activity, color = activity) ) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   theme_classic() +
@@ -135,9 +128,6 @@ plot_lm <- ggplot(train_df, aes(x = X1, y = activity, color = activity) ) +
     axis.text.x = element_text(face = "bold", color = "#000000"),
     axis.text.y = element_text(face = "bold", color = "#000000")
   )
-
-# Save plot
-ggsave(plot_lm, "./results/06_ann/linear_regression_data_set_1.png")
 
 # Set hyperparameters
 n_epochs      = 10
@@ -187,15 +177,10 @@ history = model_ann %>%
       batch_size = batch_size,
       validation_split = 0
   )
-
 # Evaluate model
 # ------------------------------------------------------------------------------
-# Accuracy 
-model <- model_ann
-acc_test <-  model %>% evaluate(X_test, y_test, batch_size=32)
-acc_train <-  model %>% evaluate(X_train, y_train, batch_size=32)
 
-# Calculate performance on test data with pearson 
+# Calculate performance on test data
 y_test_true = y_test
 y_test_pred = model_ann %>% predict(X_test) %>% as.vector
 pcc_test = round(cor(y_test_pred, y_test_true, method = "pearson"), 3)
@@ -226,5 +211,3 @@ d_perf %>%
   ylab("Actual Activity") +
   facet_wrap(~partition) +
   theme_bw()
-
-ggsave(plot = ann_keras_data_set_1, "./results/06_ann/ann_keras_data_set_1.png")
