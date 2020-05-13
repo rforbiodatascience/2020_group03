@@ -93,7 +93,7 @@ library("keras")
 
 ## Example dataset 1 - heatmap
 ![](../results/04_heatmaps/heatmap_data_set_score_1.png){width=100%}
-
+![SEQUENCE LOGO CHANGE](../results/04_heatmaps/heatmap_data_set_score_1.png){width=100%}
 ## Example dataset 1 - conserved regions
 ![](../results/04_quick_SAR/quick_sar_data_set_1.png){width=100%}
 
@@ -127,19 +127,7 @@ library("keras")
 
 <div class="columns-2">
   ```
-  data_set_1 <- read_tsv(file = './data/_raw/loaded_data_1.tsv')
-  
-  
-  # Data_set 1
-  # select variant_ID and activity to predict
-  
-  data_set_1_clean <- data_set_1 %>%
-    select(Variant_ID, E3_score) %>%
-    rename(
-    variant = Variant_ID,
-    score = E3_score
-    ) %>%
-    filter(!str_detect(variant, "\\*"))
+
   ```
   <p class="forceBreak"></p>
   * 02_clean.R
@@ -156,7 +144,7 @@ library("keras")
 ### R script overview 2
 
 <div class="columns-2">
-  ![](../doc/external_figures/project_organisation.png){width=500px}
+
   <p class="forceBreak"></p>
   * 04_model_i.R
     - Load augmented data

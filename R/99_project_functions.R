@@ -167,6 +167,72 @@ zscale2col <- function(df, zscales) {
   return(df)
 }
 
+
+#' Visualization functions
+#' 
+#' @description 
+#' `heatmap` makes a ggplot2 tile plot based on a tibble
+#' 
+#'
+#' @param df, tibble with columns score, mutation_position, mutation info
+#' @param x,
+#' @param y,
+#' @param fill,
+#'   
+#' @return heatmap object
+#'
+#' @examples heatmap_score(df,x, y, fill)
+heatmap <- function(df, x="mutation_position", y="mutation", fill="pI") {
+  heatmap <- ggplot(df, aes_string(x, y, fill = fill), color = "black") +
+    scale_x_continuous(expand=c(0,0)) +
+    scale_fill_continuous(type ="viridis", oob= scales::squish) +
+    geom_tile() +
+    labs(x="Sequence position", y="Residue mutated",color="Score") +
+    theme_classic() +
+    theme(
+      panel.background = element_blank(),
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    )
+  return(heatmap)
+}
+
+#' Visualization functions
+#' 
+#' @description 
+#' `score_distribution` makes a ggplot2 tile plot based on a tibble
+#' 
+#'
+#' @param df, tibble with columns score, mutation_position, mutation info
+#' @param threshold, cutoff of scoring
+#'   
+#' @return heatmap object
+#'
+#' @examples heatmap_score(df, threshold)
+score_distribution <- function(df, threshold) {
+  distribution <- df %>%
+    group_by(mutation) %>%
+    filter(score > threshold) %>%
+    ggplot(aes(mutation_position, score, color = mutation)) +
+    geom_point() +
+    theme_classic() +
+    labs(x = "Residue mutated", y = "Score", title = "Scores by position over a determined threshold") +
+    theme(
+      legend.position = "bottom",
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    ) +
+    guides(fill = guide_legend(title = "Residue Mutated", nrow = 4), color=guide_legend(title = "Residue Mutated",nrow = 4)
+    ) +
+    facet_grid(aminoacid_class ~ .)
+    return(distribution)
+}
+
+
 #' Visualization functions
 #' 
 #' @description 
@@ -248,8 +314,7 @@ density_plot <- function(df, title) {
       panel.border = element_rect(colour = "black", fill = NA, size = 1),
       axis.line = element_line(colour = "black", size = 0),
       axis.text.x = element_text(face = "bold", color = "#000000"),
-      axis.text.y = element_text(face = "bold", color = "#000000"),
-      legend.position = c(0.7, 0.223)) +
+      axis.text.y = element_text(face = "bold", color = "#000000")) +
     guides(fill = guide_legend(ncol = 5))
   return(density)
 }
@@ -371,7 +436,6 @@ sequence_logo <- function(df, start_position, end_position) {
   
   return(ggseq)
 }
-
 
 
 #' ANN2 - Artificial Neural Network
