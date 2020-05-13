@@ -137,10 +137,10 @@ plot_lm <- ggplot(train_df, aes(x = X1, y = activity, color = activity) ) +
   )
 
 # Save plot
-ggsave(plot = plot_lm, "./results/06_ann/linear_regression_data_set_3.png")
+ggsave(plot = plot_lm, "./results/06_ANN_plots/prelm_data_set_3.png")
 
 # Save model
-save(model, file="./results/06_ann/linear_regression_data_set_3.Rdata")
+save(model, file="./results/06_ANN_data/prelm_data_set_3.Rdata")
 
 # Set hyperparameters
 n_epochs      = 10
@@ -220,7 +220,7 @@ d_perf = bind_rows(tibble(y_pred = y_test_pred,
 # ------------------------------------------------------------------------------
 title = "Performance of ANN Regression model"
 sub_title = paste0("Test PCC = ", pcc_test, ", training PCC = ", pcc_train, ".")
-ann_keras_data_set_1 <- d_perf %>%
+ann_keras_data_set_3 <- d_perf %>%
   ggplot(aes(x = y_pred, y = y_true)) +
   geom_point() +
   geom_abline(intercept = 0, slope = 1, linetype = 'dashed') +
@@ -230,13 +230,13 @@ ann_keras_data_set_1 <- d_perf %>%
   facet_wrap(~partition) +
   theme_bw()
 
-ggsave(plot = ann_keras_data_set_1, "./results/06_ann/ann_keras_data_set_3.png")
+ggsave(plot = ann_keras_data_set_3, "./results/06_ANN_plots/ann_keras_data_set_3.png")
 
 # Save model
 # ------------------------------------------------------------------------------
 save_model_hdf5(object = model,
-                filepath = "./results/06_ann/ann_keras_ds3.h5")
+                filepath = "./results/06_ANN_data/ann_keras_ds3.h5")
 
 # Load the model (Note the use of the custom_objects argument)
-loaded_model = load_model_hdf5(filepath = './results/06_ann/ann_keras_ds3.h5',
+loaded_model = load_model_hdf5(filepath = './results/06_ANN_data/ann_keras_ds3.h5',
                                custom_objects = list('pcc' = metric_pcc))
