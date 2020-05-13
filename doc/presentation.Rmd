@@ -133,7 +133,7 @@ The score was normalized and summed to 1 for each postion.
 
 
 ## Artificial Neural Network with Keras
-![](../results/06_ANN_plots/ann_keras_data_set_4.png){width=50%}
+![](../results/06_ANN_plots/ann_keras_data_set_4.png){width=75%}
 
 
 ## Cross validation of a Pabl1 RRM2 glmnet model with z_scale
