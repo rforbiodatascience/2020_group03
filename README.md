@@ -38,19 +38,15 @@ It must be noted that, for the prediction, the string has to be the same length 
 
 ## Installation
 
-
+git clone https://github.com/rforbiodatascience/2020_group03/edit/master/
 
 ## Usage 
 
-The analysis tool can be used by running the 00_doit.R file. The running can be customized by the user, e.g to only run one model.
+The analysis tool can be used by running the "00_doit.R" file. The running can be customized by the user, e.g to only run one model.
 
 ## License
 
 MIT
-
-
-
-
 
 ## Data sources:
 
