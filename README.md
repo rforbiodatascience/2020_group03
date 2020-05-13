@@ -33,7 +33,9 @@ A shiny app has also been created to perform interactive peptide predictions. Th
 
 The shiny App only runs for z-scales matrix on the elastic net models for all the proteins.
 
-This is due to technical reasons, the combination of four datasets, all the encoding options and the three possible models made it difficult to implement all the possible combinations.
+This is due to technical reasons, the combination of four datasets, all the encoding options and the three possible models made it difficult to implement all the possible combinations. It must be noted that, for the prediction, the string has to be the same length as the sequence used to train the model.
+
+Example sequence for Pab1 prediction: ANLHPDIDNKALYDTFSVFGDLLSSKIATDENGKSKGFGFVHFEEEGAAKEAIDALNGMLLNGQEIY
 
 
 ## Installation
