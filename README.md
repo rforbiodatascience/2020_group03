@@ -35,7 +35,8 @@ The shiny App only runs for z-scales matrix on the elastic net models for all th
 
 #### Example sequence for Pab1 prediction: 
 
-"ANLHPDIDNKALYDTFSVFGDLLSSKIATDENGKSKGFGFVHFEEEGAAKEAIDALNGMLLNGQEIY"
+Example : ``ANLHPDIDNKALYDTFSVFGDLLSSKIATDENGKSKGFGFVHFEEEGAAKEAIDALNGMLLNGQEIY``
+
 It must be noted that, for the prediction, the string has to be the same length as the sequence used to train the model.
 
 ## Installation
