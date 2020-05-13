@@ -40,7 +40,7 @@ It must be noted that, for the prediction, the string has to be the same length 
 
 ## Installation
 
-´git clone https://github.com/rforbiodatascience/2020_group03/edit/master/´
+``git clone https://github.com/rforbiodatascience/2020_group03/edit/master/``
 
 ## Usage 
 
