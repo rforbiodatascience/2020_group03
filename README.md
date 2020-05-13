@@ -13,9 +13,8 @@ The toolbox found in this repository contains an analysis and predictions tools 
 
 ### Workflow
 The prediction relies exclusively on the sequence of the protein. To do so, the workflow of the toolbox can be found below.
-<p align="center">
 ![](https://github.com/rforbiodatascience/2020_group03/blob/master/doc/external_figures/flowchart.png)
-</p>
+
 
 ### Repository Structure
 The structure of the toolbox can be found below.
