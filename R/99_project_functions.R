@@ -553,9 +553,9 @@ glmnet_reg <- function (df, folder, name, alpha_, s_,
   print(name)
   print(scale)
   
-  graph_filename = paste(folder,"_glmnet_corr_",scale,"_",name,".png", sep="")
-  obj_filename = paste(folder,"_glmnet_",scale,"_",name,".Rdata", sep="")
-  RMSE_filename = paste(folder,"_glmnet_RMSE_",scale,"_",name,".tsv", sep="")
+  graph_filename = paste(folder,"_plots/06_glmnet_corr_",scale,"_",name,".png", sep="")
+  obj_filename = paste(folder,"_data/06_glmnet_",scale,"_",name,".Rdata", sep="")
+  RMSE_filename = paste(folder,"_data/_06_glmnet_RMSE_",scale,"_",name,".tsv", sep="")
   
   data <- df
 
