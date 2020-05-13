@@ -25,10 +25,14 @@ The structure of the toolbox can be found below.
 
 First each dataset is cleaned to get a "tidy" format where only the valuable data is kept. Then, the sequence strings are edited to reduce the length the protein. The resulting string is encoded to be computed on predictive models such as neural networks. For the encoding of the protein, the use of ten different matrices is implemented. Although, the user is free to use other matrices if the format matches the matrices found in this tool box.
 
+
+The implemented matrices can be found in the following table.
+
+
 | Scale(s)  | Description of scale                                         |
 | -------- | ------------------------------------------------------------ |
-| blosum45,50,62,80,90 | Substitution matrix based on VARIMAX analysis of physicochemical properties |
-| pam30,70,250    | Substitution matrix based on observed mutations in phylogenetic trees |
+| blosum45, 50, 62, 80, 90 | Substitution matrix based on VARIMAX analysis of physicochemical properties |
+| pam30, 70, 250    | Substitution matrix based on observed mutations in phylogenetic trees |
 | z5_scales | PCA of physicochemical properties                            |
 
 
