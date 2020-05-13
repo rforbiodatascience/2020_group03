@@ -29,8 +29,8 @@ folder = "./results/06_glmnet"
 print('06_modelling_glmnet.R...')
 
 
-# Data set 1 - glmnet 
-# ------------------------------------------------------------------------------
+# # Data set 1 - glmnet 
+# # ------------------------------------------------------------------------------
 glmnet_reg(
   name = "data_set_1",
   df = data_set_1,
@@ -52,7 +52,7 @@ glmnet_reg(
   seed_value = 42) # random seed
 
 
-# Data set 2 - glmnet 
+# Data set 2 - glmnet
 # ------------------------------------------------------------------------------
 glmnet_reg(
   name = "data_set_2",
@@ -75,7 +75,7 @@ glmnet_reg(
   seed_value = 42) # random seed
 
 
-# Data set 3 - glmnet 
+# Data set 3 - glmnet
 # ------------------------------------------------------------------------------
 glmnet_reg(
   name = "data_set_3",

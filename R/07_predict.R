@@ -25,7 +25,7 @@ source(file = "./R/99_project_functions.R")
 
 # Load model
 # ------------------------------------------------------------------------------
-load(file = "./results/06_glmnet/06_glmnet_z_scales_data_set_4.RData")
+load(file = "./results/06_glmnet_data/06_glmnet_z_scales_data_set_4.RData")
 
 data = unknown_data_set_4
 
