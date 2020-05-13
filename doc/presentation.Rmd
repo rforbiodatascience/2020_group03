@@ -168,6 +168,11 @@ The score was normalized and summed to 1 for each postion.
  * None the less we were able to predict the missing variant for data set 4 using the glmnet regressor which we implemented in a shiny app.
 
 
+## Shiny App
+
+![](https://github.com/rforbiodatascience/2020_group03/blob/master/doc/external_figures/Shiny_app.png){width=95%}
+
+
 ## Challenges
 * RStudio Cloud is limited in memory! We had a lot of crashes both with keras, ANN2 and glmnet in the cloud.
 * All modelling and predications of full scale data set are possible using a local RStudio installation using the idendicated libraries.
