@@ -76,4 +76,3 @@ density <- ggplot(comp, aes(score, color=status, fill=status)) +
   )
 
 ggsave(plot = density, "./results/07_predict/07_density_data_set_4.png", width = 7, height = 5, dpi=300)
-  

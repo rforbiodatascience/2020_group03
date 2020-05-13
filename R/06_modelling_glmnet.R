@@ -25,7 +25,7 @@ data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 
 # Hello from glmnet  and set folder
 # ------------------------------------------------------------------------------
-folder = "./results/06_glmnet/06"
+folder = "./results/06_glmnet_plots/06"
 print('06_modelling_glmnet.R...')
 
 
