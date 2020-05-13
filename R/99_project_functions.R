@@ -528,9 +528,10 @@ ANN2 <- function(df, folder, name, epochs, hidden_layers,
              model = "ANN",
              scale = scale)
   
-  corr_plot <- ggplot(res, aes(x=Y_pred, y=Y_test)) +
+  corr_plot <- ggplot(res, aes(x=Y_test, y=Y_pred)) +
     geom_point() +
     theme_classic() +
+    labs(x = "True score", y = "Predicted score", title = "Predicted score vs true score of ANN model")
     theme(
       panel.border = element_rect(colour = "black", fill = NA, size = 1),
       axis.line = element_line(colour = "black", size = 0),
@@ -538,7 +539,7 @@ ANN2 <- function(df, folder, name, epochs, hidden_layers,
       axis.text.y = element_text(face = "bold", color = "#000000")
     )
   
-  ggsave(plot=corr_plot, graph_filename)
+  ggsave(plot=corr_plot, graph_filename, width = 7, height = 5, dpi=300)
   
   write_ANN(NN, obj_filename)
   
@@ -630,14 +631,20 @@ glmnet_reg <- function (df, folder, name, alpha_, s_,
   corr_plot <- ggplot(results, aes(x=score, y=prediction, color=model)) +
     geom_point() +
     theme_classic() +
+    labs(x = "True score", y = "Predicted score", title = "Predicted score vs true score of ElasticNet model") +
     theme(
+      legend.position = "bottom",
       panel.border = element_rect(colour = "black", fill = NA, size = 1),
       axis.line = element_line(colour = "black", size = 0),
       axis.text.x = element_text(face = "bold", color = "#000000"),
       axis.text.y = element_text(face = "bold", color = "#000000")
     )
   
-  ggsave(plot=corr_plot, graph_filename)
+  
+  
+  
+  
+  ggsave(plot=corr_plot, graph_filename, width = 7, height = 5, dpi=300)
   
   
   RMSE_table <- RMSE_table %>%
@@ -725,6 +732,7 @@ glmnet_CV <- function (df, name, folder, scale, train_size, seed_value, alpha_) 
   geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
   geom_point() +
   theme_classic() +
+  labs(x = "log(lambda)", y = "MSE", title = "Cross validation of ElasticNet model") +
   theme(
     panel.border = element_rect(colour = "black", fill = NA, size = 1),
     axis.line = element_line(colour = "black", size = 0),
@@ -732,7 +740,7 @@ glmnet_CV <- function (df, name, folder, scale, train_size, seed_value, alpha_) 
     axis.text.y = element_text(face = "bold", color = "#000000")
   )
   
-  ggsave(plot=CV_plot, graph_filename)
+  ggsave(plot=CV_plot, graph_filename, width = 7, height = 5, dpi=300)
   write_tsv(x = CV_results, path = CV_filename)
   
   return() # clould return something
