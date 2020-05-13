@@ -1,0 +1,2 @@
+.metric	.estimator	.estimate	dataset	model	scale
+rmse	standard	0.17940153437067624	data_set_3	ANN	z_scales
