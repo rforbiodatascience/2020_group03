@@ -48,7 +48,6 @@ to_predict <- unname(as.matrix(to_predict))
 
 prediction <- predict(fit.elasticnet, newx = to_predict, s = 0.01, alpha = 0.2)
 
-
 knowns <- known_data_set_4 %>%
   select(score) %>%
   add_column(status = "known")
@@ -76,5 +75,5 @@ density <- ggplot(comp, aes(score, color=status, fill=status)) +
     axis.text.y = element_text(face = "bold", color = "#000000")
   )
 
-ggsave(plot = density, "./results/06_predict/density_data_set_4.png", width = 7, height = 5, dpi=300)
+ggsave(plot = density, "./results/07_predict/07_density_data_set_4.png", width = 7, height = 5, dpi=300)
   
