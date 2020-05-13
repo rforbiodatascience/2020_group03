@@ -1,13 +1,14 @@
 ---
 title: "Toolbox for analysis and prediction of protein and peptide variant effects"
-subtitle: "22100 - R for Bio Data Science"
 author: 'Group 3: Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra, Laura Sans Comerma'
 date: "Spring 2020"
 output:
+  beamer_presentation: default
   ioslides_presentation:
-    widescreen: true
-    smaller: true
     css: ./css/style.css
+    smaller: yes
+    widescreen: yes
+subtitle: 22100 - R for Bio Data Science
 ---
 
 ```{r setup, include=FALSE}
@@ -89,7 +90,7 @@ The aim of this project is to create a toolbox to predict the biological activit
 
 ## Discussion
 
-## Referencex
+## References
 
 <div class="columns-2">
   ![](../doc/external_figures/file.png){width=300px}
