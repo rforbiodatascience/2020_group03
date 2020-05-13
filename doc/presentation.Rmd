@@ -8,8 +8,6 @@ output:
     widescreen: true
     smaller: true
     logo: ./external_figures/r_for_bio_data_science_hex_logo_quadratic_small.png
-  beamer_presentation: default
-widescreen: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -88,17 +86,17 @@ library("keras")
 ## Example data set 1 - data overview
 
 <div class="columns-2">
- ![](../results/04_density_plots/density_data_set_1.png){width=100%}
+ ![](../results/04_density_plots/density_data_set_4.png){width=100%}
   <p class="forceBreak">
      </p>
-   ![](../results/04_density_plots/density_residue_data_set_1.png){width=100%}
+   ![](../results/04_density_plots/density_residue_data_set_4.png){width=100%}
 </div>
 
 ## Example dataset 1 - heatmap
-![](../results/04_heatmaps/heatmap_data_set_score_1.png){width=100%}
-![SEQUENCE LOGO CHANGE](../results/04_heatmaps/heatmap_data_set_score_1.png){width=100%}
+![](../results/04_heatmaps/heatmap_data_set_score_4.png){width=90%}
+![](../results/04_sequence_logos/seq_logo_data_set_4.png){width=90%}
 ## Example dataset 1 - conserved regions
-![](../results/04_quick_SAR/quick_sar_data_set_1.png){width=100%}
+![](../results/04_quick_SAR/quick_sar_data_set_4.png){width=100%}
 
 ## Machine learning toolbox
 
