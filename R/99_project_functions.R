@@ -656,3 +656,84 @@ glmnet_reg <- function (df, folder, name, alpha_, s_,
   return() # could return something
   
 }
+
+
+
+glmnet_CV <- function (df, name, folder, scale, train_size, seed_value, alpha_) {
+  print(name)
+  print(scale)
+  
+  graph_filename = paste(folder,"_plots/glmnet_CV_",scale,"_",name,".png", sep="")
+  CV_filename = paste(folder,"_data/glmnet_CV_",scale,"_",name,".tsv", sep="")
+  
+  data <- df
+
+  sequence_window <- data %>%
+  mutate(mutation_position = as.integer(mutation_position)) %>%
+  pull(mutation_position)
+  
+  data <- data %>%
+  mutate(sequence_to_model = str_sub(sequence, min(sequence_window), max(sequence_window)))
+  
+  # Make score response variable
+  # ------------------------------------------------------------------------------
+  Y <- data  %>%
+  select(score)
+  
+  Y <- unname(as.matrix(Y))
+  
+  # Partion data
+  # ------------------------------------------------------------------------------
+  set.seed(seed_value)
+  partition <- createDataPartition(y = Y, p = train_size , list = F)
+  training = data[partition, ]
+  test <- data[-partition, ]
+  
+  # Encode sequences and make test and train sets
+  # ------------------------------------------------------------------------------
+  X_train <- training %>%
+  pull(sequence_to_model) %>%
+  encode_peptide(m = scale)
+  
+  X_test <- test %>%
+  pull(sequence_to_model) %>%
+  encode_peptide(m = scale)
+  
+  Y_test <- test %>%
+  select(score)
+  
+  Y_train <- training %>%
+  select(score)
+  
+  Y_test <- unname(as.matrix(Y_test))
+  Y_train <- unname(as.matrix(Y_train))
+  X_train <- unname(as.matrix(X_train))
+  
+  
+  # Fit elasticnet model with CV
+  # ------------------------------------------------------------------------------
+  fit.elasticnet.cv <- cv.glmnet(X_train, Y_train, type.measure="mse", alpha = alpha_,
+                               family="gaussian",
+                               standardize=TRUE)
+  
+  
+  CV_results <- tidy(fit.elasticnet.cv) %>%
+  mutate(log_lambda = log10(lambda))
+  
+  
+  CV_plot <- ggplot(CV_results, aes(x=log_lambda, y=estimate)) +
+  geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
+  geom_point() +
+  theme_classic() +
+  theme(
+    panel.border = element_rect(colour = "black", fill = NA, size = 1),
+    axis.line = element_line(colour = "black", size = 0),
+    axis.text.x = element_text(face = "bold", color = "#000000"),
+    axis.text.y = element_text(face = "bold", color = "#000000")
+  )
+  
+  ggsave(plot=CV_plot, graph_filename)
+  write_tsv(x = CV_results, path = CV_filename)
+  
+  return() # clould return something
+}
