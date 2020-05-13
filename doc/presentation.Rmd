@@ -133,7 +133,7 @@ The score was normalized and summed to 1 for each postion.
 
 
 ## Artificial Neural Network with Keras
-![](../results/06_ANN_plots/ann_keras_data_set_4.png){width=100%}
+![](../results/06_ANN_plots/ann_keras_data_set_4.png){width=50%}
 
 
 ## Cross validation of a Pabl1 RRM2 glmnet model with z_scale
@@ -196,7 +196,7 @@ The score was normalized and summed to 1 for each postion.
 ## References
  * Amino acid substition matrices: https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/data/
  
- * z_scales:
+ * z_scales: https://pubs.acs.org/doi/10.1021/jm9700575
 
 
 
