@@ -235,8 +235,6 @@ ggsave(plot = ann_keras_data_set_4, "./results/06_ANN_plot/ann_keras_data_set_4.
 
 # Save model
 # ------------------------------------------------------------------------------
-#save_model_tf(object = model, filepath = "./results/06_ANN_data/ann_keras_ds4.h5")
-#tf.keras.models.save_model(model, "model_name")
 
 save_model_hdf5(object = model,
                 filepath = "./results/06_ANN_data/ann_keras_ds4.h5")
