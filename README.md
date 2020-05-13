@@ -42,7 +42,7 @@ It must be noted that, for the prediction, the string has to be the same length 
 
 ## Installation
 
-``git clone https://github.com/rforbiodatascience/2020_group03/edit/master/``
+``git clone https://github.com/rforbiodatascience/2020_group03.git``
 
 ## Usage 
 
@@ -50,7 +50,7 @@ The analysis tool can be used by running the ``00_doit.R`` file. The running can
 
 ## License
 
-MIT
+MIT, See [LICENSE](LICENSE)
 
 ## Data sources:
 
