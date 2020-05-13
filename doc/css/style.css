@@ -1,0 +1,24 @@
+slides > slide:not(.title-slide) {
+   background-image: url("../external_figures/r_for_bio_data_science_hex_logo_quadratic_small.png");
+   background-size: 6%;
+   background-repeat: no-repeat;
+   background-position: 3% 96%;
+ }
+
+
+.forceBreak { -webkit-column-break-after: always; break-after: column; }
+
+
+div.footnotes {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10px;
+  width: 80%;
+  font-size: 0.6em;
+}
+
+div.columns-2{
+  margin-bottom: -20px;
+  margin-right: 20px;
+  margin-top: -10px;
+}

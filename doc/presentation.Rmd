@@ -4,35 +4,15 @@ subtitle: "22100 - R for Bio Data Science"
 author: 'Group 3: Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra, Laura Sans Comerma'
 date: "Spring 2020"
 output:
-  beamer_presentation: default
-  ioslides_presentation: default
-widescreen: yes
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
+    css: ./css/style.css
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
-
-<style>
-.forceBreak { -webkit-column-break-after: always; break-after: column; }
-</style>
-
-<style>
-div.footnotes {
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 10px;
-  width: 80%;
-  font-size: 0.6em;
-}
-
-div.columns-2{
-  margin-bottom: -20px;
-  margin-right: 20px;
-  margin-top: -10px;
-}
-</style>
-
 ## Content
 
 * Introduction
@@ -56,10 +36,9 @@ The aim of this project is to create a toolbox to predict the biological activit
   - Visualization options.
   
 ## Project overview {.centered}
-![](../doc/external_figures/00_project_organisation.png){width=75%}
-
 [Visit our Github repository](https://github.com/rforbiodatascience/2020_group03)
 
+![](../doc/external_figures/00_project_organisation.png){width=75%}
 
 ## Methods - packages used
 ```
@@ -82,20 +61,21 @@ library("keras")
 | Data set 3 | LDLRAP1 | OBFC1                      | Protein translation    | *H. sapiens*    | 6385            | Y2H assays                                                |
 | Data set 4 | Pab1    | el4FG1                     | Translation initiation | *S. cereviseae* | 1340            | Y2H assays                                                |
 
-## Example data set 1 - data overview
+## Example data set 4 - data overview
 
 <div class="columns-2">
- ![](../results/04_density_plots/density_data_set_1.png){width=100%}
+ ![](../results/04_density_plots/density_data_set_4.png){width=100%}
   <p class="forceBreak">
      </p>
-   ![](../results/04_density_plots/density_residue_data_set_1.png){width=100%}
+   ![](../results/04_density_plots/density_residue_data_set_4.png){width=100%}
 </div>
 
-## Example dataset 1 - heatmap
-![](../results/04_heatmaps/heatmap_data_set_score_1.png){width=100%}
-![SEQUENCE LOGO CHANGE](../results/04_heatmaps/heatmap_data_set_score_1.png){width=100%}
-## Example dataset 1 - conserved regions
-![](../results/04_quick_SAR/quick_sar_data_set_1.png){width=100%}
+## Example dataset 4 - heatmap
+![](../results/04_heatmaps/heatmap_data_set_score_4.png){width=70%}
+![](../results/04_sequence_logos/seq_logo_data_set_4.png){width=70%}
+
+## Example dataset 4 - conserved regions
+![](../results/04_quick_SAR/quick_sar_data_set_4.png){width=100%}
 
 ## Machine learning toolbox
 
