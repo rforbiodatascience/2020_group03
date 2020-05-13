@@ -1,12 +1,18 @@
 ---
 title: "Toolbox for analysis and prediction of protein and peptide variant effects"
-subtitle: "22100 - R for Bio Data Science"
 author: 'Group 3: Felix Pacheco, Jacob Kofoed, Begoña Bolos Sierra, Laura Sans Comerma'
 date: "Spring 2020"
 output:
+  beamer_presentation: default
   ioslides_presentation:
+<<<<<<< HEAD
     widescreen: true
+=======
+>>>>>>> 31db0e1a1d6297292f3906993a9ad53399a2495a
     css: ./css/style.css
+    smaller: yes
+    widescreen: yes
+subtitle: 22100 - R for Bio Data Science
 ---
 
 ```{r setup, include=FALSE}
@@ -122,6 +128,7 @@ The score was normalized and summed to 1 for each postion.
 | z5_scales | PCA of physicochemical properties                            |
 
 
+<<<<<<< HEAD
 ## PCA scree plot goes here
 
 ## Cross validation of a Pabl1 RRM2 glmnet model with z_scale
@@ -154,6 +161,8 @@ The score was normalized and summed to 1 for each postion.
  * Using machine learning based on amino acid descriptors we were able to generate predictive models
 
 
+=======
+>>>>>>> 31db0e1a1d6297292f3906993a9ad53399a2495a
 ## References
 
 <div class="columns-2">

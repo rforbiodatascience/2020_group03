@@ -80,13 +80,13 @@ zscales_4 <- data_set_4 %>%
   zScales()
 
 # separate Z-scales in columns
-data_set_1 <- data_set_1 %>% 
+data_set_1 <- data_set_1 %>%
   zscale2col(zscales_1)
-data_set_2 <- data_set_2 %>% 
+data_set_2 <- data_set_2 %>%
   zscale2col(zscales_2)
-data_set_3 <- data_set_3 %>% 
+data_set_3 <- data_set_3 %>%
   zscale2col(zscales_3)
-data_set_4 <- data_set_4 %>% 
+data_set_4 <- data_set_4 %>%
   zscale2col(zscales_4)
 
 # Add aminoacid type / call function aminoacid_type
@@ -103,31 +103,31 @@ data_set_4 <- data_set_4 %>%
 # ------------------------------------------------------------------------------
 # Generate pI heatmaps
 # ------------------------------------------------------------------------------
-heatmap_data_set_pI_1 <- heatmap(data_set_1,x="mutation_position", y="mutation", fill="pI")
-heatmap_data_set_pI_2 <- heatmap(data_set_2,x="mutation_position", y="mutation", fill="pI")
-heatmap_data_set_pI_3 <- heatmap(data_set_3,x="mutation_position", y="mutation", fill="pI")
-heatmap_data_set_pI_4 <- heatmap(data_set_4,x="mutation_position", y="mutation", fill="pI")
+heatmap_data_set_pI_1 <- heatmap(data_set_1, x = "mutation_position", y = "mutation", fill = "pI")
+heatmap_data_set_pI_2 <- heatmap(data_set_2, x = "mutation_position", y = "mutation", fill = "pI")
+heatmap_data_set_pI_3 <- heatmap(data_set_3, x = "mutation_position", y = "mutation", fill = "pI")
+heatmap_data_set_pI_4 <- heatmap(data_set_4, x = "mutation_position", y = "mutation", fill = "pI")
 
 # Save heatmaps
 # ------------------------------------------------------------------------------
-ggsave(plot = heatmap_data_set_pI_1, "./results/04_heatmaps/heatmap_data_set_pI_1.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_pI_2, "./results/04_heatmaps/heatmap_data_set_pI_2.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_pI_3, "./results/04_heatmaps/heatmap_data_set_pI_3.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_pI_4, "./results/04_heatmaps/heatmap_data_set_pI_4.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_pI_1, "./results/04_heatmaps/heatmap_data_set_pI_1.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_pI_2, "./results/04_heatmaps/heatmap_data_set_pI_2.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_pI_3, "./results/04_heatmaps/heatmap_data_set_pI_3.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_pI_4, "./results/04_heatmaps/heatmap_data_set_pI_4.png", width = 10, height = 3, dpi = 300)
 
 # Generate z-scale 5 heatmaps
 # ------------------------------------------------------------------------------
-heatmap_data_set_Z5_1 <- heatmap(data_set_1,x="mutation_position", y="mutation", fill="Z5")
-heatmap_data_set_Z5_2 <- heatmap(data_set_2,x="mutation_position", y="mutation", fill="Z5")
-heatmap_data_set_Z5_3 <- heatmap(data_set_3,x="mutation_position", y="mutation", fill="Z5")
-heatmap_data_set_Z5_4 <- heatmap(data_set_4,x="mutation_position", y="mutation", fill="Z5")
+heatmap_data_set_Z5_1 <- heatmap(data_set_1, x = "mutation_position", y = "mutation", fill = "Z5")
+heatmap_data_set_Z5_2 <- heatmap(data_set_2, x = "mutation_position", y = "mutation", fill = "Z5")
+heatmap_data_set_Z5_3 <- heatmap(data_set_3, x = "mutation_position", y = "mutation", fill = "Z5")
+heatmap_data_set_Z5_4 <- heatmap(data_set_4, x = "mutation_position", y = "mutation", fill = "Z5")
 
 # Save heatmaps
 # ------------------------------------------------------------------------------
-ggsave(plot = heatmap_data_set_Z5_1, "./results/04_heatmaps/heatmap_data_set_Z5_1.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_Z5_2, "./results/04_heatmaps/heatmap_data_set_Z5_2.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_Z5_3, "./results/04_heatmaps/heatmap_data_set_Z5_3.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_Z5_4, "./results/04_heatmaps/heatmap_data_set_Z5_4.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_Z5_1, "./results/04_heatmaps/heatmap_data_set_Z5_1.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_Z5_2, "./results/04_heatmaps/heatmap_data_set_Z5_2.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_Z5_3, "./results/04_heatmaps/heatmap_data_set_Z5_3.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_Z5_4, "./results/04_heatmaps/heatmap_data_set_Z5_4.png", width = 10, height = 3, dpi = 300)
 
 
 # Generate distribution scores plots
@@ -139,10 +139,10 @@ distribution_data_set_4 <- score_distribution(data_set_4, threshold = 1.5)
 
 # Save distribution scores plots
 # ------------------------------------------------------------------------------
-ggsave(plot = distribution_data_set_1, "./results/04_distribution_plots/distribution_data_set_1.png",width = 7, height = 10, dpi=300)
-ggsave(plot = distribution_data_set_2, "./results/04_distribution_plots/distribution_data_set_2.png",width = 7, height = 10, dpi=300)
-ggsave(plot = distribution_data_set_3, "./results/04_distribution_plots/distribution_data_set_3.png",width = 7, height = 10, dpi=300)
-ggsave(plot = distribution_data_set_4, "./results/04_distribution_plots/distribution_data_set_4.png",width = 7, height = 10, dpi=300)
+ggsave(plot = distribution_data_set_1, "./results/04_distribution_plots/distribution_data_set_1.png", width = 7, height = 10, dpi = 300)
+ggsave(plot = distribution_data_set_2, "./results/04_distribution_plots/distribution_data_set_2.png", width = 7, height = 10, dpi = 300)
+ggsave(plot = distribution_data_set_3, "./results/04_distribution_plots/distribution_data_set_3.png", width = 7, height = 10, dpi = 300)
+ggsave(plot = distribution_data_set_4, "./results/04_distribution_plots/distribution_data_set_4.png", width = 7, height = 10, dpi = 300)
 
 # Score heatmaps. With a cuff-off scores
 # ------------------------------------------------------------------------------
@@ -153,10 +153,10 @@ heatmap_data_set_score_4 <- heatmap_score(data_set_4, score_min = -2, score_max 
 
 # Save heatmaps
 # ------------------------------------------------------------------------------
-ggsave(plot = heatmap_data_set_score_1, "./results/04_heatmaps/heatmap_data_set_score_1.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_2, "./results/04_heatmaps/heatmap_data_set_score_2.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_3, "./results/04_heatmaps/heatmap_data_set_score_3.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_4, "./results/04_heatmaps/heatmap_data_set_score_4.png",width = 10, height = 3, dpi=300)
+ggsave(plot = heatmap_data_set_score_1, "./results/04_heatmaps/heatmap_data_set_score_1.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_score_2, "./results/04_heatmaps/heatmap_data_set_score_2.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_score_3, "./results/04_heatmaps/heatmap_data_set_score_3.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_score_4, "./results/04_heatmaps/heatmap_data_set_score_4.png", width = 10, height = 3, dpi = 300)
 
 
 # Add aminoacid type / call function aminoacid_type
@@ -172,34 +172,33 @@ data_set_4 <- data_set_4 %>%
 
 # Score grouped heatmaps
 # ------------------------------------------------------------------------------
-heatmap_data_set_score_g_1 <- data_set_1 %>% 
+heatmap_data_set_score_g_1 <- data_set_1 %>%
   group_by(aminoacid_class) %>%
-  heatmap_g_score(score_min = 1, score_max = 10 )
-heatmap_data_set_score_g_2 <- data_set_2 %>% 
-  group_by(aminoacid_class) %>% 
   heatmap_g_score(score_min = 1, score_max = 10)
-heatmap_data_set_score_g_3 <- data_set_3 %>% 
-  group_by(aminoacid_class) %>% 
+heatmap_data_set_score_g_2 <- data_set_2 %>%
+  group_by(aminoacid_class) %>%
+  heatmap_g_score(score_min = 1, score_max = 10)
+heatmap_data_set_score_g_3 <- data_set_3 %>%
+  group_by(aminoacid_class) %>%
   heatmap_g_score(score_min = 0, score_max = 1)
-heatmap_data_set_score_g_4 <- data_set_4 %>% 
-  group_by(aminoacid_class) %>% 
+heatmap_data_set_score_g_4 <- data_set_4 %>%
+  group_by(aminoacid_class) %>%
   heatmap_g_score(score_min = -2, score_max = 2)
 
 # Save heatmaps
 # ----------------------------------------------------------------------------
-ggsave(plot = heatmap_data_set_score_g_1, "./results/04_heatmaps/heatmap_data_set_score_g_1.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_g_2, "./results/04_heatmaps/heatmap_data_set_score_g_2.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_g_3, "./results/04_heatmaps/heatmap_data_set_score_g_3.png",width = 10, height = 3, dpi=300)
-ggsave(plot = heatmap_data_set_score_g_4, "./results/04_heatmaps/heatmap_data_set_score_g_4.png",width = 10, height = 3, dpi=300)
-
+ggsave(plot = heatmap_data_set_score_g_1, "./results/04_heatmaps/heatmap_data_set_score_g_1.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_score_g_2, "./results/04_heatmaps/heatmap_data_set_score_g_2.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_score_g_3, "./results/04_heatmaps/heatmap_data_set_score_g_3.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = heatmap_data_set_score_g_4, "./results/04_heatmaps/heatmap_data_set_score_g_4.png", width = 10, height = 3, dpi = 300)
 
 
 # Generate density plots
 # ------------------------------------------------------------------------------
-density_data_set_1 <- density_plot(data_set_1, title="Score density plot for Data Set 1")
-density_data_set_2 <- density_plot(data_set_2, title="Score density plot for Data Set 2")
-density_data_set_3 <- density_plot(data_set_3, title="Score density plot for Data Set 3")
-density_data_set_4 <- density_plot(data_set_4, title="Score density plot for Data Set 4")
+density_data_set_1 <- density_plot(data_set_1, title = "Score density plot for Data Set 1")
+density_data_set_2 <- density_plot(data_set_2, title = "Score density plot for Data Set 2")
+density_data_set_3 <- density_plot(data_set_3, title = "Score density plot for Data Set 3")
+density_data_set_4 <- density_plot(data_set_4, title = "Score density plot for Data Set 4")
 
 # Generate density plot per mutation
 # ------------------------------------------------------------------------------
@@ -210,17 +209,17 @@ density_residue_data_set_4 <- density_plot_residue(data_set_4)
 
 # Save density plots
 # ------------------------------------------------------------------------------
-ggsave(plot = density_data_set_1, "./results/04_density_plots/density_data_set_1.png", width = 7, height = 5, dpi=300)
-ggsave(plot = density_data_set_2, "./results/04_density_plots/density_data_set_2.png", width = 7, height = 5, dpi=300)
-ggsave(plot = density_data_set_3, "./results/04_density_plots/density_data_set_3.png", width = 7, height = 5, dpi=300)
-ggsave(plot = density_data_set_4, "./results/04_density_plots/density_data_set_4.png", width = 7, height = 5, dpi=300)
+ggsave(plot = density_data_set_1, "./results/04_density_plots/density_data_set_1.png", width = 7, height = 5, dpi = 300)
+ggsave(plot = density_data_set_2, "./results/04_density_plots/density_data_set_2.png", width = 7, height = 5, dpi = 300)
+ggsave(plot = density_data_set_3, "./results/04_density_plots/density_data_set_3.png", width = 7, height = 5, dpi = 300)
+ggsave(plot = density_data_set_4, "./results/04_density_plots/density_data_set_4.png", width = 7, height = 5, dpi = 300)
 
 # Save density plots per mutation
 # ------------------------------------------------------------------------------
-ggsave(plot = density_residue_data_set_1, "./results/04_density_plots/density_residue_data_set_1.png", width = 7, height = 6.25, dpi=300)
-ggsave(plot = density_residue_data_set_2, "./results/04_density_plots/density_residue_data_set_2.png", width = 7, height = 6.25, dpi=300)
-ggsave(plot = density_residue_data_set_3, "./results/04_density_plots/density_residue_data_set_3.png", width = 7, height = 6.25, dpi=300)
-ggsave(plot = density_residue_data_set_4, "./results/04_density_plots/density_residue_data_set_4.png", width = 7, height = 6.25, dpi=300)
+ggsave(plot = density_residue_data_set_1, "./results/04_density_plots/density_residue_data_set_1.png", width = 7, height = 6.25, dpi = 300)
+ggsave(plot = density_residue_data_set_2, "./results/04_density_plots/density_residue_data_set_2.png", width = 7, height = 6.25, dpi = 300)
+ggsave(plot = density_residue_data_set_3, "./results/04_density_plots/density_residue_data_set_3.png", width = 7, height = 6.25, dpi = 300)
+ggsave(plot = density_residue_data_set_4, "./results/04_density_plots/density_residue_data_set_4.png", width = 7, height = 6.25, dpi = 300)
 
 
 
@@ -233,10 +232,10 @@ seq_logo_data_set_4 <- sequence_logo(data_set_4, start_position = 135, end_posit
 
 # Save sequence logos
 # ------------------------------------------------------------------------------
-ggsave(plot = seq_logo_data_set_1, "./results/04_sequence_logos/seq_logo_data_set_1.png",width = 10, height = 3, dpi=300)
-ggsave(plot = seq_logo_data_set_2, "./results/04_sequence_logos/seq_logo_data_set_2.png",width = 10, height = 3, dpi=300)
-ggsave(plot = seq_logo_data_set_3, "./results/04_sequence_logos/seq_logo_data_set_3.png",width = 10, height = 3, dpi=300)
-ggsave(plot = seq_logo_data_set_4, "./results/04_sequence_logos/seq_logo_data_set_4.png",width = 10, height = 3, dpi=300)
+ggsave(plot = seq_logo_data_set_1, "./results/04_sequence_logos/seq_logo_data_set_1.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = seq_logo_data_set_2, "./results/04_sequence_logos/seq_logo_data_set_2.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = seq_logo_data_set_3, "./results/04_sequence_logos/seq_logo_data_set_3.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = seq_logo_data_set_4, "./results/04_sequence_logos/seq_logo_data_set_4.png", width = 10, height = 3, dpi = 300)
 
 
 
@@ -257,7 +256,7 @@ quick_sar_data_set_4 <- quick_sar(data_set_4, cutoff = 0)
 
 # Save quickSAR plots
 # ------------------------------------------------------------------------------
-ggsave(plot = quick_sar_data_set_1, "./results/04_quick_SAR/quick_sar_data_set_1.png",width = 10, height = 3, dpi=300)
-ggsave(plot = quick_sar_data_set_2, "./results/04_quick_SAR/quick_sar_data_set_2.png",width = 10, height = 3, dpi=300)
-ggsave(plot = quick_sar_data_set_3, "./results/04_quick_SAR/quick_sar_data_set_3.png",width = 10, height = 3, dpi=300)
-ggsave(plot = quick_sar_data_set_4, "./results/04_quick_SAR/quick_sar_data_set_4.png",width = 10, height = 3, dpi=300)
+ggsave(plot = quick_sar_data_set_1, "./results/04_quick_SAR/quick_sar_data_set_1.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = quick_sar_data_set_2, "./results/04_quick_SAR/quick_sar_data_set_2.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = quick_sar_data_set_3, "./results/04_quick_SAR/quick_sar_data_set_3.png", width = 10, height = 3, dpi = 300)
+ggsave(plot = quick_sar_data_set_4, "./results/04_quick_SAR/quick_sar_data_set_4.png", width = 10, height = 3, dpi = 300)
