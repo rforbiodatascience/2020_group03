@@ -220,7 +220,7 @@ d_perf = bind_rows(tibble(y_pred = y_test_pred,
 # ------------------------------------------------------------------------------
 title = "Performance of ANN Regression model"
 sub_title = paste0("Test PCC = ", pcc_test, ", training PCC = ", pcc_train, ".")
-ann_keras_data_set_1 <- d_perf %>%
+ann_keras_data_set_3 <- d_perf %>%
   ggplot(aes(x = y_pred, y = y_true)) +
   geom_point() +
   geom_abline(intercept = 0, slope = 1, linetype = 'dashed') +
@@ -230,7 +230,7 @@ ann_keras_data_set_1 <- d_perf %>%
   facet_wrap(~partition) +
   theme_bw()
 
-ggsave(plot = ann_keras_data_set_1, "./results/06_ann/ann_keras_data_set_3.png")
+ggsave(plot = ann_keras_data_set_3, "./results/06_ann/ann_keras_data_set_3.png")
 
 # Save model
 # ------------------------------------------------------------------------------
