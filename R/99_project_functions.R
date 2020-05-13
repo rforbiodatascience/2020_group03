@@ -928,6 +928,7 @@ ANN_keras_func <- function(df, folderplot, folderdata, name, epochs, partitions,
   # Evaluate model
   # ------------------------------------------------------------------------------
   # Calculate performance on test data with pearson 
+  model <- model_ann
   y_test_true = y_test
   y_test_pred = model_ann %>% predict(X_test) %>% as.vector
   pcc_test = round(cor(y_test_pred, y_test_true, method = "pearson"), 3)
