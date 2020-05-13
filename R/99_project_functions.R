@@ -965,5 +965,5 @@ ANN_keras_func <- function(df, folderplot, folderdata, name, epochs, partitions,
   # Load the model (Note the use of the custom_objects argument)
   loaded_model = load_model_hdf5(filepath = model_save,
                                  custom_objects = list('pcc' = metric_pcc))
-  return("Done with keras")
+  return()
 }
