@@ -163,7 +163,7 @@ The score was normalized and summed to 1 for each postion.
 
 
 ## Discussion and model comparison for all four data sets 2
- * The ANN with keras was performed for all 4 data set  obtaining a really low accuracy for all of them. It was necessary to downsize the datasets, taking 1/4 of the sequence, in order to obtain a final model in each case.
+ * The ANN with keras was performed for all 4 data set obtaining a really low accuracy for all of them. It was necessary to downsize the datasets, taking 1/4 of the sequence, in order to obtain a final model in each case.
  * The models performance is not impressive. Most likely other model types such as gaussian process regression or more advanced neural networks might be needed.
  * None the less we were able to predict the missing variant for data set 4 using the glmnet regressor which we implemented in a shiny app.
 
@@ -171,7 +171,7 @@ The score was normalized and summed to 1 for each postion.
 ## Challenges
 * RStudio Cloud is limited in memory! We had a lot of crashes both with keras, ANN2 and glmnet in the cloud.
 * All modelling and predications of full scale data set are possible using a local RStudio installation using the idendicated libraries.
-* On ther other we had problem with local keras installations hence the need for ANN2 and glmnet.
+* On the other hand we had problem with local keras installations hence the need for ANN2 and glmnet.
  
 
 ## Conclusion
