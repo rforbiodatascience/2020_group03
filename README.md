@@ -12,16 +12,28 @@ The toolbox found in this repository contains an analysis and predictions tools 
 
 
 ### Workflow
-The prediction relies exclusively on the sequence of the protein. To do so, the workflow followed as well as the structure of the repository can be found below.
+The prediction relies exclusively on the sequence of the protein. To do so, the workflow of the toolbox can be found below.
 
 ![](https://github.com/rforbiodatascience/2020_group03/blob/master/doc/external_figures/flowchart.png)<!-- .element height="50%" width="50%" -->
 
-First each dataset is cleaned to get a "tidy" format where only the valuable data is kept. Then, the sequence strings are encoded to be computed on predictive models such as neural networks. For the encoding of the protein, the use of ten different matrices is implemented. Although, the user is free to use other matrices if the format matches the matrices found in this tool box.
+### Repository Structure
+the workflow of the toolbox can be found below.
 
+
+### Cleaning and sequence encoding
+
+First each dataset is cleaned to get a "tidy" format where only the valuable data is kept. Then, the sequence strings are edited to reduce the length the protein. The resulting string is encoded to be computed on predictive models such as neural networks. For the encoding of the protein, the use of ten different matrices is implemented. Although, the user is free to use other matrices if the format matches the matrices found in this tool box.
+
+
+### Predictive models
 Once the protein is encoded, three models are available to use; ANN2, ANN (keras) and an elastic net (gml2).
 
 ### Shiny App
 A shiny app has also been created to perform interactive peptide predictions. The url to the shiny app corresponds to the following link : https://felix-pacheco.shinyapps.io/peptide_score_predictor/
+
+The shiny App only runs for z-scales matrix on the elastic net models for all the proteins.
+
+This is due to technical reasons, the combination of four datasets, all the encoding options and the three possible models made it difficult to implement all the possible combinations.
 
 
 ## Installation
