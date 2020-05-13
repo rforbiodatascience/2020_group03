@@ -27,7 +27,7 @@ source(file = "./R/99_project_functions.R")
 # ------------------------------------------------------------------------------
 load(file = "./results/06_glmnet_data/06_glmnet_z_scales_data_set_4.RData")
 
-data = unknown_data_set_4
+data <- unknown_data_set_4
 
 # Get sequence window and truncate
 # ------------------------------------------------------------------------------
@@ -56,17 +56,17 @@ prediction <- tibble(prediction) %>%
   add_column(status = "unknown") %>%
   rename(score = prediction)
 
-
 comp <- prediction %>%
-  full_join(knowns, by="score") %>%
+  full_join(knowns, by = "score") %>%
   mutate(status = case_when(
     is.na(status.x) ~ status.y,
-    is.na(status.y) ~ status.x))
+    is.na(status.y) ~ status.x
+  ))
 
-density <- ggplot(comp, aes(score, color=status, fill=status)) +
-  geom_density(alpha=0.4) +
+density <- ggplot(comp, aes(score, color = status, fill = status)) +
+  geom_density(alpha = 0.4) +
   theme_classic() +
-  labs(x="Score", y="Density",title="Score density plot for known and unknown in data set 4") +
+  labs(x = "Score", y = "Density", title = "Score density plot for known and unknown in data set 4") +
   theme(
     legend.position = "bottom",
     panel.border = element_rect(colour = "black", fill = NA, size = 1),
@@ -75,4 +75,4 @@ density <- ggplot(comp, aes(score, color=status, fill=status)) +
     axis.text.y = element_text(face = "bold", color = "#000000")
   )
 
-ggsave(plot = density, "./results/07_predict/07_density_data_set_4.png", width = 12, height = 5, dpi=300)
+ggsave(plot = density, "./results/07_predict/07_density_data_set_4.png", width = 12, height = 5, dpi = 300)
