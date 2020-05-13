@@ -133,7 +133,7 @@ The score was normalized and summed to 1 for each postion.
 
 
 ## Prediction of unknown Pabl1 RRM2 variants with ElasticNet and z_scales
-![](../results/07_predict/07_density_data_set_4.png){width=100%}
+![](../results/07_predict/07_density_data_set_4.png){width=50%}
 
 
 
