@@ -50,7 +50,7 @@ The analysis tool can be used by running the ``00_doit.R`` file. The running can
 
 ## License
 
-MIT
+MIT, See [LICENSE](LICENSE)
 
 ## Data sources:
 
