@@ -75,4 +75,4 @@ density <- ggplot(comp, aes(score, color=status, fill=status)) +
     axis.text.y = element_text(face = "bold", color = "#000000")
   )
 
-ggsave(plot = density, "./results/07_predict/07_density_data_set_4.png", width = 7, height = 5, dpi=300)
+ggsave(plot = density, "./results/07_predict/07_density_data_set_4.png", width = 12, height = 5, dpi=300)

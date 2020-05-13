@@ -42,12 +42,27 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 ## Deep mutational scanning
-* Deep mutational scanning allows for assessing the functional consequences of up to hundreds of thousands of variants of a protein in a single experiment. It combines high-throughput DNA sequencingwith a selection in which a physical association is maintained between each protein variant and the DNA that encodes it. The sequence analysis provides the frequency of each variant in an input population and in a population after selection, with this ratio serving as a proxy for the function of each variant.
+* Deep mutational scanning allows for assessing the functional consequences of up to hundreds of thousands of variants of a protein in a single experiment.
+
+* It combines high-throughput DNA sequencing with a selection in which a physical association is maintained between each protein variant and the DNA that encodes it.
+
+* The sequence analysis provides the frequency of each variant in an input population and in a population after selection, with this ratio serving as a proxy for the function of each variant.
+
+
+## Methods - the data sets
+
+|            | Protein | Target                     | Biological activity    | Species         | Num of variants | Score                                                     |
+| ---------- | ------- | -------------------------- | ---------------------- | --------------- | --------------- | --------------------------------------------------------- |
+| Data set 1 | BRCA1   | BARD1 RING domain          | Ubiquitin E3 activity  | *H. sapiens*    | 5610            | Y2H assays                                                |
+| Data set 2 | ERK2    | Small molecule (SCH772984) | Resistance to drugs    | *H. sapiens*    | 6810            | Drug sensitivity assays. Calculation of cell availability |
+| Data set 3 | LDLRAP1 | OBFC1                      | Protein translation    | *H. sapiens*    | 6385            | Y2H assays                                                |
+| Data set 4 | Pab1    | el4FG1                     | Translation initiation | *S. cereviseae* | 1340            | Y2H assays                                                |
 
 
 ## This presentation
 * In this presentation we focus on a particular dataset; data set 4 concerning deep mutatagenesis of Pab1.
 * We did however run all four data sets through the pipeline to verify the generality of the workflow and to see if some amino acid decriptors are better than others depending on the protein function.
+
 
 
 ## Methods - packages used
@@ -61,14 +76,8 @@ knitr::opts_chunk$set(echo = FALSE)
 | Analysing                   | `stats`                                                    |
 | Modeling                    | `keras`,`neuralnet`, `caret`, `yardstick`, `glmnet`,`ANN2` |
 
-## Methods - the data sets
 
-|            | Protein | Target                     | Biological activity    | Species         | Num of variants | Score                                                     |
-| ---------- | ------- | -------------------------- | ---------------------- | --------------- | --------------- | --------------------------------------------------------- |
-| Data set 1 | BRCA1   | BARD1 RING domain          | Ubiquitin E3 activity  | *H. sapiens*    | 5610            | Y2H assays                                                |
-| Data set 2 | ERK2    | Small molecule (SCH772984) | Resistance to drugs    | *H. sapiens*    | 6810            | Drug sensitivity assays. Calculation of cell availability |
-| Data set 3 | LDLRAP1 | OBFC1                      | Protein translation    | *H. sapiens*    | 6385            | Y2H assays                                                |
-| Data set 4 | Pab1    | el4FG1                     | Translation initiation | *S. cereviseae* | 1340            | Y2H assays                                                |
+
 
 
 ## Score densities for Pab1 RRM2 domain variants
@@ -99,11 +108,6 @@ The score was normalized and summed to 1 for each postion.
 
 
 
-
-
-
-
-
 ## Machine learning toolbox
 
 * Supported machine learning framework:
@@ -124,11 +128,13 @@ The score was normalized and summed to 1 for each postion.
 | z5_scales | PCA of physicochemical properties                            |
 
 
-<<<<<<< HEAD
-## PCA scree plot goes here
+## Principal component analysis (PCA) showed around 200 components needed
+![](../results/05_PCA_plots/scree_plot_pca_4.png){width=100%}
+
 
 ## Artificial Neural Network with Keras
 ![](../results/06_ANN_plots/ann_keras_data_set_4.png){width=100%}
+
 
 ## Cross validation of a Pabl1 RRM2 glmnet model with z_scale
 <div class="columns-2">
@@ -138,23 +144,36 @@ The score was normalized and summed to 1 for each postion.
 </div>
 
 
-## Prediction of unknown Pabl1 RRM2 variants with ElasticNet and z_scales
-![](../results/07_predict/07_density_data_set_4.png){width=50%}
+## Prediction of unknown Pabl1 RRM2 variants with glmnet and z_scales
+![](../results/07_predict/07_density_data_set_4.png){width=95%}
 
 
 
-## Discussion and model comparison for all four data sets
+## Discussion and model comparison for all four data sets 1
+
 <div class="columns-2">
-* For all four data sets 4 we compared ANN and glmnet regression (ElasticNet) on two amino acid descriptor scales.
- *We found the model performance (meassured as RMSE) for the test sets to be comparable across both scales and regressor - except for data set 2 where ANN seemed to perform better than glmnet.
- * The ANN with keras was performed for 4 data sets obtaining a really low accuracy for all of them. It was necessary to downsize the datasets, taking 1/4 of the sequence, in order to obtain a final model in each case.
- * The models performance is not impressive. Most likely other model types such as gaussian process regression or more advanced neural networks might be needed.
- * None the less we were able to predict the missing variant for data set 4.
- 
-<p class="forceBreak"></p>
 
-</div
+* For all four data sets we compared ANN and glmnet regression (ElasticNet) on two amino acid descriptor scales; z_scales and blosum62.
+* We found the model performance (meassured as RMSE) for the test sets to be comparable across both scales and regressor - except for data set 2 where ANN seemed to perform better than glmnet.
+
+<p class="forceBreak"></p>
+![](../results/06_plots_model_summaries/06_RMSE_comparison_blosum62_z_scale.png){width=100%}
+</div>
+
+
+
+## Discussion and model comparison for all four data sets 2
+ * The ANN with keras was performed for all 4 data set  obtaining a really low accuracy for all of them. It was necessary to downsize the datasets, taking 1/4 of the sequence, in order to obtain a final model in each case.
+ * The models performance is not impressive. Most likely other model types such as gaussian process regression or more advanced neural networks might be needed.
+ * None the less we were able to predict the missing variant for data set 4 using the glmnet regressor which we implemented in a shiny app.
+
+
+## Challenges
+* RStudio Cloud is limited in memory! We had a lot of crashes both with keras, ANN2 and glmnet in the cloud.
+* All modelling and predications of full scale data set are possible using a local RStudio installation using the idendicated libraries.
+* On ther other we had problem with local keras installations hence the need for ANN2 and glmnet.
  
+
 ## Conclusion
  * Visualization of the raw data provided insights into the SAR of the 4 proteins.
  * We are able to find regions in the proteins which are both sensitive and insensitive to substitutions.
@@ -162,8 +181,6 @@ The score was normalized and summed to 1 for each postion.
  * Using machine learning based on amino acid descriptors we were able to generate predictive models
 
 
-=======
->>>>>>> 31db0e1a1d6297292f3906993a9ad53399a2495a
 ## References
 
 <div class="columns-2">
