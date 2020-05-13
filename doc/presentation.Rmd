@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = FALSE)
   - Project overview
   - Data
 * Results
-* Conclusion
+* Discussion
 
 ## Introduction
 Prediction of protein-protein interactions (PPI) are a challenging task. 
@@ -69,11 +69,11 @@ The aim of this project is to create a toolbox to predict the biological activit
    ![](../results/04_density_plots/density_residue_data_set_4.png){width=100%}
 </div>
 
-## Example dataset 4 - heatmap
+## Example data set 4 - heatmap
 ![](../results/04_heatmaps/heatmap_data_set_score_4.png){width=70%}
 ![](../results/04_sequence_logos/seq_logo_data_set_4.png){width=70%}
 
-## Example dataset 4 - conserved regions
+## Example data set 4 - conserved regions
 ![](../results/04_quick_SAR/quick_sar_data_set_4.png){width=100%}
 
 ## Machine learning toolbox
@@ -87,7 +87,7 @@ The aim of this project is to create a toolbox to predict the biological activit
 
 ## Results
 
-## Conclusion
+## Discussion
 
 ## Referencex
 
@@ -105,9 +105,7 @@ The aim of this project is to create a toolbox to predict the biological activit
 ### R script overview 1
 
 <div class="columns-2">
-  ```
-
-  ```
+![](../doc/external_figures/00_project_organisation.png){width=500px}
   <p class="forceBreak"></p>
   * 02_clean.R
     - Load: Load data from 01_load.R
@@ -115,15 +113,15 @@ The aim of this project is to create a toolbox to predict the biological activit
     - Save cleansed data in .tsv format
   * 03_augment.R
     - Load data from 02_clean.R
-    - Augment data: Calculate sequences, descriptors, properties
-    - Save augmente data in .tsv format
+    - Augment data: Calculate sequences, descriptors (pI, MW, Z-Scale)
+    - Save augmented data in .tsv format
 </div>
 
 ## Appendix   
 ### R script overview 2
 
 <div class="columns-2">
-
+![](../doc/external_figures/00_project_organisation.png){width=500px}
   <p class="forceBreak"></p>
   * 04_model_i.R
     - Load augmented data
@@ -136,10 +134,10 @@ The aim of this project is to create a toolbox to predict the biological activit
 ### R script overview 3
 
 <div class="columns-2">
-  ![](../doc/external_figures/project_organisation.png){width=500px}
+  ![](../doc/external_figures/00_project_organisation.png){width=500px}
   <p class="forceBreak"></p>
   * 99_proj_func.R
     - Sequence encoder
     - Sequence generator
-    - ...
+    - Plot functions
 </div>
