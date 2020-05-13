@@ -193,6 +193,7 @@ ggsave(plot = heatmap_data_set_score_g_3, "./results/04_heatmaps/heatmap_data_se
 ggsave(plot = heatmap_data_set_score_g_4, "./results/04_heatmaps/heatmap_data_set_score_g_4.png",width = 10, height = 3, dpi=300)
 
 
+
 # Generate density plots
 # ------------------------------------------------------------------------------
 density_data_set_1 <- density_plot(data_set_1, title="Score density plot for Data Set 1")
@@ -220,6 +221,23 @@ ggsave(plot = density_residue_data_set_1, "./results/04_density_plots/density_re
 ggsave(plot = density_residue_data_set_2, "./results/04_density_plots/density_residue_data_set_2.png", width = 7, height = 6.25, dpi=300)
 ggsave(plot = density_residue_data_set_3, "./results/04_density_plots/density_residue_data_set_3.png", width = 7, height = 6.25, dpi=300)
 ggsave(plot = density_residue_data_set_4, "./results/04_density_plots/density_residue_data_set_4.png", width = 7, height = 6.25, dpi=300)
+
+
+
+# Make sequence logo plots
+# ------------------------------------------------------------------------------
+seq_logo_data_set_1 <- sequence_logo(data_set_1, start_position = 40, end_position = 80)
+seq_logo_data_set_2 <- sequence_logo(data_set_1, start_position = 40, end_position = 80)
+seq_logo_data_set_3 <- sequence_logo(data_set_1, start_position = 110, end_position = 150)
+seq_logo_data_set_4 <- sequence_logo(data_set_1, start_position = 135, end_position = 185)
+
+# Save sequence logos
+# ------------------------------------------------------------------------------
+ggsave(plot = seq_logo_data_set_1, "./results/04_sequence_logos/seq_logo_data_set_1.png",width = 10, height = 3, dpi=300)
+ggsave(plot = seq_logo_data_set_2, "./results/04_sequence_logos/seq_logo_data_set_2.png",width = 10, height = 3, dpi=300)
+ggsave(plot = seq_logo_data_set_3, "./results/04_sequence_logos/seq_logo_data_set_3.png",width = 10, height = 3, dpi=300)
+ggsave(plot = seq_logo_data_set_4, "./results/04_sequence_logos/seq_logo_data_set_4.png",width = 10, height = 3, dpi=300)
+
 
 
 # Drop NA for the next plot

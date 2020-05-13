@@ -137,17 +137,10 @@ plot_lm <- ggplot(train_df, aes(x = X1, y = activity, color = activity) ) +
   )
 
 # Save plot
-<<<<<<< HEAD
-ggsave(plot = plot_lm, "./results/06_ann/linear_regression_data_set_4.png")
-
-# Save model
-save(model, file="./results/06_ann/linear_regression_data_set_4.Rdata")
-=======
 ggsave(plot = plot_lm, "./results/06_ANN_plots/prelm_data_set_4.png")
 
 # Save model
 save(model, file="./results/06_ANN_data/prelm_data_set_4.Rdata")
->>>>>>> 426fe94df338df0b72d0cf403eed77bc6634029e
 
 # Set hyperparameters
 n_epochs      = 10
@@ -237,29 +230,15 @@ ann_keras_data_set_4 <- d_perf %>%
   facet_wrap(~partition) +
   theme_bw()
 
-<<<<<<< HEAD
-ggsave(plot = ann_keras_data_set_4, "./results/06_ann/ann_keras_data_set_4.png")
 
-# Save model
-# ------------------------------------------------------------------------------
-
-save_model_hdf5(object = model,
-                filepath = "./results/06_ann/ann_keras_ds4.h5")
-
-# Load the model (Note the use of the custom_objects argument)
-loaded_model = load_model_hdf5(filepath = './results/06_ann/ann_keras_ds4.h5',
-=======
 ggsave(plot = ann_keras_data_set_4, "./results/06_ANN_plot/ann_keras_data_set_4.png")
 
 # Save model
 # ------------------------------------------------------------------------------
-#save_model_tf(object = model, filepath = "./results/06_ANN_data/ann_keras_ds4.h5")
-#tf.keras.models.save_model(model, "model_name")
 
 save_model_hdf5(object = model,
                 filepath = "./results/06_ANN_data/ann_keras_ds4.h5")
 
 # Load the model (Note the use of the custom_objects argument)
 loaded_model = load_model_hdf5(filepath = './results/06_ANN_data/ann_keras_ds4.h5',
->>>>>>> 426fe94df338df0b72d0cf403eed77bc6634029e
                                custom_objects = list('pcc' = metric_pcc))
