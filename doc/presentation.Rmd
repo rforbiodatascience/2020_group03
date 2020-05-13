@@ -144,10 +144,12 @@ The score was normalized and summed to 1 for each postion.
 
 ## Discussion and model comparison for all four data sets
 <div class="columns-2">
-* For all four data sets 4 we compared ANN and glmnet regression (ElasticNet) on two amino acid descriptir scales.
+* For all four data sets 4 we compared ANN and glmnet regression (ElasticNet) on two amino acid descriptor scales.
  *We found the model performance (meassured as RMSE) for the test sets to be comparable across both scales and regressor - except for data set 2 where ANN seemed to perform better than glmnet.
- * The model performance is not impressive. Most likely other model types such as gaussian process regession or more advanced neural networks might be needed.
+ * The ANN with keras was performed for 4 data sets obtaining a really low accuracy for all of them. It was necessary to downsize the datasets, taking 1/4 of the sequence, in order to obtain a final model in each case.
+ * The models performance is not impressive. Most likely other model types such as gaussian process regression or more advanced neural networks might be needed.
  * None the less we were able to predict the missing variant for data set 4.
+ 
 <p class="forceBreak"></p>
 
 </div
