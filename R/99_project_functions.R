@@ -175,9 +175,9 @@ zscale2col <- function(df, zscales) {
 #' 
 #'
 #' @param df, tibble with columns score, mutation_position, mutation info
-#' @param x,
-#' @param y,
-#' @param fill,
+#' @param x, x axis of the heatmap
+#' @param y, y axis of the heatmap
+#' @param fill, numerical variable
 #'   
 #' @return heatmap object
 #'
@@ -206,11 +206,11 @@ heatmap <- function(df, x="mutation_position", y="mutation", fill="pI") {
 #' 
 #'
 #' @param df, tibble with columns score, mutation_position, mutation info
-#' @param threshold, cutoff of scoring
+#' @param threshold, numeric cutoff of scoring
 #'   
-#' @return heatmap object
+#' @return distribution object
 #'
-#' @examples heatmap_score(df, threshold)
+#' @examples score_distribution(df, threshold)
 score_distribution <- function(df, threshold) {
   distribution <- df %>%
     group_by(mutation) %>%
