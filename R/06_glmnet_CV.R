@@ -8,7 +8,7 @@ library("tidyverse")
 library("glmnet")
 library("caret")
 library("UniprotR")
-
+library("broom")
 
 # Define functions
 # ------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ glmnet_CV(
   df = data_set_4,
   name = "data_set_4",
   folder = folder,
-  scale = "z_scales",
+  scale = "blosum62",
   train_size = 0.75,
   seed_value = 42,
   alpha_ = 0.2)

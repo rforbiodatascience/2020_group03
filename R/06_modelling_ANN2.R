@@ -27,7 +27,7 @@ data_set_4 <- read_tsv(file = "./data/03_aug_data_set_4.tsv")
 
 # Hello from ANN2 and set folder
 # ------------------------------------------------------------------------------
-folder = "./results/06_ann/06"
+folder = "./results/06_ANN"
 print('06_modelling_ANN2.R...')
 
 

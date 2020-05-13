@@ -459,9 +459,9 @@ ANN2 <- function(df, folder, name, epochs, hidden_layers,
   print(name)
   print(scale)
   
-  graph_filename = paste(folder,"_ann_corr_",scale,"_",name,".png", sep="")
-  obj_filename = paste(folder,"_ann_",scale,"_",name,".RData", sep="")
-  RMSE_filename = paste(folder,"_ann_RMSE_",scale,"_",name,".tsv", sep="")
+  graph_filename = paste(folder,"_plots/06_ann_corr_",scale,"_",name,".png", sep="")
+  obj_filename = paste(folder,"_data/06_ann_",scale,"_",name,".RData", sep="")
+  RMSE_filename = paste(folder,"_data/06_ann_RMSE_",scale,"_",name,".tsv", sep="")
   
   data <- df
   
@@ -555,7 +555,7 @@ glmnet_reg <- function (df, folder, name, alpha_, s_,
   
   graph_filename = paste(folder,"_plots/06_glmnet_corr_",scale,"_",name,".png", sep="")
   obj_filename = paste(folder,"_data/06_glmnet_",scale,"_",name,".Rdata", sep="")
-  RMSE_filename = paste(folder,"_data/_06_glmnet_RMSE_",scale,"_",name,".tsv", sep="")
+  RMSE_filename = paste(folder,"_data/06_glmnet_RMSE_",scale,"_",name,".tsv", sep="")
   
   data <- df
 
