@@ -1,2 +1,2 @@
 .metric	.estimator	.estimate	dataset	model	scale
-rmse	standard	0.5550062775724877	data_set_1	ANN	blosum62
+rmse	standard	0.5480290962392131	data_set_1	ANN	blosum62

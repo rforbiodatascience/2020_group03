@@ -1,7 +1,5 @@
 # 00_do_it.R
 # ------------------------------------------------------------------------------
-
-
 # Install packages ONLY if needed
 # ------------------------------------------------------------------------------
 # install.packages("tidyverse")
@@ -9,6 +7,11 @@
 # install.packages("UniprotR")
 # install.packages("devtools")
 # install.packages('neuralnet')
+# install.packages('glmnet')
+# install.packages('caret')
+# install.packages('neuralnet')
+# install.packages('yardstick')
+#  install.packages('ANN2')
 # library("devtools")
 # install_github("rstudio/keras")
 # 
@@ -21,15 +24,15 @@ install_keras(tensorflow = "1.13.1")
 # ------------------------------------------------------------------------------
 source(file = "./R/01_load.R")
 source(file = "./R/02_clean.R")
+source(file = "./R/02_get_unknowns.R")
 source(file = "./R/03_augment.R")
-source(file = "./R/04_heatmaps.R")
-source(file = "./R/04_quicksar.R")
-source(file = "./R/04_density_plots.R")
-#source(file = "./R/04_glmnet_CV_data_set_1.R") # be aware lengthy process
-#source(file = "./R/04_glmnet_CV_data_set_2.R") # be aware lengthy process
-#source(file = "./R/04_glmnet_CV_data_set_3.R") # be aware lengthy process
-#source(file = "./R/04_glmnet_CV_data_set_4.R") # be aware lengthy process
-#source(file = "./R/04_glmnet_data_set_1.R")
-#source(file = "./R/04_glmnet_data_set_2.R")
-#source(file = "./R/04_glmnet_data_set_3.R")
-#source(file = "./R/04_glmnet_data_set_4.R")
+source(file = "./R/03_get_unknowns.R")
+source(file = "./R/04_data_visualization.R")
+source(file = "./R/05_PCA.R") 
+source(file = "./R/06_modelling_ANN_keras.R") # be aware lengthy process
+source(file = "./R/06_modelling_ANN2.R")      # be aware lengthy process
+source(file = "./R/06_modelling_glmnet.R")    # be aware lengthy process
+source(file = "./R/06_glmnet_CV.R")           # be aware lengthy process
+source(file = "./R/06_get_unkowns.R") 
+source(file = "./R/06_model_summary_both.R")  # be aware lengthy process
+source(file = "./R/07_predict.R") 
