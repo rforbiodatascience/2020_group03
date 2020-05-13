@@ -663,8 +663,8 @@ glmnet_CV <- function (df, name, folder, scale, train_size, seed_value, alpha_) 
   print(name)
   print(scale)
   
-  graph_filename = paste(folder,"_plots/glmnet_CV_",scale,"_",name,".png", sep="")
-  CV_filename = paste(folder,"_data/glmnet_CV_",scale,"_",name,".tsv", sep="")
+  graph_filename = paste(folder,"_plots/06_glmnet_CV_",scale,"_",name,".png", sep="")
+  CV_filename = paste(folder,"_data/06_glmnet_CV_",scale,"_",name,".tsv", sep="")
   
   data <- df
 
