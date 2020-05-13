@@ -31,25 +31,18 @@ Once the protein is encoded, three models are available to use; ANN2, ANN (keras
 ### Shiny App
 A shiny app has also been created to perform interactive peptide predictions. The url to the shiny app corresponds to the following link : https://felix-pacheco.shinyapps.io/peptide_score_predictor/
 
-The shiny App only runs for z-scales matrix on the elastic net models for all the proteins.
+The shiny App only runs for z-scales matrix on the elastic net models for all the proteins. This is due to technical reasons, every prediction relies on the computation of a predictive model. The combination of four datasets, all the encoding options and the three possible models made it difficult to implement all the possible combinations of predictive models.
 
-This is due to technical reasons, the combination of four datasets, all the encoding options and the three possible models made it difficult to implement all the possible combinations. It must be noted that, for the prediction, the string has to be the same length as the sequence used to train the model.
-
-Example sequence for Pab1 prediction: ANLHPDIDNKALYDTFSVFGDLLSSKIATDENGKSKGFGFVHFEEEGAAKEAIDALNGMLLNGQEIY
-
+Example sequence for Pab1 prediction: "ANLHPDIDNKALYDTFSVFGDLLSSKIATDENGKSKGFGFVHFEEEGAAKEAIDALNGMLLNGQEIY"
+It must be noted that, for the prediction, the string has to be the same length as the sequence used to train the model.
 
 ## Installation
 
 
+
 ## Usage 
 
-
-Describe usage of the analysis scripts
-
-
-## Contributing
-
-
+The analysis tool can be used by running the 00_doit.R file. The running can be customized by the user, e.g to only run one model.
 
 ## License
 
@@ -62,17 +55,17 @@ MIT
 ## Data sources:
 
 #### Data set 1 : BRCA1
-* data_set_1 ref: https://doi.org/10.1534/genetics.115.175802
+* reference: https://doi.org/10.1534/genetics.115.175802
 
 
 #### Data set 2 : ERK2
-* data_set_2 ref: https://doi.org/10.1016/j.celrep.2016.09.061
+* reference: https://doi.org/10.1016/j.celrep.2016.09.061
 
 
 #### Data set 3 : DLRAP1
-* data_set_3 ref: https://www.mavedb.org/scoreset/urn:mavedb:00000036-a-1/
+* reference: https://www.mavedb.org/scoreset/urn:mavedb:00000036-a-1/
 
 
 #### Data set 4 : Pab1.
-* data_set_4 ref: https://doi.org/10.1371/journal.pgen.1004918
+* reference: https://doi.org/10.1371/journal.pgen.1004918
 
