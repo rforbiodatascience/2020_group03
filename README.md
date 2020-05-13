@@ -4,6 +4,42 @@
 ### Group 03 - Begoña Bolós, Jakob Kofoed, Felix Pacheco and Laura Sans
 In this toolbox we explored, analyzed and modelled four different deep mutational scanning studies.
 
+
+## Description
+
+The toolbox found in this repository contains an analysis and predictions tools on four different mutational scanning studies. The aim of this tool box is to predict the activity of a given sequence with or without mutations. The analysis and models proposed, predict the score of the given proteins : BRCA1, ERK2, DLRAP1 and Pab1.
+
+The prediction relies exclusively on the sequence of the protein. To do so, the workflow followed as well as the structure of the repository can be found below.
+
+
+First each dataset is cleaned to get a "tidy" format where only the valuable data is kept. Then, the sequence strings are encoded to be computed on predictive models such as neural networks. For the encoding of the protein, the use of ten different matrices is implemented. Although, the user is free to use other matrices if the format matches the matrices found in this tool box.
+
+Once the protein is encoded, three models are available to use; ANN2, ANN (keras) and an elastic net (gml2).
+
+A shiny app has also been created to perform interactive peptide predictions. The url to the shiny app corresponds to the following link : https://felix-pacheco.shinyapps.io/peptide_score_predictor/
+
+
+## Installation
+
+
+## Usage 
+
+
+Describe usage of the analysis scripts
+
+
+## Contributing
+
+
+
+## License
+
+MIT
+
+
+
+
+
 ### Data sources:
 
 ### Data set 1
