@@ -227,9 +227,9 @@ ggsave(plot = density_residue_data_set_4, "./results/04_density_plots/density_re
 # Make sequence logo plots
 # ------------------------------------------------------------------------------
 seq_logo_data_set_1 <- sequence_logo(data_set_1, start_position = 40, end_position = 80)
-seq_logo_data_set_2 <- sequence_logo(data_set_1, start_position = 40, end_position = 80)
-seq_logo_data_set_3 <- sequence_logo(data_set_1, start_position = 110, end_position = 150)
-seq_logo_data_set_4 <- sequence_logo(data_set_1, start_position = 135, end_position = 185)
+seq_logo_data_set_2 <- sequence_logo(data_set_2, start_position = 40, end_position = 80)
+seq_logo_data_set_3 <- sequence_logo(data_set_3, start_position = 110, end_position = 150)
+seq_logo_data_set_4 <- sequence_logo(data_set_4, start_position = 135, end_position = 185)
 
 # Save sequence logos
 # ------------------------------------------------------------------------------
