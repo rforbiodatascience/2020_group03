@@ -737,3 +737,233 @@ glmnet_CV <- function (df, name, folder, scale, train_size, seed_value, alpha_) 
   
   return() # clould return something
 }
+
+ANN_keras_func <- function(df, folderplot, folderdata, name, epochs, partitions,
+                scale, batch_size, learning_rate){
+  
+  # Wrangle data
+  # ------------------------------------------------------------------------------
+  data_set <- df %>%
+    mutate(variant = case_when(variant=="NA-NA" ~ "D2D",
+                               !variant=="NA-NA" ~ variant))
+  
+  data_set %>% glimpse()
+  
+  # we will make the model with the mutations 
+  
+  max_value <- data_set %>% 
+    summarise(max = max(mutation_position)) %>% 
+    as.integer()
+  
+  if(max_value > 60){
+    data_rwos <- data_set %>%
+      #filter(mutation_position < (max_value/3)*2 & mutation_position > (max_value/3)) %>%
+      mutate(peptide = substr(sequence, (max_value/4), (max_value/4)*2))  %>%
+      mutate(len = str_length(peptide))
+    
+    data <- data_rwos %>% 
+      rename(
+        activity = score,
+      ) %>%  select(c(2,7))
+  } else {
+    data <- data_set %>% 
+      rename(
+        peptide = sequence,
+        activity = score,
+      ) %>%  select(c(2,6))
+  }
+  
+  # Add new columns (encoding)
+  # change
+  encoded_seq <- data %>%
+    pull(peptide) %>% 
+    encode_peptide(m = scale)
+  
+  nrow <- dim(encoded_seq)[1]
+  # The ouput of encode_peptide function is a matrix, we need to convert it to a dataframe
+  df_encoded_seq <- data.frame(matrix(unlist(encoded_seq), nrow=nrow, byrow=T),stringsAsFactors=FALSE)
+  
+  # To add the activity
+  df_encoded_seq$activity <- data$activity
+  
+  
+  # Model data
+  # ------------------------------------------------------------------------------
+  
+  ## ANN
+  # Example of custom metric, here pearson's correlation coefficient, i.e.
+  # equivalent to cor(x, y, method = "pearson"), but note how we need to use the
+  # keras (tensorflow) methods 'k_*'
+  metric_pcc = custom_metric("pcc", function(y_true, y_pred) {
+    mu_y_true = k_mean(y_true)
+    mu_y_pred = k_mean(y_pred)
+    r = k_sum( (y_true - mu_y_true) * (y_pred - mu_y_pred) ) /
+      ( k_sqrt(k_sum( k_square(y_true - mu_y_true) )) *
+          k_sqrt(k_sum( k_square(y_pred - mu_y_pred) )) )
+    return(r)
+  })
+  
+  # Set nn data and test/training partitions
+  test_f <- partitions
+  nn_dat = df_encoded_seq %>%
+    filter_all(all_vars(. != 0)) %>% 
+    mutate_if(is.ordered, as.numeric) %>% 
+    mutate(partition = sample(x = c('test', 'train'),
+                              size = nrow(.),
+                              replace = TRUE,
+                              prob = c(test_f, 1 - test_f)))
+  # as we are going to predict activity (y) we need to exclude it from X_train and X_test
+  # Set training data
+  X_train = nn_dat %>%
+    filter(partition == "train") %>%
+    select(-activity, -partition) %>%
+    as.matrix
+  y_train = nn_dat %>%
+    filter(partition == "train") %>%
+    pull(activity)
+  
+  # Set test data
+  X_test = nn_dat %>%
+    filter(partition == "test") %>%
+    select(-activity, -partition) %>%
+    as.matrix
+  y_test = nn_dat %>%
+    filter(partition == "test") %>%
+    pull(activity)
+  
+  # Linear model with partitions
+  train_df = nn_dat %>%
+    filter(partition == "train") %>%
+    select(-partition)
+  X_test_df = nn_dat %>%
+    filter(partition == "test") %>%
+    select(-activity, -partition)
+  
+  # internal linear model
+  model <- lm(activity ~., data = train_df)
+  par(mfrow = c(2, 2))  # Split the plotting panel into a 2 x 2 grid
+  p <-plot(model)
+  sumars <- summary(model)
+  y_pred <- predict(model, X_test_df)
+  
+  # plot
+  plot_lm <- ggplot(train_df, aes(x = X1, y = activity, color = activity) ) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE) +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(colour = "black", fill = NA, size = 1),
+      axis.line = element_line(colour = "black", size = 0),
+      axis.text.x = element_text(face = "bold", color = "#000000"),
+      axis.text.y = element_text(face = "bold", color = "#000000")
+    )
+  
+  plot_save = paste(folderplot,"prelm_",name,".png", sep="")
+  model_save = paste(folderdata,"prelm_",name,".Rdata", sep="")
+  
+  # Save plot
+  ggsave(plot = plot_lm, file = plot_save)
+  
+  # Save model
+  save(model, file = model_save)
+  
+  ## ANN
+  # Set hyperparameters
+  n_epochs      = epochs
+  batch_size    = batch_size
+  loss          = 'mean_squared_error'
+  learning_rate = learning_rate
+  optimzer      = optimizer_adam(lr = learning_rate)
+  h1_activation = 'relu'
+  h1_n_hidden   = 2
+  h2_activation = 'relu'
+  h2_n_hidden   = 2
+  h3_activation = 'relu'
+  h3_n_hidden   = 2
+  o_activation  = 'linear'
+  
+  # Set architecture
+  model_ann = keras_model_sequential() %>% 
+    layer_dense(units = h1_n_hidden,
+                activation = h1_activation,
+                input_shape = ncol(X_train)) %>%
+    layer_dense(units = h2_n_hidden,
+                activation = h2_activation) %>% 
+    layer_dense(units = h3_n_hidden,
+                activation = h3_activation) %>% 
+    layer_dense(units = 1,
+                activation = o_activation)
+  
+  # Compile model
+  model_ann %>% compile(
+    loss      = loss,
+    optimizer = optimzer,
+    metrics   = metric_pcc # Note the custom metric here
+  )
+  
+  
+  # View model
+  model_ann %>% summary %>% print
+  
+  # Train model
+  # ------------------------------------------------------------------------------
+  
+  # Fit model on training data
+  history = model_ann %>%
+    fit(x = X_train,
+        y = y_train,
+        epochs = n_epochs,
+        batch_size = batch_size,
+        validation_split = 0
+    )
+  
+  # Evaluate model
+  # ------------------------------------------------------------------------------
+  # Calculate performance on test data with pearson 
+  y_test_true = y_test
+  y_test_pred = model_ann %>% predict(X_test) %>% as.vector
+  pcc_test = round(cor(y_test_pred, y_test_true, method = "pearson"), 3)
+  
+  # Calculate performance on training data
+  y_train_true = y_train
+  y_train_pred = model_ann %>% predict(X_train) %>% as.vector
+  pcc_train = round(cor(y_train_pred, y_train_true, method = "pearson"), 3)
+  
+  # Compile data for plotting
+  d_perf = bind_rows(tibble(y_pred = y_test_pred,
+                            y_true = y_test_true,
+                            partition = 'test'),
+                     tibble(y_pred = y_train_pred,
+                            y_true = y_train_true,
+                            partition = 'train'))
+  
+  # Visualise performance
+  # ------------------------------------------------------------------------------
+  title = "Performance of ANN Regression model"
+  sub_title = paste0("Test PCC = ", pcc_test, ", training PCC = ", pcc_train, ".")
+  plot_keras <- d_perf %>%
+    ggplot(aes(x = y_pred, y = y_true)) +
+    geom_point() +
+    geom_abline(intercept = 0, slope = 1, linetype = 'dashed') +
+    ggtitle(label = title, subtitle = sub_title) +
+    xlab("Predicted Activity") +
+    ylab("Actual Activity") +
+    facet_wrap(~partition) +
+    theme_bw()
+  
+  plot_save = paste(folderplot,"ann_keras_",name,".png", sep="")
+  model_save = paste(folderdata,"ann_keras_",name,".h5", sep="")
+  
+  ggsave(plot = plot_keras, file= plot_save)
+  
+  # Save model
+  # ------------------------------------------------------------------------------
+  
+  save_model_hdf5(object = model,
+                  filepath = model_save)
+  
+  # Load the model (Note the use of the custom_objects argument)
+  loaded_model = load_model_hdf5(filepath = model_save,
+                                 custom_objects = list('pcc' = metric_pcc))
+  return("Done with keras")
+}
