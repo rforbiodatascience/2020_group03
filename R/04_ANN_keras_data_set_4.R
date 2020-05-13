@@ -231,7 +231,7 @@ ann_keras_data_set_4 <- d_perf %>%
   theme_bw()
 
 
-ggsave(plot = ann_keras_data_set_4, "./results/06_ANN_plot/ann_keras_data_set_4.png")
+ggsave(plot = ann_keras_data_set_4, "./results/06_ANN_plots/ann_keras_data_set_4.png")
 
 # Save model
 # ------------------------------------------------------------------------------
