@@ -728,12 +728,13 @@ glmnet_CV <- function (df, name, folder, scale, train_size, seed_value, alpha_) 
   mutate(log_lambda = log10(lambda))
   
   
-  CV_plot <- ggplot(CV_results, aes(x=log_lambda, y=estimate)) +
+  CV_plot <- ggplot(CV_results, aes(x=log_lambda, y=estimate, color = "MSE")) +
   geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
   geom_point() +
   theme_classic() +
   labs(x = "log(lambda)", y = "MSE", title = "Cross validation of ElasticNet model") +
   theme(
+    legend.position = "bottom",
     panel.border = element_rect(colour = "black", fill = NA, size = 1),
     axis.line = element_line(colour = "black", size = 0),
     axis.text.x = element_text(face = "bold", color = "#000000"),
