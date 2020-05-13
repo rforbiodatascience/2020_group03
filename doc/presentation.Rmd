@@ -6,39 +6,47 @@ date: "Spring 2020"
 output:
   ioslides_presentation:
     widescreen: true
-    smaller: true
     css: ./css/style.css
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
-## Content
-
-* Introduction
-* Methods
-  - Project overview
-  - Data
+## Content of this presentation
+* Introduction to the project
+* Project overview
+* Methods used
 * Results
 * Discussion
+* Conclusion
 
 ## Introduction
-Prediction of protein-protein interactions (PPI) are a challenging task. 
-
-ML models allow to exploit the content of these PPI data sets. 
-
-The aim of this project is to create a toolbox to predict the biological activity of these peptides with machine learning models. 
-
-* Features:
+* Prediction of protein-protein interactions (PPI) are a challenging task. 
+* ML models allow to exploit the content of these PPI data sets. 
+* The aim of this project is to create a toolbox to predict the biological activity of these peptides with machine learning models. 
+* Features of the toolbox:
   - Support for both sequence or variant input.
   - Support for several sequence encoders.
   - Support for several models.
   - Visualization options.
-  
+
+
+## Project workflow
+
+
 ## Project overview {.centered}
 [Visit our Github repository](https://github.com/rforbiodatascience/2020_group03)
-
 ![](../doc/external_figures/00_project_organisation.png){width=75%}
+
+
+## Deep mutational scanning
+* Deep mutational scanning allows for assessing the functional consequences of up to hundreds of thousands of variants of a protein in a single experiment. It combines high-throughput DNA sequencingwith a selection in which a physical association is maintained between each protein variant and the DNA that encodes it. The sequence analysis provides the frequency of each variant in an input population and in a population after selection, with this ratio serving as a proxy for the function of each variant.
+
+
+## This presentation
+* In this presentation we focus on a particular dataset; data set 4 concerning deep mutatagenesis of Pab1.
+* We did however run all four data sets through the pipeline to verify the generality of the workflow and to see if some amino acid decriptors are better than others depending on the protein function.
+
 
 ## Methods - packages used
 | Function                    | Library                                                    |
@@ -60,36 +68,93 @@ The aim of this project is to create a toolbox to predict the biological activit
 | Data set 3 | LDLRAP1 | OBFC1                      | Protein translation    | *H. sapiens*    | 6385            | Y2H assays                                                |
 | Data set 4 | Pab1    | el4FG1                     | Translation initiation | *S. cereviseae* | 1340            | Y2H assays                                                |
 
-## Example data set 4 - data overview
 
+## Score densities for Pab1 RRM2 domain variants
 <div class="columns-2">
- ![](../results/04_density_plots/density_data_set_4.png){width=100%}
-  <p class="forceBreak">
-     </p>
-   ![](../results/04_density_plots/density_residue_data_set_4.png){width=100%}
+![](../results/04_density_plots/density_data_set_4.png){width=100%}
+<p class="forceBreak"></p>
+![](../results/04_density_plots/density_residue_data_set_4.png){width=100%}
 </div>
 
-## Example data set 4 - heatmap
-![](../results/04_heatmaps/heatmap_data_set_score_4.png){width=70%}
-![](../results/04_sequence_logos/seq_logo_data_set_4.png){width=70%}
 
-## Example data set 4 - conserved regions
+## Residues allowed in Pabl1 RRM2 domain
+An amino acid was counted as active if score >0.
+
 ![](../results/04_quick_SAR/quick_sar_data_set_4.png){width=100%}
+
+
+## Heatmap of Pabl1 RRM2 domain variant scores
+The scoring scale was truncated to between -2...2.
+
+![](../results/04_heatmaps/heatmap_data_set_score_4.png){width=100%}
+
+
+## Sequence logo of Pabl1 RRM2 domain(135-185) variant scores
+The score was normalized and summed to 1 for each postion.
+
+![](../results/04_sequence_logos/seq_logo_data_set_4.png){width=100%}
+
+
+
+
+
+
+
+
 
 ## Machine learning toolbox
 
-* Ideas for supported machine learning framework:
+* Supported machine learning framework:
 
-  - Gaussian Process Regression.
-  - Artificial Neutral Network.
-  - ElasticNet Regression.
+  - Artificial Neutral Network (ANN) regression.
+  - Regularized linear regression.
+
+## Amino acid encoding
+
+* In order to present the protein sequences to the ML framework we used amino acids descriptors.
+ * Each amino acid residue is converted to a vector and each protein as concatenation of vectors to yield a highly dimentional vector representation.
+ * The following amino acid scales are available:
+ 
+| Scale(s)  | Description of scale                                         |
+| -------- | ------------------------------------------------------------ |
+| blosum45,50,62,80,90 | Substitution matrix based on VARIMAX analysis of physicochemical properties |
+| pam30,70,250    | Substitution matrix based on observed mutations in phylogenetic trees |
+| z5_scales | PCA of physicochemical properties                            |
 
 
-## Results
+## PCA scree plot goes here
 
-## Discussion
+## Cross validation of a Pabl1 RRM2 glmnet model with z_scale
+<div class="columns-2">
+![](../results/06_glmnet_plots/06_glmnet_corr_z_scales_data_set_4.png){width=100%}
+<p class="forceBreak"></p>
+![](../results/06_glmnet_plots/06_glmnet_CV_z_scales_data_set_4.png){width=100%}
+</div>
 
-## Referencex
+
+## Prediction of unknown Pabl1 RRM2 variants with ElasticNet and z_scales
+![](../results/07_predict/07_density_data_set_4.png){width=100%}
+
+
+
+## Discussion and model comparison for all four data sets
+<div class="columns-2">
+* For all four data sets 4 we compared ANN and glmnet regression (ElasticNet) on two amino acid descriptir scales.
+ *We found the model performance (meassured as RMSE) for the test sets to be comparable across both scales and regressor - except for data set 2 where ANN seemed to perform better than glmnet.
+ * The model performance is not impressive. Most likely other model types such as gaussian process regession or more advanced neural networks might be needed.
+ * None the less we were able to predict the missing variant for data set 4.
+<p class="forceBreak"></p>
+
+</div
+ 
+## Conclusion
+ * Visualization of the raw data provided insights into the SAR of the 4 proteins.
+ * We are able to find regions in the proteins which are both sensitive and insensitive to substitutions.
+ * The heatmap shows quite that a substantial part of the C-terminal region studied was not very well covered in the scanning.
+ * Using machine learning based on amino acid descriptors we were able to generate predictive models
+
+
+## References
 
 <div class="columns-2">
   ![](../doc/external_figures/file.png){width=300px}
@@ -100,6 +165,53 @@ The aim of this project is to create a toolbox to predict the biological activit
   * <font size="3">**Data set 3**: A deep mutational scan of LDLRAP1 based on a Y2H assay with the interactor OBFC1. [https://www.mavedb.org/scoreset/urn:mavedb:00000036-a-1/]   </font>
   * <font size="3">**Data set 4**: D. Melamed, D. L. Young, et al. *Combining natural sequence variation withhigh throughput mutational data to reveal protein interaction sites*. PLOS Genetics, vol. 11, no. 2,pp. 1–21, 2015.  </font>
 </div>
+
+## References
+ * Amino acid substition matrices: https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/data/
+ 
+ * z_scales:
+
+
+
+## Score density collection
+<div class="columns-2">
+![](../results/04_density_plots/density_data_set_1.png){width=70%}
+![](../results/04_density_plots/density_data_set_2.png){width=70%}
+<p class="forceBreak"></p>
+![](../results/04_density_plots/density_data_set_3.png){width=70%}
+![](../results/04_density_plots/density_data_set_4.png){width=70%}
+</div>
+
+
+## Heatmap collection
+<div class="columns-2">
+![](../results/04_heatmaps/heatmap_data_set_score_1.png){width=100%}
+![](../results/04_heatmaps/heatmap_data_set_score_2.png){width=100%}
+<p class="forceBreak"></p>
+![](../results/04_heatmaps/heatmap_data_set_score_3.png){width=100%}
+![](../results/04_heatmaps/heatmap_data_set_score_4.png){width=100%}
+</div>
+
+
+## Sequence logo collection
+<div class="columns-2">
+![](../results/04_sequence_logos/seq_logo_data_set_1.png){width=100%}
+![](../results/04_sequence_logos/seq_logo_data_set_2.png){width=100%}
+<p class="forceBreak"></p>
+![](../results/04_sequence_logos/seq_logo_data_set_3.png){width=100%}
+![](../results/04_sequence_logos/seq_logo_data_set_4.png){width=100%}
+</div>
+
+
+## Residues allowed collection
+<div class="columns-2">
+![](../results/04_quick_SAR/quick_sar_data_set_1.png){width=100%}
+![](../results/04_quick_SAR/quick_sar_data_set_2.png){width=100%}
+<p class="forceBreak"></p>
+![](../results/04_quick_SAR/quick_sar_data_set_3.png){width=100%}
+![](../results/04_quick_SAR/quick_sar_data_set_4.png){width=100%}
+</div>
+
 
 ## Appendix
 ### R script overview 1
