@@ -33,8 +33,8 @@ knitr::opts_chunk$set(echo = FALSE)
   - Support for several models.
 
 
-## Project workflow
-
+## Project workflow {.centered}
+![](../doc/external_figures/flowchart.png){width=40%}
 
 ## Project overview {.centered}
 [Visit our Github repository](https://github.com/rforbiodatascience/2020_group03)
@@ -106,8 +106,6 @@ The score was normalized and summed to 1 for each postion.
 ![](../results/04_sequence_logos/seq_logo_data_set_4.png){width=100%}
 
 
-
-
 ## Machine learning toolbox
 
 * Supported machine learning framework:
@@ -132,11 +130,15 @@ The score was normalized and summed to 1 for each postion.
 ![](../results/05_PCA_plots/scree_plot_pca_4.png){width=100%}
 
 
-## Artificial Neural Network with Keras
-![](../results/06_ANN_plots/ann_keras_data_set_4.png){width=75%}
+## Artificial Neural Network with Keras and linear model {.centered}
+<div class="columns-2">
+![](../results/06_ANN_plots/ann_keras_data_set_4.png){width=90%}
+<p class="forceBreak"></p>
+![](../results/06_ANN_plots/prelm_data_set_4.png){width=90%}
+</div>
 
 
-## Cross validation of a Pabl1 RRM2 glmnet model with z_scale
+## Cross validation of a Pabl1 RRM2 glmnet model with Z5-scale
 <div class="columns-2">
 ![](../results/06_glmnet_plots/06_glmnet_corr_z_scales_data_set_4.png){width=100%}
 <p class="forceBreak"></p>
@@ -144,7 +146,7 @@ The score was normalized and summed to 1 for each postion.
 </div>
 
 
-## Prediction of unknown Pabl1 RRM2 variants with glmnet and z_scales
+## Prediction of unknown Pabl1 RRM2 variants with glmnet and Z5-scales
 ![](../results/07_predict/07_density_data_set_4.png){width=95%}
 
 
@@ -153,13 +155,12 @@ The score was normalized and summed to 1 for each postion.
 
 <div class="columns-2">
 
-* For all four data sets we compared ANN and glmnet regression (ElasticNet) on two amino acid descriptor scales; z_scales and blosum62.
+* For all four data sets we compared ANN and glmnet regression (ElasticNet) on two amino acid descriptor scales; Z5-scales and blosum62.
 * We found the model performance (meassured as RMSE) for the test sets to be comparable across both scales and regressor - except for data set 2 where ANN seemed to perform better than glmnet.
 
 <p class="forceBreak"></p>
 ![](../results/06_plots_model_summaries/06_RMSE_comparison_blosum62_z_scale.png){width=100%}
 </div>
-
 
 
 ## Discussion and model comparison for all four data sets 2
@@ -170,7 +171,7 @@ The score was normalized and summed to 1 for each postion.
 
 ## Shiny App
 
-![](https://github.com/rforbiodatascience/2020_group03/blob/master/doc/external_figures/Shiny_app.png){width=95%}
+![](../doc/external_figures/Shiny_app.png){width=95%}
 
 
 ## Challenges
@@ -201,7 +202,7 @@ The score was normalized and summed to 1 for each postion.
 ## References
  * Amino acid substition matrices: https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/data/
  
- * z_scales: https://pubs.acs.org/doi/10.1021/jm9700575
+ * Z5-scales: https://pubs.acs.org/doi/10.1021/jm9700575
 
 
 
@@ -257,7 +258,7 @@ The score was normalized and summed to 1 for each postion.
     - Save cleansed data in .tsv format
   * 03_augment.R
     - Load data from 02_clean.R
-    - Augment data: Calculate sequences, descriptors (pI, MW, Z-Scale)
+    - Augment data: Calculate sequences, descriptors (pI, MW, Z5-Scale)
     - Save augmented data in .tsv format
 </div>
 
@@ -267,15 +268,46 @@ The score was normalized and summed to 1 for each postion.
 <div class="columns-2">
 ![](../doc/external_figures/00_project_organisation.png){width=500px}
   <p class="forceBreak"></p>
-  * 04_model_i.R
-    - Load augmented data
-    - Perform model fitting
-    - Predict unknowns
-    - Plotting and reporting
+  * 04_visualization.R
+     - Load augmented data
+     - Makes various plots
+  * 05_PCA.R
+     - PCA of the dataset
+     - Scree - biplotting
 </div>
 
 ## Appendix
 ### R script overview 3
+
+<div class="columns-2">
+  ![](../doc/external_figures/00_project_organisation.png){width=500px}
+  <p class="forceBreak"></p>
+  * 06_modelling_ANN_keras.R,
+  * 06_modelling_ANN2.R,
+  * 06_glmnetCV.R,
+  * 06_modelling_glmnet
+    - Performs model cross-validation
+    - Performs model fitting
+    - Performs model quality calculation
+    - Models: ANN, glmnet
+</div>
+
+## Appendix
+### R script overview 4
+
+<div class="columns-2">
+  ![](../doc/external_figures/00_project_organisation.png){width=500px}
+  <p class="forceBreak"></p>
+  * 03_get_unknowns.R
+   - Gets variant_IDs for NA values
+  * 03_augment_unknowns.R
+   - Augment with protein sequence
+  * 07_predict.R
+   - Predict unknowns and makes a plot.
+</div>
+
+## Appendix
+### R script overview 5
 
 <div class="columns-2">
   ![](../doc/external_figures/00_project_organisation.png){width=500px}
