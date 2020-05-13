@@ -1,7 +1,7 @@
 # Toolbox for analysis and prediction of protein and peptide variant effects
 ![Image description](https://github.com/rforbiodatascience/2020_group03/blob/master/doc/front.png)
 ## 22100 - R for Bio Data Science - Spring 2020
-### Group 03
+### Group 03 - Begoña Bolós, Jakob Kofoed, Felix Pacheco and Laura Sans
 In this toolbox we explored, analyzed and modelled four different deep mutational scanning studies.
 
 ### Data sources:
