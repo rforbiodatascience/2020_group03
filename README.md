@@ -33,7 +33,7 @@ A shiny app has also been created to perform interactive peptide predictions. Th
 
 The shiny App only runs for z-scales matrix on the elastic net models for all the proteins. This is due to technical reasons, every prediction relies on the computation of a predictive model. The combination of four datasets, all the encoding options and the three possible models made it difficult to implement all the possible combinations of predictive models.
 
-* Example sequence for Pab1 prediction: 
+#### Example sequence for Pab1 prediction: 
 
 "ANLHPDIDNKALYDTFSVFGDLLSSKIATDENGKSKGFGFVHFEEEGAAKEAIDALNGMLLNGQEIY"
 It must be noted that, for the prediction, the string has to be the same length as the sequence used to train the model.
@@ -44,7 +44,7 @@ It must be noted that, for the prediction, the string has to be the same length 
 
 ## Usage 
 
-The analysis tool can be used by running the "00_doit.R" file. The running can be customized by the user, e.g to only run one model.
+The analysis tool can be used by running the ``00_doit.R`` file. The running can be customized by the user, e.g to only run one model.
 
 ## License
 
@@ -53,17 +53,17 @@ MIT
 ## Data sources:
 
 #### Data set 1 : BRCA1
-* reference: https://doi.org/10.1534/genetics.115.175802
+* Reference: https://doi.org/10.1534/genetics.115.175802
 
 
 #### Data set 2 : ERK2
-* reference: https://doi.org/10.1016/j.celrep.2016.09.061
+* Reference: https://doi.org/10.1016/j.celrep.2016.09.061
 
 
 #### Data set 3 : DLRAP1
-* reference: https://www.mavedb.org/scoreset/urn:mavedb:00000036-a-1/
+* Reference: https://www.mavedb.org/scoreset/urn:mavedb:00000036-a-1/
 
 
 #### Data set 4 : Pab1.
-* reference: https://doi.org/10.1371/journal.pgen.1004918
+* Reference: https://doi.org/10.1371/journal.pgen.1004918
 
