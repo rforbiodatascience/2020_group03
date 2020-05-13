@@ -44,10 +44,11 @@ The aim of this project is to create a toolbox to predict the biological activit
 | Function                    | Library                                                    |
 | --------------------------- | ---------------------------------------------------------- |
 | Data loading                | `readxl`                                                   |
-| Data cleaning and wrangling | `dplyr` (`tidyverse`)                                      |
+| Data cleaning and wrangling | `dplyr` , `broom` (`tidyverse`)                            |
 | Data augmenting             | `dplyr` (`tidyverse`),`Peptides`                           |
 | Extracting data             | `UniprotR`                                                 |
-| Plotting                    | `ggplot2`(`tidyverse`), `ggseqlogo`                        |
+| Plotting                    | `ggplot2`(`tidyverse`), `ggseqlogo`,`ggpubr`               |
+| Analysing                   | `stats`                                                    |
 | Modeling                    | `keras`,`neuralnet`, `caret`, `yardstick`, `glmnet`,`ANN2` |
 
 ## Methods - the data sets
